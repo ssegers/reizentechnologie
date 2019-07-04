@@ -29,7 +29,7 @@ class CreateTravellersTable extends Migration
             $table->string("emergency_phone_1");
             $table->string("emergency_phone_2")->nullable();
             $table->string("nationality");
-            $table->string("birthdate");
+            $table->date("birthdate");
             $table->string("birthplace");
             $table->string("iban");
             $table->string("bic");

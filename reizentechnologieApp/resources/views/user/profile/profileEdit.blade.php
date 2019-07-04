@@ -127,7 +127,7 @@
                                 <div class="form-row form-group">
                                     <div class="col-5">{{ Form::label('BirthDate', 'Geboortedatum*') }}</div>
                                     <div class="col-7">
-                                        {{ Form::date('BirthDate', $aUserData["birthdate"], ['id'=>'BirthDate','type'=>'date', 'class' => 'form-control', 'required'])}}
+                                        {{ Form::text('BirthDate', $aUserData["birthdate"], ['id'=>'BirthDate','type'=>'date', 'class' => 'form-control', 'required', 'placeholder' => 'JJJJ-MM-DD' ,'pattern' =>'([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))', 'title' => 'JJJJ-MM-DD'])}}
                                     </div>
                                 </div>
                                 <div class="form-row form-group">

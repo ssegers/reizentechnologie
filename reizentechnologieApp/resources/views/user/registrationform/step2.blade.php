@@ -51,8 +51,8 @@
             {{ Form::text('txtNationaliteit', $sEnteredNationality, ['required', 'id'=>'txtNationaliteit','class' => 'mb-2 form-control'])}}
         </div>
         <div class="form-group col-md-4">
-            {{ Form::label('dateGeboorte','Geboortedatum*') }}
-            {{ Form::date('dateGeboorte', $sEnteredBirthDate, ['required', 'id'=>'dateGeboorte','type'=>'date', 'class' => 'mb-2 form-control'])}}
+            {{ Form::label('dateGeboorte','Geboortedatum (JJJJ-MM-DD)*') }}
+            {{ Form::text('dateGeboorte', $sEnteredBirthDate, ['required', 'id'=>'dateGeboorte', 'class' => 'mb-2 form-control','placeholder' => 'JJJJ-MM-DD' ,'pattern' =>'([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))', 'title' => 'JJJJ-MM-DD'])}}
         </div>
         <div class="form-group col-md-4">
             {{ Form::label('txtGeboorteplaats','Geboorteplaats*') }}
