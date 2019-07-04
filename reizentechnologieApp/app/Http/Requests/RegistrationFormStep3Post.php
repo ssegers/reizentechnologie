@@ -31,6 +31,7 @@ class RegistrationFormStep3Post extends FormRequest
     {
         return [
             'txtEmailLocalPart.required' => 'Vul het eerste deel van je mail adres in',
+            'txtEmailLocalPart.not_regex' => 'Het r of u nummer is geen email adres, gebruik voornaam en naam',
             'txtEmailDomain.required' => 'Vul de domeinnaam van je email adres is',
             'txtEmail.email' => 'Het ingevulde email adres is niet geldig.',
             'txtEmail.unique' => 'Het ingevulde email adres is al in gebruik.',
@@ -51,7 +52,7 @@ class RegistrationFormStep3Post extends FormRequest
     public function rules()
     {
         return [
-            'txtEmailLocalPart' => 'required',
+            'txtEmailLocalPart' => 'required|not_regex:/^[rRuU][0-9]+/i',
             'txtEmailDomain' => 'required',
             'txtEmail' => 'email | unique:travellers,email',
             'txtGsm' => 'required|phone:BE,NL',
