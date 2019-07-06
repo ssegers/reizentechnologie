@@ -272,9 +272,12 @@ class RegisterController extends Controller
         $request->session()->put('sEnteredEmailLocalPart', $request->post('txtEmailLocalPart'));
         $request->session()->put('sEmailDomain', $request->post('txtEmailDomain'));
         $request->session()->put('sEmail',$request->input('txtEmail'));
-        $request->session()->put('sEnteredMobile', $request->post('txtGsm'));
-        $request->session()->put('sEnteredEmergency1', $request->post('txtNoodnummer1'));
-        $request->session()->put('sEnteredEmergency2', $request->post('txtNoodnummer2'));
+        $request->session()->put('sEnteredMobile', phone($request->post('txtGsm'), array('BE','NL'), 'E164'));
+        $request->session()->put('sEnteredEmergency1',phone($request->post('txtNoodnummer1'), array('BE','NL'), 'E164'));
+        //noodnummer 2 is geen vereist veld
+        if ($request->post('txtNoodnummer2') != null){
+            $request->session()->put('sEnteredEmergency2', phone($request->post('txtNoodnummer2'), array('BE','NL'), 'E164'));
+        }
         $request->session()->put('bCheckedMedicalCondition', $request->post('radioMedisch'));
         $request->session()->put('sEnteredMedicalCondition', $request->post('txtMedisch'));
 
