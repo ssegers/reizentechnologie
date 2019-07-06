@@ -117,43 +117,25 @@ class Partisipants extends Controller
             }
         }
         $aFiltersChecked = $this->aFiltersChecked;
-
-        /* Save th active pagination */
-        $aPaginate = array(
-            '5' => false,
-            '10' => false,
-            '15' => false,
-            '20' => false,
-            '25' => false,
-        );
-        if ($iPaginate = $request->post('per-page')) {
-            $aPaginate[$iPaginate] = true;
-        }
-        else {
-            $aPaginate[$iPaginate = 10] = true;
-        }
-
         /* Get the travellers based on the applied filters */
-        $aUserData = $this->travellers->getTravellersDataByTrip($iTripId, $aFiltersChecked, $iPaginate);
-
+        $aDataToGet = array_add($aFiltersChecked, 'username', true); //we always need the unsername
+        $aUsers = $this->travellers->getTravellersDataByTrip($iTripId, $aDataToGet);
         /* Check witch download option is checked */
         switch ($request->post('export')) {
             case 'excel':
-                $this->downloadExcel($aFiltersChecked, $oCurrentTrip);
+                $this->downloadExcel($aDataToGet, $aUsers);
                 break;
             case 'pdf':
-                $this->downloadPDF($aFiltersChecked, $oCurrentTrip);
+                $this->downloadPDF($aDataToGet, $aUsers, $oTrip);
                 break;
         }
 
         return view('user.lists.tripattendants', [
-            'aUserData' => $aUserData,
+            'aUsers' => $aUsers,
             'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked,
-            'sUserName' => $oUser->username,
             'oCurrentTrip' => $oCurrentTrip,
             'aTripsAndNumberOfAttendants' => $aTripsAndNumberOfAttendants,
-            'aPaginate' => $aPaginate,
             'aTripsByOrganiser' => $aTripsByOrganiser,
         ]);
     }
@@ -165,18 +147,14 @@ class Partisipants extends Controller
      * @return \Exception|Exception
      * This will download an excel file based on the session data of filters (the checked fields)
      */
-    private function downloadExcel($aFiltersChecked, $oTrip) {
+    private function downloadExcel($aFiltersChecked, $aUsers) {
         $aUserFields = $aFiltersChecked;
-        $data = $this->travellers->getTravellersDataByTrip($oTrip->trip_id, $aFiltersChecked);
-        
-        //$data = Traveller::getTravellersDataByTrip($iTrip->trip_id, $aFiltersChecked);
-//        $data = $this->getUserData($aFiltersChecked, $iTrip);
         try {
             /** Create a new Spreadsheet Object **/
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
             $sheet->fromArray($aUserFields, '', 'A1');
-            $sheet->fromArray($data, '', 'A2');
+            $sheet->fromArray($aUsers, '', 'A2');
             $writer = new Xlsx($spreadsheet);
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="travellers.xlsx"');
@@ -190,10 +168,9 @@ class Partisipants extends Controller
     /**
      * downloadPDF: deze functie zorgt ervoor dat je een pdf van de gefilterde lijst download.
      */
-    private function downloadPDF($aFiltersChecked, $oTrip){
+    private function downloadPDF($aFiltersChecked, $aUsers,$oTrip){
         $iCols = count($aUserFields = $aFiltersChecked);
         $aAlphas = range('A', 'Z');
-        $data = $this->travellers->getTravellersDataByTrip($oTrip->trip_id, $aFiltersChecked);
         try {
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
             $spreadsheet->getActiveSheet();
@@ -203,9 +180,9 @@ class Partisipants extends Controller
             }
             $activeSheet->fromArray($aUserFields,NULL, 'A1')->getStyle('A1:'.$aAlphas[$iCols-1].'1')->getFont()->setBold(true)->setUnderline(true);
             $activeSheet->getStyle('A1:'.$aAlphas[$iCols-1]."1")->getBorders()->getOutline()->setBorderStyle(1);
-            $activeSheet->fromArray($data,NULL,'A2');
+            $activeSheet->fromArray($aUsers,NULL,'A2');
             
-            foreach ($data as $iRij => $sValue){
+            foreach ($aUsers as $iRij => $sValue){
                 //$activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iCols-1].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);
                 for($iI = 0;$iI<$iCols;$iI++){
                     $activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iI].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);

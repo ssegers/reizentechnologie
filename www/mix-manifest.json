@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/dropdown/cascadingDropDownStudyMajors.js": "/js/dropdown/cascadingDropDownStudyMajors.js"
+    "/js/dropdown/cascadingDropDownStudyMajors.js": "/js/dropdown/cascadingDropDownStudyMajors.js",
+    "/css/datatables/datatables.min.css": "/css/datatables/datatables.min.css",
+    "/js/datatables/datatables.min.js": "/js/datatables/datatables.min.js"
 }

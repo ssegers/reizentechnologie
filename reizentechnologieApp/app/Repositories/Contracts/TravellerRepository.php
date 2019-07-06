@@ -49,5 +49,5 @@ interface TravellerRepository {
      *
      * @return mixed
      */    
-    public function getTravellersDataByTrip($iTripId, $aDataFields, $iPagination = null);
+    public function getTravellersDataByTrip($iTripId, $aDataFields);
 }

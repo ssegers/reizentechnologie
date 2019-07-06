@@ -132,30 +132,11 @@ class EloquentTraveller implements TravellerRepository
      * @return mixed
      */    
      
-    public function getTravellersDataByTrip($iTripId, $aDataFields, $iPagination = null) {
+    public function getTravellersDataByTrip($iTripId, $aDataFields) {
        // voorlopige versie met join en gebruik van de pivot table traveller_trip
         
          //example: filter table
-        if ($iPagination != null) {
-            return Traveller::select(array_keys(array_add($aDataFields, 'username', true)))
-                ->join('users','travellers.user_id','=','users.user_id')
-                ->join('zips','travellers.zip_id','=','zips.zip_id')
-                ->join('majors','travellers.major_id','=','majors.major_id')
-                ->join('traveller_trip', 'travellers.traveller_id', '=', 'traveller_trip.traveller_id')
-                ->join('studies','majors.study_id','=','studies.study_id')
-                ->where('trip_id', $iTripId)
-//                ->where(function ($query) {
-//                    $query
-//                        ->where('is_guide', true)
-//                        ->orWhere('role', '=', 'traveller');})
-                ->orderBy('role', 'asc')
-                ->orderBy('major_name', 'asc')
-                ->orderBy('last_name', 'asc')
-                    
-                ->paginate($iPagination);
-        }
-        //example: to pdf/excel
-        else {
+
             return Traveller::select(array_keys($aDataFields))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
@@ -199,6 +180,5 @@ class EloquentTraveller implements TravellerRepository
            $collection = $collection->sortBy('last_name')->sortBy('role');
         }*/
     }    
-    
-}
+
 

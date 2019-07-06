@@ -17,6 +17,8 @@ mix.js([
   'resources/js/app.js',
   'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js',
   'node_modules/bootstrap-select/dist/js/i18n/defaults-nl_NL.min.js'
-], 'js')
-   .js('resources/js/dropdown/cascadingDropDownStudyMajors.js', 'js/dropdown')
-   .sass('resources/sass/app.scss', 'css');
+], 'js');
+ mix.js('resources/js/dropdown/cascadingDropDownStudyMajors.js', 'js/dropdown');
+ mix.sass('resources/sass/app.scss', 'css');
+ mix.copy('resources/datatables/datatables.min.css','../www/css/datatables');
+ mix.copy('resources/datatables/datatables.min.js', '../www/js/datatables');

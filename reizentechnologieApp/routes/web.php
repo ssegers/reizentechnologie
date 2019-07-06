@@ -76,6 +76,7 @@ Route::middleware(['auth','guest'])->group(function () {
  * -----------------------------------------------------------------------------
  */
 Route::middleware(['auth','checkloggedin'])->group(function () {
+    //get data
     Route::get('majors/get/{id}', 'DataController@getMajorsByStudy');
     //User profile
     Route::prefix('/user/profile')->group(function() {

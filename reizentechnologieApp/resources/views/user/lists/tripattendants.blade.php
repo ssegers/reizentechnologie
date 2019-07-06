@@ -10,6 +10,7 @@
  
 }
 </style>
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/datatables/datatables.min.css') }}"/>
 @endsection
 
 @section('content')
@@ -68,7 +69,7 @@
             <div class="d-flex flex-row">
                        
                 <div class="table-responsive" >
-                    <table class="table table-striped table-hover table-sm">
+                    <table id="tripattendees" class="table table-striped table-hover nowrap compact table-sm">
                         <thead>
                         <tr>
                             @foreach($aFiltersChecked as $sFilterValue)
@@ -77,42 +78,45 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($aUserData as $oUserData)
-                            <tr class="cursor-pointer" onclick="displayUser('<?php echo $oUserData->username ?>')">
+                        @foreach($aUsers as $aUserData)
+                            <tr class="cursor-pointer" onclick="displayUser('<?php echo $aUserData['username'] ?>')">
                                 @foreach($aFiltersChecked as $sFilterName => $sFilterText)
-                                    <td>{{ $oUserData->$sFilterName }}</td>
+                                    <td>{{ $aUserData[$sFilterName] }}</td>
                                 @endforeach
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
-                </div>
-               
+                </div>              
             </div>    
-            <div class="d-flex flex-row justify-content-between">
-                <div>
-                    {{ $aUserData->appends(request()->input())->links() }}
-                </div>
-                <div>
-                    {{ Form::label('per-page', 'Reizigers per pagina:') }}
-                    <select name="per-page" onchange="this.form.submit()">
-                        @foreach($aPaginate as $iValue => $bActive)
-                            @if($bActive)
-                                <option selected value="{{ $iValue }}">{{ $iValue }}</option>
-                            @else
-                                <option value="{{ $iValue }}">{{ $iValue }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-            </div>
         </div>  
     </div>
 </div>
 {{ Form::close() }}
 @endsection
 @section('scripts')
+<script src="{{ mix('/js/datatables/datatables.min.js') }}"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+    $('#tripattendees').DataTable({
+        "language": {
+            "lengthMenu": "Toon _MENU_ rijen/pagina",
+            "zeroRecords": "Geen gegevens gevonden - sorry",
+            "info": "pagina _PAGE_ van _PAGES_",
+            "infoEmpty": "geen gegevens beschikbaar",
+            "infoFiltered": "(gefilterd uit een totaal van _MAX_ rijen)",
+            "search":         "zoeken:",
+            "paginate": {
+                "first":      "Eeste",
+                "last":       "Laatste",
+                "next":       "Volgende",
+                "previous":   "Vorige"
+            },
+            "decimal":        ",",
+            "thousands": "."          
+        }
+    } );
+} );    
 //    function displayUser(userName) {
 //        window.location.href = '<?php echo url('/') ?>/userinfo/' + userName;
 //    }
