@@ -15,7 +15,8 @@ interface TravellerRepository {
      *    fieldnames as index
      */ 
     public function store($aProfileData);
-
+    
+    public function getIdByUsername($sUsername);
     /**
      * get All travellerdata in one array based on the user_id
      * @param $userId the user_id
@@ -23,14 +24,6 @@ interface TravellerRepository {
      */
     public function get($userId);
 
-    /**
-     * update travellerdata where user_id = $userid
-     * @param $userId the user_id
-     * @param $aProfileData all Traveller Data as an array with database 
-     *    fieldnames as index
-     */ 
-    public function update($aProfileData,$userId);
-    
     /**
      * get traveller by email
      * @param $sEmail the users email
@@ -50,4 +43,42 @@ interface TravellerRepository {
      * @return mixed
      */    
     public function getTravellersDataByTrip($iTripId, $aDataFields);
+
+    /**
+     * update travellerdata where user_id = $userid
+     * @param $userId the user_id
+     * @param $aProfileData all Traveller Data as an array with database 
+     *    fieldnames as index
+     */ 
+    public function update($aProfileData,$userId);
+   
+    /**
+     * change the trip the attendant is part of
+     * 
+     * @author Stefan Segers
+     *
+     * @param integer $userId
+     * @param integer $tripIdOld
+     * @param integer $tripIdNew
+     * @return 
+     */   
+    public function changeTrip($iUserId, $iTripIdOld, $iTripIdNew);
+   /**
+     * Deletes the data of a selected traveller
+     *
+     * @author Stefan Segers
+     *
+     * @param $sUserName
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
+    public function destroy($sUserName);
+    
+    /**
+     * check if loggedin user is organiser for the given trip
+     * 
+     * @param intger $tripid the trip_id
+     * @return boolean $isOrganizer 
+     */
+    public function isOrganizerForTheTrip($iTripId); 
+    
 }

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             MajorsTableSeeder::class,
             ZipTableSeeder::class,
             TravellersTableSeeder::class,
-            TravellersPerTripSeeder::class,
+            TravellerTripSeeder::class,
 
         ]);
     }

@@ -32,5 +32,5 @@ class EloquentUser implements UserRepository
         $oResult = User::where('user_id',$sUserId)->first();
         return $oResult->resettoken;
     }
-
+  
 }

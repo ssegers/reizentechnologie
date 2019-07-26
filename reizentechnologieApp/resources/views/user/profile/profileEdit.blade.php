@@ -15,10 +15,10 @@
         </div>
     @endif
     <div class="container">
-        @if(str_contains($sPath, 'profile'))
+        @if($sEditor == 'user')
             {{ Form::open(array('url' => "/user/profile/update", 'method' => 'post', 'name' => 'userProfile')) }}
         @else
-            {{ Form::open(array('url' => "/userinfo/".$aUserData["username"]."/update", 'method' => 'post', 'name' => 'userProfile')) }}
+            {{ Form::open(array('url' => "/organiser/updatepartisipant/".$aUserData["trip_id"]."/".$aUserData["username"], 'method' => 'post', 'name' => 'userProfile')) }}
         @endif
 
             <div class="row">
@@ -67,8 +67,12 @@
                                 <div class="form-row form-group">
                                     <div class="col-5">{{ Form::label('Trip', 'Reis') }}</div>
                                     <div class="col-7">
-                                        {{ $aUserData['name'] }} {{ $aUserData['year'] }}
-<!--                                        <select id="Trip" name="Trip" required class="form-control">
+                                        @if($sEditor == 'user')
+                                            {{ $aUserData['name'] }} {{ $aUserData['year'] }}
+                                        @else
+                                            {{ Form::select('Trip', $aTrips, $aUserData["trip_id"] ,['required','id'=>'dropReizen', 'placeholder' => 'Selecteer een reis', 'class' => 'mb-2 form-control'])}}
+                                        @endif
+<!--                                      <select id="Trip" name="Trip" required class="form-control">
                                             @foreach($aTrips as $iTripId => $sTrip)
                                                 <option value="{{ $iTripId }}" @if($iTripId == $aUserData["trip_id"]) selected @endif> {{ $sTrip }} </option>
                                             @endforeach
@@ -188,10 +192,10 @@
             </div>
             <div class="row">
                 <div class="col">
-                    @if(str_contains($sPath, 'profile'))
+                    @if($sEditor == 'user')
                         <a class="btn btn-danger" href="/user/profile">Annuleren</a>
                     @else
-                        <a class="btn btn-danger" href="/userinfo/{{$aUserData["username"]}}">Annuleren</a>
+                        <a class="btn btn-danger" href="/organiser/showpartisipant/{{$aUserData["trip_id"]}}/{{$aUserData["username"]}}">Annuleren</a>
                     @endif
                     {{ Form::submit('Opslaan', ['class' => 'btn btn-primary'])}}
                 </div>

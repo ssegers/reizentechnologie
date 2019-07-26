@@ -98,6 +98,10 @@ Route::middleware(['auth','guide'])->group(function () {
     Route::prefix('organiser')->group(function () {
         Route::get('partisipantslist/{trip?}', 'Organiser\Partisipants@showFilteredList')->name("partisipantslist");
         Route::post('partisipantslist/{trip?}', 'Organiser\Partisipants@showFilteredList');
+        Route::get('showpartisipant/{trip?}/{username?}','Organiser\Partisipants@showPartisipantsProfile');
+        Route::get('editpartisipant/{trip?}/{username?}','Organiser\Partisipants@editPartisipantsProfile');
+        Route::post('updatepartisipant/{trip?}/{username?}', 'Organiser\Partisipants@updatePartisipantsProfile');
+        Route::delete('deletepartisipant/{trip?}/{username?}','Organiser\Partisipants@destroyPartisipantsProfile')->name("userdestroy");
     });
 });
 

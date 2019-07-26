@@ -14,9 +14,24 @@
 @endsection
 
 @section('content')
-    {{Form::open(array('url' => "organiser/partisipantslist/$oCurrentTrip->trip_id", 'method' => 'post'))}}
+<div class="d-flex justify-content-center">
+    <div class="d-inline-flex ">
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+            {!! session()->get('message') !!}
+        </div>
+        @endif
+        @if(session()->has('errormessage'))
+        <div class="alert alert-danger">
+            {{ session()->get('errormessage') }}
+        </div>
+        @endif
+    </div>
+</div>
+{{Form::open(array('url' => "organiser/partisipantslist/$oCurrentTrip->trip_id", 'method' => 'post'))}}
     
-    <div class="flex-container">
+<div class="flex-container justif">
+        
     <div class="d-flex flex-row flex-nowrap py-3" style="height: calc(100vh - 200px);">
         <div class="d-flex flex-column col-auto overflow-auto" id="left">
             <div>
@@ -72,6 +87,7 @@
                     <table id="tripattendees" class="table table-striped table-hover nowrap compact table-sm">
                         <thead>
                         <tr>
+                            <th></th>
                             @foreach($aFiltersChecked as $sFilterValue)
                                 <th>{{ $sFilterValue }}</th>
                             @endforeach
@@ -80,6 +96,12 @@
                         <tbody>
                         @foreach($aUsers as $aUserData)
                             <tr class="cursor-pointer" onclick="displayUser('<?php echo $aUserData['username'] ?>')">
+                                <td>
+                                    <button id="editButton" type="button" class="open btn-primary rounded btn-xs" 
+                                                    onclick="edituser( '{{$oCurrentTrip->trip_id}}','{{ $aUserData['username'] }}')">
+                                        <i class="fas fa-edit"></i>                                    
+                                    </button>
+                                </td>
                                 @foreach($aFiltersChecked as $sFilterName => $sFilterText)
                                     <td>{{ $aUserData[$sFilterName] }}</td>
                                 @endforeach
@@ -117,8 +139,8 @@ $(document).ready(function() {
         }
     } );
 } );    
-//    function displayUser(userName) {
-//        window.location.href = '<?php echo url('/') ?>/userinfo/' + userName;
-//    }
+    function edituser(tripid, userid) {
+        window.location.href = '<?php echo url('/') ?>/organiser/showpartisipant/' + tripid +'/'+ userid;
+    }
 </script>
 @endsection

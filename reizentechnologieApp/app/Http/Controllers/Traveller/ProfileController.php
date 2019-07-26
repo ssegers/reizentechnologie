@@ -58,7 +58,7 @@ class ProfileController extends Controller
     public function __construct(TravellerRepository $traveller, 
             TripRepository $trip, CityRepository $city, StudieRepository $study) 
     {
-       $this->traveller = $traveller;
+       $this->travellers = $traveller;
        $this->trips = $trip;
        $this->cities = $city;
        $this->studies = $study;
@@ -67,22 +67,21 @@ class ProfileController extends Controller
     public function showProfile(Request $request) 
     {
         if (Auth::user()->role == "admin"){
-            return redirect(route("info"));
+            return redirect(route("/"));
         }
         $usersId = Auth::user()->user_id;     
-        $aUserData = $this->traveller->get($usersId);
-
-        return view('user.profile.profile', ['sPath' => $request->path(),'aUserData' => $aUserData]);
+        $aUserData = $this->travellers->get($usersId);
+        return view('user.profile.profile', ['bIsOrganizer' => false,'aUserData' => $aUserData]);
     
     }
     
     public function editProfile(Request $request) 
     {
         if (Auth::user()->role == "admin"){
-            return redirect(route("info"));
+            return redirect(route("/"));
         }
         $usersId = Auth::user()->user_id;     
-        $aUserData = $this->traveller->get($usersId);
+        $aUserData = $this->travellers->get($usersId);
         $aTrips = $this->trips->getAllActive();
         foreach ($aTrips as $oTrip){
             $aTripSelectList[$oTrip->trip_id] = $oTrip->name." ".$oTrip->year;
@@ -95,7 +94,7 @@ class ProfileController extends Controller
         $oZips = $this->cities->get();
         $aMajors = $this->studies->getMajorsByStudy($aUserData['study_id']);
 
-        return view('user.profile.profileEdit', ['sPath' => $request->path(),'aUserData' => $aUserData, 'aTrips' => $aTripSelectList, 'oZips' => $oZips, 'aStudies' =>  $aStudySelectList, 'aMajors' => $aMajors]);
+        return view('user.profile.profileEdit', ['sEditor' => 'user', 'aUserData' => $aUserData, 'aTrips' => $aTripSelectList, 'oZips' => $oZips, 'aStudies' =>  $aStudySelectList, 'aMajors' => $aMajors]);
     }
     
     /**
@@ -110,7 +109,7 @@ class ProfileController extends Controller
     public function updateProfile(ProfileEdit $aRequest)
     {
         if (Auth::user()->role == "admin"){
-            return redirect(route("info"));
+            return redirect(route("/"));
         }
         $userId = Auth::user()->user_id; 
         $aProfileData = [
@@ -132,11 +131,8 @@ class ProfileController extends Controller
                     'emergency_phone_1' => $aRequest->post('icePhone1'),
                     'emergency_phone_2' => $aRequest->post('icePhone2'),
                 ];
-        $this->traveller->update($aProfileData,$userId);
-        
-        if(str_contains($aRequest->path(), 'profile')){
-            return redirect()->route('profile');
-        }
-        return redirect('userinfo/'. $sUserName);
+        $this->travellers->update($aProfileData,$userId);   
+        return redirect()->route('profile');
+
     }
 }

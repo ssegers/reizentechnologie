@@ -28,8 +28,7 @@ class ResetPas extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => config('mail.username'), 'name' => config('app.name')])
-            ->bcc(config('mail.username'))
+        return $this->from(['address' => config('mail.from.address'), 'name' => config('mail.from.name')])
             ->replyTo(['address' => $this->aMailData['email']])
             ->subject($this->aMailData['subject'])
             ->view('mails.resetpasswordmail')

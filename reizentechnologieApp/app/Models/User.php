@@ -48,19 +48,12 @@ class User extends Authenticatable
         if($oUser->role=='admin'){
             return true;
         }
-        $travellerId=$oUser->traveller->traveller_id;
-        $activeTrips=TravellerTrip::
-        join('trips','traveller_trip.trip_id','=','trips.trip_id')
-           ->where('is_organizer',true)
-            ->where('traveller_id',$travellerId)
-            ->where('is_active',true)
-            ->get();
-        if(count($activeTrips)!=0){
-            return true;
+        foreach($oUser->traveller->trips->where('is_active', true) as $oTrip){
+            if ($oTrip->pivot->is_organizer == true){
+                return true;
+            }       
         }
-        else{
-            return false;
-        }
-        return true;
+        return false;
+
     }
 }

@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 use App\Repositories\Contracts\TravellerRepository;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Traveller;
 
@@ -17,6 +18,8 @@ class EloquentTraveller implements TravellerRepository
 {
     /**
      * Insert new record into user table and traveller table
+     * 
+     * @author Stefan Segers
      * @param type $aData
      */
     
@@ -72,9 +75,10 @@ class EloquentTraveller implements TravellerRepository
             throw $e;
         }
         DB::commit();
-    }    
+    }
+    
     /**
-     * get All travellerdata in one array based on the user_id
+     * get All travellerdata as an array based on the user_id
      * 
      * @author Stefan Segers
      *
@@ -94,21 +98,17 @@ class EloquentTraveller implements TravellerRepository
 
         return $aProfileData;
     }
-
-    /**
-     * update the traveller data based on the given array
-     * 
-     * @author Stefan Segers
-     *
-     * @param $aProfileData all Traveller Data
-     * @return 
-     */    
-    public function update($aProfileData,$userId){
-        $oTraveller = Traveller::where('user_id',$userId)->first();
-
-        $oTraveller->update($aProfileData);
-    }
     
+    /**
+     * get userId by username
+     * @param string the username (u,r or b nummer)
+     * @return integer the userId
+     */    
+    public function getIdByUsername($sUsername)
+    {
+        return User::where('username',$sUsername)->first()->user_id;
+    }
+
    /**
      * get traveller by email
      * @param $sEmail the users email
@@ -119,6 +119,74 @@ class EloquentTraveller implements TravellerRepository
         $oTraveller = Traveller::where('email', $sEmail)->first();
         return $oTraveller;
     }
+    
+    /**
+     * update the traveller data based on the given array
+     * 
+     * @author Stefan Segers
+     *
+     * @param $aProfileData all Traveller Data
+     * @return 
+     */    
+    public function update($aProfileData,$userId){
+        $oTraveller = Traveller::where('user_id',$userId)->first();
+        $oTraveller->update($aProfileData);
+    }
+    /**
+     * change the trip the attendant is part of
+     * 
+     * @author Stefan Segers
+     *
+     * @param integer $userId
+     * @param integer $tripIdOld
+     * @param integer $tripIdNew
+     * @return 
+     */ 
+   
+    public function changeTrip($iUserId, $iTripIdOld, $iTripIdNew){
+
+        $oTrip = Traveller::where('user_id',$iUserId)->first()
+                ->trips()->wherePivot('trip_id',$iTripIdOld)->first();
+            if ($oTrip != null){
+                $oTrip->pivot->trip_id = $iTripIdNew;
+                $oTrip->pivot->save();
+            }
+        return true;
+    }
+    
+    /**
+     * Deletes the data of a selected traveller
+     *
+     * @author Stefan Segers
+     *
+     * @param $sUserName
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
+    public function destroy($sUserName){
+        $oUser = User::where('username', $sUserName)->firstOrFail();
+        $oUser->delete();
+    }
+    
+    /**
+     * check if loggedin user is organiser for the given trip
+     * @author Stefan Segers
+     * @param intger $iTripid the trip_id
+     * @return boolean $isOrganizer 
+     */
+    public function isOrganizerForTheTrip($iTripId){
+        $bIsOrganizer = FALSE;
+        $oUser = Auth::user();
+        if ($oUser->role == 'admin') {
+            $bIsOrganizer = true;
+        }elseif($oUser->role == 'guide'){ 
+            $oTrip = Traveller::where('user_id',$oUser->user_id)->first()
+                ->trips()->wherePivot('trip_id',$iTripId)->first();
+            if ($oTrip != null){
+                $bIsOrganizer = $oTrip->pivot->is_organizer;
+            }
+        }
+        return $bIsOrganizer;
+    }    
     
     /*
      * Returns the traveller data based on the trip id and requested datafields. Will return a paginated list if requested
@@ -153,32 +221,7 @@ class EloquentTraveller implements TravellerRepository
                 ->orderBy('last_name', 'asc')
                 ->get()->toArray();
         }       
-  
-        
-
-/*        if ($iPagination != null) {
-           $trip = Trip:: 
-                   where("trip_id" , $iTripId)
-// onderstaande geeft geen foutmelding maar heeft ook geen enkel effect                   
-//                   ->whereHas('travellers', function ($query) {
-//                        $query->whereHas('user', function ($query2) {
-//                                $query2->where('role', '=', 'traveller');
-//                    });
-//                   })
-                   ->paginate($iPagination)
-                   ->first();
-
-            foreach($trip->travellers as $traveller){
-                $aProfileData = $traveller->attributesToArray();
-                $aProfileData = array_merge($aProfileData,$traveller->User->attributesToArray());
-                $aProfileData = array_merge($aProfileData,$traveller->Zip->attributesToArray());
-                $aProfileData = array_merge($aProfileData,$traveller->Major->attributesToArray());
-                $aProfileData = array_merge($aProfileData,$traveller->Major->Study->attributesToArray());
-                $aUser[] = collect($aProfileData)->only(array_keys($aDataFields));
-           }
-           $collection = collect($aUser);
-           $collection = $collection->sortBy('last_name')->sortBy('role');
-        }*/
+   
     }    
 
 

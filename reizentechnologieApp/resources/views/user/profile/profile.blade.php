@@ -6,10 +6,19 @@
             margin-bottom: 2em;
         }
     </style>
-
-    @if(!str_contains($sPath, 'profile'))
-        <form method="POST" action="{{ route('user.destroy', $aUserData["username"]) }}" onsubmit="return confirm('Are you sure?')">
-            @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if($bIsOrganizer))
+       
+    <form method="POST" action="{{ route('userdestroy',array('trip'=>$aUserData["trip_id"], 'username'=>$aUserData["username"])) }}" onsubmit="return confirm('Bent U zeker? Alle gegevens worden verwijderd')">
+    @endif
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -146,15 +155,15 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        @if(!str_contains($sPath, 'profile'))
-                            <a class="btn btn-info" href="{{route("filter")}}">Terug</a>
-                            <a class="btn btn-primary" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
+                        @if($bIsOrganizer)
+                            <a class="btn btn-info" href="{{route("partisipantslist")}}">Terug</a>
+                            <a class="btn btn-primary" href="/organiser/editpartisipant/{{$aUserData["trip_id"]}}/{{$aUserData["username"]}}">Aanpassen</a>
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button class="btn btn-danger" type="submit">Verwijderen</button>
                         @endif
 
-                        @if(str_contains($sPath, 'profile'))
+                        @if(!$bIsOrganizer)
                             <a class="btn btn-primary" href="/user/profile/edit">Aanpassen</a>
                         @endif
                     </div>
@@ -163,7 +172,7 @@
                     <br>
                 </div>
             </div>
-            @if(!str_contains($sPath, 'profile'))
+            @if($bIsOrganizer)
         </form>
     @endif
 @endsection

@@ -10,6 +10,7 @@ interface UserRepository {
     
     /**
      * get user based on the username
+     * 
      * @param $sUserName the username
      * @return $aProfileData all Traveller Data
      */
@@ -17,8 +18,6 @@ interface UserRepository {
     
     /**
      * update the user data based on the given array
-     * 
-     * @author Stefan Segers
      *
      * @param $aUserData all User Data
      */    
@@ -26,8 +25,9 @@ interface UserRepository {
 
     /**
      * get user resettoken based on the user_id
+     * 
      * @param $iUserId the user_id
      * @return $aProfileData all Traveller Data
      */
-    public function getResetToken($sUserName);    
+    public function getResetToken($sUserName);
 }
