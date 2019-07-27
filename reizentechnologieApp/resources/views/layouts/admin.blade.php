@@ -51,7 +51,7 @@
                             beheer reizen
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                          <a class="dropdown-item" href="{{ route('dashboard') }}">reis beheren</a>
+                          <a class="dropdown-item" href="{{ route('showtrips') }}">reis beheren</a>
                           <a class="dropdown-item" href="{{ route('dashboard') }}">organistor koppelen</a>
                         </div>
                     </div>

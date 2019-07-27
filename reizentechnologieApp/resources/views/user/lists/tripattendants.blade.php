@@ -30,9 +30,9 @@
 </div>
 {{Form::open(array('url' => "organiser/partisipantslist/$oCurrentTrip->trip_id", 'method' => 'post'))}}
     
-<div class="flex-container justif">
+<div class="flex-container justify">
         
-    <div class="d-flex flex-row flex-nowrap py-3" style="height: calc(100vh - 200px);">
+    <div class="d-flex flex-row flex-nowrap py-3" style="height: calc(100vh - 220px);">
         <div class="d-flex flex-column col-auto overflow-auto" id="left">
             <div>
                 <div class="d-flex justify-content-center">
@@ -87,7 +87,7 @@
                     <table id="tripattendees" class="table table-striped table-hover nowrap compact table-sm">
                         <thead>
                         <tr>
-                            <th></th>
+                            <th>edit</th>
                             @foreach($aFiltersChecked as $sFilterValue)
                                 <th>{{ $sFilterValue }}</th>
                             @endforeach
@@ -95,7 +95,7 @@
                         </thead>
                         <tbody>
                         @foreach($aUsers as $aUserData)
-                            <tr class="cursor-pointer" onclick="displayUser('<?php echo $aUserData['username'] ?>')">
+                            <tr>
                                 <td>
                                     <button id="editButton" type="button" class="open btn-primary rounded btn-xs" 
                                                     onclick="edituser( '{{$oCurrentTrip->trip_id}}','{{ $aUserData['username'] }}')">

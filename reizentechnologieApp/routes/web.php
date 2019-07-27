@@ -123,5 +123,10 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::post('updatePage','Admin\InfoPagesController@updateContent');
         Route::post('editPage','Admin\InfoPagesController@editPage');
         Route::post('deletePage','Admin\InfoPagesController@deletePage');
+        
+        Route::get('trips','Admin\TripController@showAllTrips')->name('showtrips');
+        Route::post('trips', 'Admin\TripController@UpdateOrCreateTrip');
+        
+        
     });
 });

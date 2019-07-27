@@ -7,12 +7,34 @@ namespace App\Repositories\Contracts;
  * @author u0067341
  */
 interface TripRepository {
+
+    /**
+     * Insert new record into trip table
+     * @param type $aTripData
+     */ 
+    public function store($aTripData);
+    
+    /**
+     * update record into trip table
+     * @param array $aTripData 
+     * @param integer $iTripId
+     */    
+    public function update($aTripData,$iTripId);
+    
+    /**
+     * get all trips
+     * @param integer $iTripId
+     * @return $oTrip
+     */    
+     public function getAllTrips();
+     
     /**
      * get trip
      * @param integer $iTripId
      * @return $oTrip
      */
     public function get($iTripId);
+    
     /**
      * get All active trips
      * 
@@ -39,12 +61,7 @@ interface TripRepository {
      * @param integer $iTripId 
      * @return $aAttendants
      */    
-    public function getAttendantsPerTrip($iTripId);
-    /**
-     * get attendants per trip
-     * @param integer $iTripId 
-     * @return $aAttendants
-     */
+
     public function getNumberOfAttendants($iTripId);
     /**
      * get requested data of attendants per trip

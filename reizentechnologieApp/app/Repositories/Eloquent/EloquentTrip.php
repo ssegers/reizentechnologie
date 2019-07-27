@@ -3,10 +3,8 @@
 namespace App\Repositories\Eloquent;
 use App\Repositories\Contracts\TripRepository;
 
+use App\Models\Traveller;
 use App\Models\Trip;
-use App\Models\TravellerTrip;
-
-use App\Models\User;
 
 /**
  * accessing trip data
@@ -15,6 +13,60 @@ use App\Models\User;
  */
 class EloquentTrip implements TripRepository
 {
+    /**
+     * Insert new record into trip table
+     * 
+     * @author Stefan Segers
+     * @param type $aTripData
+     */
+    public function store($aTripData) 
+    {
+        /* Create the trip */
+        try{
+            $oTrip = new Trip();
+            $oTrip->name = $aTripData['name'];
+            $oTrip->is_active = $aTripData['is_active'];
+            $oTrip->year = $aTripData['year'];
+            $oTrip->contact_mail = $aTripData['contact_mail'];
+            $oTrip->price = $aTripData['price'];
+            $oTrip->save();       
+        }
+        catch(\Exception $e)
+        {
+            throw $e;
+        }
+    }
+    
+    /**
+     * update record into trip table
+     * 
+     * @author Stefan Segers
+     * @param array $aTripData 
+     * @param integer $iTripId
+     */    
+    public function update($aTripData,$iTripId)
+    {
+        /* Update the trip */
+        try{
+            $oTrip = Trip::find($iTripId);
+            $oTrip->name = $aTripData['name'];
+            $oTrip->is_active = $aTripData['is_active'];
+            $oTrip->year = $aTripData['year'];
+            $oTrip->contact_mail = $aTripData['contact_mail'];
+            $oTrip->price = $aTripData['price'];
+            $oTrip->save();
+        }
+        catch(\Exception $e)
+        {
+            throw $e;
+        }
+    }
+    
+    public function getAllTrips() {
+        $trips = Trip::all();
+        return $trips;
+    }
+    
     public function get($iTripId) {
         $oTrip = Trip::where('trip_id', $iTripId)->first();
         return $oTrip;
@@ -27,12 +79,11 @@ class EloquentTrip implements TripRepository
     }
 
     public function getActiveByOrganiser($iUserId) {
-        $aActiveTripsByOrganiser = User::where('users.user_id', $iUserId)->where('is_active', true)->where('is_organizer', true)
-                ->join('travellers', 'travellers.user_id', '=', 'users.user_id')
-                ->join('traveller_trip', 'traveller_trip.traveller_id', '=', 'travellers.traveller_id')
-                ->join('trips', 'trips.trip_id', '=', 'traveller_trip.trip_id')
+        $aActiveTripsByOrganiser = Traveller::where('user_id', $iUserId)->first()
+                ->trips()->wherePivot('is_organizer', true)
                 ->select('trips.trip_id','trips.name','trips.year')
                 ->get();
+               
         return $aActiveTripsByOrganiser;
     }
     public function getAllActiveWithContact() {
@@ -42,19 +93,6 @@ class EloquentTrip implements TripRepository
     public function getNumberOfAttendants($iTripId) {
         $oTrip = Trip::where('trip_id',$iTripId)->withcount('travellers')->first();
         return $oTrip->travellers_count;
-    }
-
-    public function getAttendantsPerTrip($iTripId) {
-        $travellers = TravellerTrip::with('Traveller','Trip')->where('trip_id',$iTripId)->get(); 
-        
-//        $travellers = Traveller::with('User' , 'Zip', 'Major', 'Major.Study','TravellerTrip','TravellerTrip.Trip')->where('user_id',$id)->first();
-//        $aProfileData = $travellers->attributesToArray();
-//        $aProfileData = array_merge($aProfileData,$travellers->user->attributesToArray());
-//        $aProfileData = array_merge($aProfileData,$travellers->zip->attributesToArray());
-//        $aProfileData = array_merge($aProfileData,$travellers->major->attributesToArray());
-//        $aProfileData = array_merge($aProfileData,$travellers->major->study->attributesToArray());
-//        $aProfileData = array_merge($aProfileData,$travellers->travellersPerTrip[0]->trip->attributesToArray());
-        return $travellers;
     }
     
 }
