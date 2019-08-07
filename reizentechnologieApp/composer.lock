@@ -4,8 +4,71 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07aca30af530a5b9e3bb30fb0a0ed1dd",
+    "content-hash": "69bf037ebbbe397194572360e0ed096f",
     "packages": [
+        {
+            "name": "axlon/laravel-postal-code-validation",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/axlon/laravel-postal-code-validation.git",
+                "reference": "9abe87cb6a0c7349226b1ff4d7489096349b613e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/axlon/laravel-postal-code-validation/zipball/9abe87cb6a0c7349226b1ff4d7489096349b613e",
+                "reference": "9abe87cb6a0c7349226b1ff4d7489096349b613e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": ">=5.1,<5.9",
+                "illuminate/http": ">=5.1,<5.9",
+                "illuminate/support": ">=5.1,<5.9",
+                "illuminate/validation": ">=5.1,<5.9",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3",
+                "illuminate/filesystem": ">=5.1,<5.9",
+                "illuminate/translation": ">=5.1,<5.9",
+                "ocramius/package-versions": "^1.4",
+                "phpunit/phpunit": "^5.2 || ^6.0 || ^7.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\Axlon\\PostalCodeValidation\\ValidationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Axlon\\PostalCodeValidation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Choraimy Kroonstuiver",
+                    "email": "choraimy@live.nl"
+                }
+            ],
+            "description": "Worldwide postal code validation for Laravel",
+            "keywords": [
+                "laravel",
+                "lumen",
+                "post code",
+                "postal code",
+                "validation",
+                "zip code"
+            ],
+            "time": "2019-07-06T15:17:04+00:00"
+        },
         {
             "name": "barryvdh/laravel-ide-helper",
             "version": "v2.6.2",

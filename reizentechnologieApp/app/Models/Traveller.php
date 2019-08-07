@@ -37,7 +37,6 @@ class Traveller extends Model
 //        return $this->hasMany('App\Models\TravellersPerRoom', 'traveller_id', 'traveller_id');
 //
 //    }
-    public $timestamps = false;
 
     /**
      * Array with data from different tables

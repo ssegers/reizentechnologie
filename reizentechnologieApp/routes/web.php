@@ -78,6 +78,7 @@ Route::middleware(['auth','guest'])->group(function () {
 Route::middleware(['auth','checkloggedin'])->group(function () {
     //get data
     Route::get('majors/get/{id}', 'DataController@getMajorsByStudy');
+
     //User profile
     Route::prefix('/user/profile')->group(function() {
         Route::get('', 'Traveller\ProfileController@showProfile')->name('profile');
@@ -127,6 +128,9 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::get('trips','Admin\TripController@showAllTrips')->name('showtrips');
         Route::post('trips', 'Admin\TripController@UpdateOrCreateTrip');
         
-        
+        Route::get('organizer/{trip?}', 'Admin\OrganizerController@show')->name('showorganizers');
+        Route::get('organizers/get/{tripId}','DataController@getOrganizersByTrip');
+        Route::post('organizers/add','DataController@addOrganizersToTrip');
+        Route::delete('organizer/delete','DataController@removeOrganizerFromTrip');
     });
 });

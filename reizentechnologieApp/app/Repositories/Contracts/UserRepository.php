@@ -30,4 +30,11 @@ interface UserRepository {
      * @return $aProfileData all Traveller Data
      */
     public function getResetToken($sUserName);
+    
+    /**
+     * get all organizers that are guide
+     * 
+     * @return array
+     */
+    public function getGuides();    
 }

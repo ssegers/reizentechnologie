@@ -32,5 +32,22 @@ class EloquentUser implements UserRepository
         $oResult = User::where('user_id',$sUserId)->first();
         return $oResult->resettoken;
     }
+    
+    /**
+     * get all users that are guide
+     * 
+     * @return array
+     */
+    public function getGuides()
+    {
+        $aGuides = User::where('role','guide')->with('traveller')->get();
+        
+                $aSubsetOfGuides = $aGuides->map(function ($oGuide) {
+                return collect($oGuide->traveller->toArray())
+                ->only(['traveller_id', 'first_name', 'last_name'])
+                ->all();
+            });
+        return $aSubsetOfGuides;
+    }    
   
 }

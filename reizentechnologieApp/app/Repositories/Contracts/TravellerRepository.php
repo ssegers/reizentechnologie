@@ -17,6 +17,7 @@ interface TravellerRepository {
     public function store($aProfileData);
     
     public function getIdByUsername($sUsername);
+    
     /**
      * get All travellerdata in one array based on the user_id
      * @param $userId the user_id
@@ -80,5 +81,5 @@ interface TravellerRepository {
      * @return boolean $isOrganizer 
      */
     public function isOrganizerForTheTrip($iTripId); 
-    
+        
 }

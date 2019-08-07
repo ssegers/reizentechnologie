@@ -95,4 +95,65 @@ class EloquentTrip implements TripRepository
         return $oTrip->travellers_count;
     }
     
+    /**
+     * get organizers per trip
+     * 
+     * @autor Stefan Segers
+     * @param integer $iTripId 
+     * @return $aOrganizers 
+     */        
+    public function getOrganizersByTrip($iTripId)
+    {
+        $aOrganizers = Trip::where('trip_id', $iTripId)->first()
+                ->travellers()->wherePivot('is_organizer', true)
+                ->select('travellers.traveller_id','travellers.first_name','travellers.last_name')
+                ->get();
+        $aSubsetOfOrganizers = $aOrganizers->map(function ($oOrganiser) {
+                return collect($oOrganiser->toArray())
+                ->only(['traveller_id', 'first_name', 'last_name'])
+                ->all();
+            });
+        return $aSubsetOfOrganizers;
+    }
+    
+    /**
+     * set organizer for a trip
+     * 
+     * @autor Stefan Segers
+     * @param integer $iTripId
+     * @param integer $iTravellerId   
+     * @return boolean
+     */
+    public function setTravellerAsTripOrganizer($iTripId,$iTravellerId)
+    {
+        $oTrip = Trip::where('trip_id', $iTripId)->first()
+                ->travellers()->wherePivot('traveller_id',$iTravellerId)->first();
+        if ($oTrip != null){
+            $oTrip->pivot->is_organizer = true;
+            $oTrip->pivot->save();
+        }else{
+            $oTrip = Trip::where('trip_id', $iTripId)->first();           
+            $oTrip->travellers()->attach($iTravellerId,['is_guide' => true, 'is_organizer' => true]);
+        }
+        return true;
+        
+    }
+
+    /**
+     * remove organizer from trip
+     * 
+     * @autor Stefan Segers
+     * @param integer $iTripId
+     * @param integer $iTravellerId  
+     * @return boolean 
+     */     
+    public function removeOrganizerFromTrip($iTripId,$iTravellerId)
+    {
+    $oTrip = Trip::where('trip_id', $iTripId)->first()
+        ->travellers()->wherePivot('traveller_id',$iTravellerId)->first();
+    if ($oTrip != null){
+        $oTrip->pivot->is_organizer = false;
+        $oTrip->pivot->save();     
+    }
+    }
 }

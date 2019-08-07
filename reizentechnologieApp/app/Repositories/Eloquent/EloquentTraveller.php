@@ -220,7 +220,7 @@ class EloquentTraveller implements TravellerRepository
                 ->orderBy('major_name', 'asc')
                 ->orderBy('last_name', 'asc')
                 ->get()->toArray();
-        }       
+        }     
    
     }    
 

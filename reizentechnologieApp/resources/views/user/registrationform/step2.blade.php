@@ -117,7 +117,7 @@
                 <div class="modal-body">
                     <div class="form-group col">
                         {{Form::label('zip_code', 'Postcode: ', ['class' => ''])}}
-                        {{ Form::number('zip_code', null, array("id"=>"zip-text","class" => "form-control", "required", "min" => "1000", "max" => "9999", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
+                        {{ Form::text('zip_code', null, array("id"=>"zip-text","class" => "form-control", "required", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
                     </div>
                     <div class="form-group col">
                         {{Form::label('city', 'Stad of Gemeente: ', ['class' => ''])}}

@@ -28,15 +28,15 @@
 
     <div class="d-flex flex-column overflow-auto" id="main" style="height: calc(100vh - 240px);">
         <div class="d-flex flex-row flex-wrap">
-        <h1 class="d-flex p-2">Beheer reizen</h1>
-        <p class="d-flex p-2 align-self-end">Hier vind je alle reizen. Reizen 
-            die actief zijn daar kan men zich voor registreren en al de gegevens van raadplegen
-        </p>
-        <div class="d-flex p-3 ml-auto">
-            <button type="button" class=" btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="-1">
-                Voeg een reis toe
-            </button>
-        </div>
+            <h1 class="d-flex p-2">Beheer reizen</h1>
+            <p class="d-flex p-2 align-self-end">Hier vind je alle reizen. Reizen 
+                die actief zijn daar kan men zich voor registreren en al de gegevens van raadplegen
+            </p>
+            <div class="d-flex p-3 ml-auto">
+                <button type="button" class=" btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="-1">
+                    Voeg een reis toe
+                </button>
+            </div>
         </div>
         <div class="table-responsive" >
             <table id="trips" class="table table-striped table-hover nowrap compact table-sm">

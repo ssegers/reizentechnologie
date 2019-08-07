@@ -63,11 +63,16 @@ interface TripRepository {
      */    
 
     public function getNumberOfAttendants($iTripId);
-    /**
-     * get requested data of attendants per trip
-     * @param integer $iTripId 
-     * @return $aAttendants
-     */    
     
-    //public function getTravellersDataByTrip($iTripId, $aDataFields, $iPagination = null);
+    /**
+     * get organizers per trip
+     * @param integer $iTripId 
+     * @return $aOrganizers
+     */      
+    public function getOrganizersByTrip($iTripId);
+    
+    
+    public function setTravellerAsTripOrganizer($iTripId,$iTravellerId);
+    
+    public function removeOrganizerFromTrip($iTripId,$iTravellerId);
 }

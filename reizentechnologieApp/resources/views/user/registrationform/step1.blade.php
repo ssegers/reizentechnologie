@@ -18,7 +18,7 @@
     {{ csrf_field() }}
     <div class="form-row border-bottom pt-2">
         <div class="form-group col-md-6">
-            {{ FORM::label('droprReis','Reis*')}}
+            {{ FORM::label('dropReis','Reis*')}}
             {{ Form::select('dropReis', $aTrips, $iSelectedTripId ,['required','id'=>'dropReis', 'placeholder' => 'Selecteer een reis', 'class' => 'mb-2 form-control '])}}
         </div>
         <div class="form-group col-md-6">

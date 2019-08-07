@@ -27,12 +27,10 @@ class RegistrationFormAddZip extends FormRequest
     {
         return [
             'city.reuired' => 'je moet een stad of gemeente invullen bij het toevoegen van een postcode',
-            'city.max' => 'Jde ingevulde gemeentenaam is te lang',
+            'city.max' => 'de ingevulde gemeentenaam is te lang',
             'city.unique' => 'De naam van de gemeente bestaat al in de database',
             'zip_code.required' => 'Je moet een postcode invullen',
-            'zip_code.numeric' => 'De postcode is niet geldig',
-            'zip_code.min' => 'De postcode is niet geldig',
-            'zip_code.max' => 'De postcode is niet geldig',            
+            'zip_code.postal_code' => 'je hebt een niet geldige postcode ingevuld',
         ];
     }
     
@@ -46,7 +44,7 @@ class RegistrationFormAddZip extends FormRequest
     {
         return [
             'city' =>'required | max:50 |unique:zips,city',
-            'zip_code' => 'required|numeric|min:1000|max:9999',
+            'zip_code' => 'required|postal_code:NL,BE',
             //
         ];
     }

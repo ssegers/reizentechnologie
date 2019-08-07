@@ -52,7 +52,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                           <a class="dropdown-item" href="{{ route('showtrips') }}">reis beheren</a>
-                          <a class="dropdown-item" href="{{ route('dashboard') }}">organistor koppelen</a>
+                          <a class="dropdown-item" href="{{ route('showorganizers') }}">organistor koppelen</a>
                         </div>
                     </div>
                     <div class="btn-group" role="group">
