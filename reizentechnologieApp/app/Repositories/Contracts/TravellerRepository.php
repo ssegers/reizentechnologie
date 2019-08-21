@@ -81,5 +81,12 @@ interface TravellerRepository {
      * @return boolean $isOrganizer 
      */
     public function isOrganizerForTheTrip($iTripId); 
-        
+    
+    public function getPaymentData($iTripId);
+    
+    public function getPayments($iTripId,$iTravellerId);
+    
+    public function deletePayment($iPaymentId);
+    
+    public function addPayment($aPaymentData);
 }

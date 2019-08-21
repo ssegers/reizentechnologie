@@ -104,6 +104,12 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::post('updatepartisipant/{trip?}/{username?}', 'Organiser\Partisipants@updatePartisipantsProfile');
         Route::delete('deletepartisipant/{trip?}/{username?}','Organiser\Partisipants@destroyPartisipantsProfile')->name("userdestroy");
     });
+    Route::prefix('payments')->group(function () {
+        Route::get('overview/{trip?}','Organiser\Payments@showPaymentsTable')->name("paymentslist");
+        Route::get('get/{tripId}/{travellerId}','DataController@getPaymentsFromUserByTrip');
+        Route::post('delete', 'DataController@deletePayment');
+        Route::post('add','DataController@addPayment')->name("addPayment");
+    });
 });
 
 /*

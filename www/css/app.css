@@ -17008,3 +17008,9 @@ readers do not read off random characters that represent icons */
   border-color: #cbdbf2;
 }
 
+/* Set custom margins for badges */
+
+.badge-custom {
+  margin: 4px 2px;
+}
+

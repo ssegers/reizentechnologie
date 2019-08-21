@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Repositories\Contracts\StudieRepository;
 use App\Repositories\Contracts\TripRepository;
+use App\Repositories\Contracts\TravellerRepository;
 
 class DataController extends Controller
 {
@@ -20,14 +21,20 @@ class DataController extends Controller
      * @var tripRepository
      */
     private $trips;
+
+    /**
+     *
+     * @var travellerRepository
+     */
+    private $travellers;    
     
-    
-    function __construct(StudieRepository $studie, TripRepository $trip) {
+    function __construct(StudieRepository $studie, TripRepository $trip, TravellerRepository $traveller) {
         $this->middleware('auth');
         $this->middleware('checkloggedin');
 
         $this->studies = $studie;
         $this->trips = $trip;
+        $this->travellers = $traveller;
     }
     
     /**
@@ -87,4 +94,36 @@ class DataController extends Controller
        // $request->session()->flash('message', 'Het verwijderen van de begeleider is gelukt.');
         return response()->json(['success' => true]);  
     }
+    
+    public function getPaymentsFromUserByTrip($iTripId,$iTravellerId)
+    {
+        $aPaymentsPerUser = $this->travellers->getPayments($iTripId, $iTravellerId);
+        return response()->json(['aPayments' => $aPaymentsPerUser]);
+    }
+    
+    public function deletePayment(Request $request){
+        $iPaymentId = $request->post('payment_id');
+        $this->travellers->deletePayment($iPaymentId);
+        //return response()->json(['success' => true]);
+    }
+    
+    public function addPayment(Request $request){
+        // this will automatically return a 422 error response when request is invalid
+        $this->validate($request, [
+            'traveller_id' => 'required',
+            'trip_id' => 'required',
+            'amount' => 'required',
+            'payment_date' => 'required',
+
+        ]);
+
+        // below is executed when request is valid
+        $aPaymentData['traveller_id'] = $request->post('traveller_id');
+        $aPaymentData['trip_id'] = $request->post('trip_id');
+        $aPaymentData['amount'] = $request->post('amount');
+        $aPaymentData['date_of_payment'] = $request->post('payment_date');
+        $this->travellers->addPayment($aPaymentData);
+
+    }
+
 }

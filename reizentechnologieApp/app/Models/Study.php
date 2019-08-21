@@ -8,7 +8,7 @@ class Study extends Model
 {
     protected $primaryKey = 'study_id';
     
-    public function major()
+    public function majors()
     {
         return $this->hasMany('App\Models\Major', 'study_id', 'study_id');
     }

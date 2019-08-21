@@ -12,7 +12,7 @@ class Major extends Model
         return $this->belongsTo('App\Models\Study','study_id','study_id');
     }
 
-    public function traveller()
+    public function travellers()
     {
         return $this->hasMany('App\Models\Travellers', 'major_id', 'major_id');
     }
@@ -21,4 +21,5 @@ class Major extends Model
     {
         return $query->where('study_id', $studyId);
     }
+    
 }

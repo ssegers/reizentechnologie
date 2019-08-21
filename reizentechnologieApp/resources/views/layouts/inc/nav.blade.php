@@ -24,7 +24,7 @@
                                     @if(Auth::user()->role!='admin')
                                     <a class="dropdown-item" href="{{ route('home') }}">Verstuur mail</a>
                                     @endif
-                                <a class="dropdown-item" href="{{ route('home') }}">Betalingen</a>
+                                <a class="dropdown-item" href="{{ route('paymentslist') }}">Betalingen</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('home') }}">Hotels</a>
                                 <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>

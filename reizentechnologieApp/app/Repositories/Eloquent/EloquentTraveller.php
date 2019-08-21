@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Traveller;
+use App\Models\Trip;
+use App\Models\Payment;
 
 
 /**
@@ -221,7 +223,46 @@ class EloquentTraveller implements TravellerRepository
                 ->orderBy('last_name', 'asc')
                 ->get()->toArray();
         }     
-   
-    }    
+        
+        
+        public function getPaymentData($iTripId){
+            $aTripData = Trip::where('trip_id',$iTripId)->select('trip_id','price')->first()->attributesToArray();
+            $travellers = Trip::where('trip_id', $iTripId)->first()->travellers()
+                    ->select('travellers.traveller_id','user_id','first_name','last_name','iban')
+                    ->withCount(['payments AS totalpaid' => function($query) use ($iTripId) {
+                        $query->select(DB::raw("SUM(amount)"))->where('trip_id', $iTripId);}])
+                    ->get();
+                        
+            foreach($travellers as $traveller){
+                $aPaymentData[$traveller->traveller_id] = $traveller->attributesToArray();
+                $aPaymentData[$traveller->traveller_id] = array_merge($aPaymentData[$traveller->traveller_id],$traveller->User->attributesToArray());
+                $aPaymentData[$traveller->traveller_id] = array_merge($aPaymentData[$traveller->traveller_id],$aTripData);
+            }
+            return $aPaymentData;
+        } 
+        
+        public function getPayments($iTripId,$iTravellerId)
+        {
+            $aPaymentsPerUser = Payment::where([
+                ['traveller_id', '=', $iTravellerId],
+                ['trip_id', '=', $iTripId],
+                ])->orderBy('date_of_payment', 'asc')->get();
 
-
+        return $aPaymentsPerUser;
+        }
+        
+        public function deletePayment($iPaymentId) {
+            Payment::destroy($iPaymentId);
+            return true;
+        }
+        
+        public function addPayment($aPaymentData) {
+            $oPayment = new Payment;
+            $oPayment->traveller_id = $aPaymentData['traveller_id'];
+            $oPayment->trip_id = $aPaymentData['trip_id'];
+            $oPayment->amount = $aPaymentData['amount'];
+            $oPayment->date_of_payment = $aPaymentData['date_of_payment'];
+            $oPayment->save();
+            return true;
+        }
+    } 
