@@ -157,7 +157,7 @@ class Partisipants extends Controller
                 break;
         }
 
-        return view('user.lists.tripattendants', [
+        return view('organizer.lists.tripattendants', [
             'aUsers' => $aUsers,
             'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked,

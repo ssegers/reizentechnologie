@@ -45,14 +45,16 @@
                 @endif
             @endforeach
 
-            <div>
-                <button type="button" class="btn btn-primary badge-custom">Studenten betalingsstatus mailen</button>
-            </div>
         </div>
 
         <div class="d-flex flex-row justify-content-between">
             <div class="d-none d-sm-block">
                 <h1>Betalingen {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary badge-custom">Studenten betalingsstatus mailen</button>
+                <a href="{{ route('exportpayments',$oCurrentTrip->trip_id)}}" class="btn btn-primary badge-custom">Export to Excel</a>
+            </div>
             </div>
             
         </div>

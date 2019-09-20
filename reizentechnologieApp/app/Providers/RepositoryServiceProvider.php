@@ -21,6 +21,8 @@ use App\Repositories\Eloquent\EloquentCity;
 use App\Repositories\Contracts\PageRepository;
 use App\Repositories\Eloquent\EloquentPage;
 
+use App\Repositories\Contracts\PaymentRepository;
+use App\Repositories\Eloquent\EloquentPayment;
 /**
  * Description of RepositoryServiceProvider
  *
@@ -36,6 +38,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(TripRepository::class, EloquentTrip::class);
         $this->app->singleton(StudieRepository::class, EloquentStudie::class);
         $this->app->singleton(CityRepository::class, EloquentCity::class);
-        $this->app->singleton(PageRepository::class, EloquentPage::class); 
+        $this->app->singleton(PageRepository::class, EloquentPage::class);
+        $this->app->singleton(PaymentRepository::class, EloquentPayment::class); 
     }
 }

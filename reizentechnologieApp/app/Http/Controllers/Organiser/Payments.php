@@ -73,10 +73,9 @@ class Payments extends Controller
         /* Get the current trip */
         $oCurrentTrip = $this->trips->get($iTripId);
 
-//        $userdata = Traveller::getTravellersWithPayment($iTripId);
         $aPaymentData = $this->travellers->getPaymentData($iTripId);
 
-        return view('user.lists.pay_overview',[
+        return view('organizer.lists.pay_overview',[
             'userdata' => $aPaymentData,
             'oCurrentTrip' => $oCurrentTrip,
             'aActiveTrips' => $aActiveTrips,

@@ -19,7 +19,9 @@
  * -----------------------------------------------------------------------------
  */
 //test page
-//Route::get('/test', 'TestController@index')->name('test');
+
+
+
 //home page
 Route::get('/', 'GuestAccess\HomeController@home')->name('home');
 
@@ -78,7 +80,8 @@ Route::middleware(['auth','guest'])->group(function () {
 Route::middleware(['auth','checkloggedin'])->group(function () {
     //get data
     Route::get('majors/get/{id}', 'DataController@getMajorsByStudy');
-
+    //export data
+    Route::get('/export/payments/{id}', 'ExportController@paymentsExport')->name('exportpayments');
     //User profile
     Route::prefix('/user/profile')->group(function() {
         Route::get('', 'Traveller\ProfileController@showProfile')->name('profile');
