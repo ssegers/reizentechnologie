@@ -22,7 +22,7 @@
                                 @if(Auth::user()->isOrganizer())
                                 <a class="dropdown-item" href="{{ route('partisipantslist') }}">Reizigers</a>
                                     @if(Auth::user()->role!='admin')
-                                    <a class="dropdown-item" href="{{ route('home') }}">Verstuur mail</a>
+                                    <a class="dropdown-item" href="{{ route('composeemail') }}">Verstuur mail</a>
                                     @endif
                                 <a class="dropdown-item" href="{{ route('paymentslist') }}">Betalingen</a>
                                 @endif

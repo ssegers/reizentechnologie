@@ -145,7 +145,7 @@ class Partisipants extends Controller
         }
         $aFiltersChecked = $this->aFiltersChecked;
         /* Get the travellers based on the applied filters */
-        $aDataToGet = array_add($aFiltersChecked, 'username', true); //we always need the unsername
+        $aDataToGet = array_add($aFiltersChecked, "username", true); //we always need the unsername
         $aUsers = $this->travellers->getTravellersDataByTrip($iTripId, $aDataToGet);
         /* Check witch download option is checked */
         switch ($request->post('export')) {

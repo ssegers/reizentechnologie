@@ -110,6 +110,10 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::post('delete', 'DataController@deletePayment');
         Route::post('add','DataController@addPayment')->name("addPayment");
     });
+    Route::prefix('email')->group(function () {
+        Route::get('compose','Organiser\SendMail@getEmailForm')->name('composeemail');
+        Route::post('send','Organiser\SendMail@sendInformationMail')->name('sendemail');
+    });
 });
 
 /*

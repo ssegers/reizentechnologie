@@ -80,7 +80,7 @@ class EloquentTrip implements TripRepository
 
     public function getActiveByOrganiser($iUserId) {
         $aActiveTripsByOrganiser = Traveller::where('user_id', $iUserId)->first()
-                ->trips()->wherePivot('is_organizer', true)
+                ->trips()->where('is_active',true)->wherePivot('is_organizer', true)
                 ->select('trips.trip_id','trips.name','trips.year')
                 ->get();
                

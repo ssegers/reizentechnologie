@@ -97,8 +97,8 @@ class EloquentTraveller implements TravellerRepository
         $aProfileData = array_merge($aProfileData,$travellers->Major->attributesToArray());
         $aProfileData = array_merge($aProfileData,$travellers->Major->Study->attributesToArray());
         $aProfileData = array_merge($aProfileData,$travellers->Trips[0]->attributesToArray());
-
-        return $aProfileData;
+        $profileDataCollection = collect($aProfileData);
+        return $profileDataCollection;
     }
     
     /**
@@ -204,24 +204,35 @@ class EloquentTraveller implements TravellerRepository
      
     public function getTravellersDataByTrip($iTripId, $aDataFields) {
        // voorlopige versie met join en gebruik van de pivot table traveller_trip
-        
-         //example: filter table
 
-            return Traveller::select(array_keys($aDataFields))
+//        $allTravellerData = Traveller::whereHas('trips', function ($q) use ($iTripId) {
+//            $q->where('trips.trip_id', $iTripId);})
+//            ->with(['user','zip','major','major.study'])
+//            ->get();
+//        foreach($allTravellerData as $travellerData){    
+//        $aData = $travellerData->attributesToArray();
+//        $aData = array_merge($aData,$travellerData->User->attributesToArray());
+//        $aData = array_merge($aData,$travellerData->Zip->attributesToArray());
+//        $aData = array_merge($aData,$travellerData->Major->attributesToArray());
+//        //$aData = array_merge($aData,$$travellerData->Major->Study->attributesToArray());
+//        $aAllData[]=$aData;
+//        }
+//        //$aData = array_merge($aData,$travellers->Trips[0]->attributesToArray());
+//        $dataCollection = collect($aAllData)->only(array_keys($aDataFields))->all();
+//         dd($allTravellerData,$dataCollection);
+        $travellerData = Traveller::select(array_keys($aDataFields))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
                 ->join('majors','travellers.major_id','=','majors.major_id')
                 ->join('traveller_trip', 'travellers.traveller_id', '=', 'traveller_trip.traveller_id')
                 ->join('studies','majors.study_id','=','studies.study_id')
                 ->where('trip_id', $iTripId)
-//                ->where(function ($query) {
-//                    $query
-//                        ->where('is_guide', true)
-//                        ->orWhere('role', '=', 'traveller');})
                 ->orderBy('role', 'asc')
                 ->orderBy('major_name', 'asc')
                 ->orderBy('last_name', 'asc')
                 ->get()->toArray();
+
+        return $travellerData;
         }     
         
         
