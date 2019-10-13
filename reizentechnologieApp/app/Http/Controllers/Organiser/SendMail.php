@@ -91,20 +91,23 @@ class SendMail extends Controller
             'contactMail' => $sContactMail
         ]; 
 
-        /* Get the mail list and chunk them by 10 */
-        $aAllTravellersPerTrip = $this->travellers->getTravellersDataByTrip($iTripId, ['email' => 'email','first_name' => 'first_name','last_name' => 'last_name']);
-        foreach( $aAllTravellersPerTrip as $aTraveller){
-            $aRecipient['email'] = $aTraveller['email'];
-            $aRecipient['name'] = $aTraveller['first_name']. ' ' .$aTraveller['last_name'];
-            $aMalingList[] = $aRecipient;
+        if (($request->post('test')) == 'sendTestMail'){
+             Mail::to($sContactMail)->send(new InformationMail($aMailData));
+        }else{
+            /* Get the mail list and chunk them by 10 */
+            $aAllTravellersPerTrip = $this->travellers->getTravellersDataByTrip($iTripId, ['email' => 'email','first_name' => 'first_name','last_name' => 'last_name']);
+            foreach( $aAllTravellersPerTrip as $aTraveller){
+                $aRecipient['email'] = $aTraveller['email'];
+                $aRecipient['name'] = $aTraveller['first_name']. ' ' .$aTraveller['last_name'];
+                $aMalingList[] = $aRecipient;
+            }
+            $aChunkMalingList = array_chunk($aMalingList, 10);
+            /* Send the mail to each recipient */
+            foreach ($aChunkMalingList as $aChunk) {
+                //dd($aChunk);
+                Mail::to($aChunk)->send(new InformationMail($aMailData));
+            }           
         }
-        $aChunkMalingList = array_chunk($aMalingList, 10);
-        /* Send the mail to each recipient */
-        foreach ($aChunkMalingList as $aChunk) {
-            //dd($aChunk);
-            Mail::to($aChunk)->send(new InformationMail($aMailData));
-        }
-
         return redirect()->back()->with('message', 'De email is succesvol verstuurd!');
     }
 

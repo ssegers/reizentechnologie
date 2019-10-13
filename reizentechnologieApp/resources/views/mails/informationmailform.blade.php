@@ -24,6 +24,10 @@
     <div class="container">
         <h1>Mail naar alle deelnemers:</h1><br />
         {{ Form::open(array('route' => 'sendemail', 'method' =>'post', "onsubmit" => 'return confirm("Bent u zeker dat u de mail wilt versturen?")')) }}
+        <div class="form-group">    
+            {{ Form::label('test', 'Verstuur test mail') }}
+            {{ Form::checkbox('test', 'sendTestMail',false) }}
+        </div>
         <div class="form-group">
             {{ Form::label('subject', 'Onderwerp:') }}
             {{ Form::text('subject', '', ['class' => 'form-control', 'required']) }}
