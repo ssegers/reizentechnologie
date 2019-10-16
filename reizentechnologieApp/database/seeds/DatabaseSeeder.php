@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ZipTableSeeder::class,
             TravellersTableSeeder::class,
             TravellerTripSeeder::class,
+            InformationTableSeeder::class,
 
         ]);
     }

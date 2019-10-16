@@ -102,6 +102,7 @@ return [
         'default' => [
             'query' => [
                 // 'example_query' => ExampleQuery::class,
+                'info' => App\GraphQL\Queries\InfoQuery::class,
             ],
             'mutation' => [
                 // 'example_mutation'  => ExampleMutation::class,
@@ -124,6 +125,7 @@ return [
         // 'example'           => ExampleType::class,
         // 'relation_example'  => ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,
+        'info' => App\GraphQL\Types\InfoType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request
