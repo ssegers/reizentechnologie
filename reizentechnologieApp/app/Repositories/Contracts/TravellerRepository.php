@@ -89,4 +89,14 @@ interface TravellerRepository {
     public function deletePayment($iPaymentId);
     
     public function addPayment($aPaymentData);
+
+    /**
+     * get full username by user id
+     * 
+     * @author Koen De Deckers
+     * 
+     * @param $sUserId
+     * @return string
+     */
+    public function getFullNameByUserId($UserId);
 }

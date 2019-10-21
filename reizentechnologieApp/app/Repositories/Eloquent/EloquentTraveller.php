@@ -276,4 +276,18 @@ class EloquentTraveller implements TravellerRepository
             $oPayment->save();
             return true;
         }
-    } 
+
+
+        /**
+         * get full username by user id
+         * 
+         * @author Koen De Deckers
+         * 
+         * @param $sUserId
+         * @return string
+         */
+        public function getFullNameByUserId($sUserId) {
+            $traveller = Traveller::where('user_id', $sUserId)->get()->first();
+            return $traveller->first_name . " " . $traveller->last_name;
+        }
+    }
