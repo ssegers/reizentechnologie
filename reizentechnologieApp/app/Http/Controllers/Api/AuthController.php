@@ -22,7 +22,9 @@ class AuthController extends Controller
             return Array(
                 "status" => "succedded",
                 "api_token" => Auth::user()->api_token,
-                "user_name" => $this->travellerRepository->getFullNameByUserId(Auth::id()),
+                "first_name" => $this->travellerRepository->getFirstNameByUserId(Auth::id()),
+                "last_name" => $this->travellerRepository->getLastNameByUserId(Auth::id()),
+                "traveller_id" => $this->travellerRepository->getTravellerIdByUserId(Auth::id()),
             );
         }
         return Array(

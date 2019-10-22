@@ -279,15 +279,40 @@ class EloquentTraveller implements TravellerRepository
 
 
         /**
-         * get full username by user id
+         * get first name by user id
          * 
          * @author Koen De Deckers
          * 
          * @param $sUserId
          * @return string
          */
-        public function getFullNameByUserId($sUserId) {
+        public function getFirstNameByUserId($sUserId) {
             $traveller = Traveller::where('user_id', $sUserId)->get()->first();
-            return $traveller->first_name . " " . $traveller->last_name;
+            return $traveller->first_name;
+        }
+        /**
+         * get last name by user id
+         * 
+         * @author Koen De Deckers
+         * 
+         * @param $sUserId
+         * @return string
+         */
+        public function getLastNameByUserId($sUserId) {
+            $traveller = Traveller::where('user_id', $sUserId)->get()->first();
+            return $traveller->last_name;
+        }
+
+        /**
+         * get last name by user id
+         * 
+         * @author Koen De Deckers
+         * 
+         * @param $sUserId
+         * @return string
+         */
+        public function getTravellerIdByUserId($sUserId) {
+            $traveller = Traveller::where('user_id', $sUserId)->get()->first();
+            return $traveller->traveller_id;
         }
     }
