@@ -80,7 +80,6 @@ Route::middleware(['auth','guest'])->group(function () {
 Route::middleware(['auth','checkloggedin'])->group(function () {
     //get data
     Route::get('majors/get/{id}', 'DataController@getMajorsByStudy');
-    Route::get('destination/get/{destinationName}','DataController@getAccomodationsByDestination');
     //export data
     Route::get('/export/payments/{id}', 'ExportController@paymentsExport')->name('exportpayments');
     //User profile
@@ -117,20 +116,6 @@ Route::middleware(['auth','guide'])->group(function () {
     Route::prefix('email')->group(function () {
         Route::get('compose','Organiser\SendMail@getEmailForm')->name('composeemail');
         Route::post('send','Organiser\SendMail@sendInformationMail')->name('sendemail');
-    });
-        //hotels
-    Route::prefix('accomodations')->group(function() {
-        Route::get('/overview/{trip?}', 'Organiser\Accomodation@overview')->name("accomodationOverview");
-        Route::post('/listhotels', 'Organiser\Accomodation@getHotelsPerTripOrganizer');
-        Route::post('/deleteHotel', 'Organiser\Accomodation@deleteHotel');
-        Route::post('/deleteHotelRoom', 'Organiser\Accomodation@deleteHotelRoom');
-        Route::post('/addAccomodationToTrip', 'Organiser\Accomodation@addAccomodationToTrip');
-        Route::post('/createHotel', 'Organiser\Accomodation@createHotel');
-
-        Route::get('/listrooms/{hotel_id}/{hotel_name}', 'Organiser\Accomodation@getRoomsOrganisator');
-        Route::post('/listrooms/{hotel_id}/{hotel_name}', 'Organiser\Accomodation@getRoomsOrganisator');
-
-        Route::post('/addRoom', 'Organiser\Accomodation@addHotelRoom');
     });
 });
 

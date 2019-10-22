@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\StudieRepository;
 use App\Repositories\Contracts\TripRepository;
 use App\Repositories\Contracts\TravellerRepository;
-use App\Repositories\Contracts\AccomodationRepository;
 
 class DataController extends Controller
 {
@@ -27,23 +26,15 @@ class DataController extends Controller
      *
      * @var travellerRepository
      */
-    private $travellers; 
+    private $travellers;    
     
-    /**
-     *
-     * @var accomodationRepository
-     */
-    private $accomodations;     
-    
-    function __construct(StudieRepository $studie, TripRepository $trip, 
-            TravellerRepository $traveller, AccomodationRepository $accomodation) {
+    function __construct(StudieRepository $studie, TripRepository $trip, TravellerRepository $traveller) {
         $this->middleware('auth');
         $this->middleware('checkloggedin');
 
         $this->studies = $studie;
         $this->trips = $trip;
         $this->travellers = $traveller;
-        $this->accomodations = $accomodation;
     }
     
     /**
@@ -57,16 +48,6 @@ class DataController extends Controller
         return json_encode($aMajors);
     }
     
-    /**
-     * 
-     * @param type $destinationName
-     * @return type
-     */
-    public function getAccomodationsByDestination($sDestinationName)
-    {    
-        $aAccomodations = $this->accomodations->getAccomodationsByDestination($sDestinationName);
-        return json_encode($aAccomodations);
-    }    
     /**
      * get organizers by trip and result in Json format
      * 

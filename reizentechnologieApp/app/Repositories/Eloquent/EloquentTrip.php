@@ -5,7 +5,6 @@ use App\Repositories\Contracts\TripRepository;
 
 use App\Models\Traveller;
 use App\Models\Trip;
-use App\Models\Destination;
 
 /**
  * accessing trip data
@@ -150,16 +149,11 @@ class EloquentTrip implements TripRepository
      */     
     public function removeOrganizerFromTrip($iTripId,$iTravellerId)
     {
-        $oTrip = Trip::where('trip_id', $iTripId)->first()
-            ->travellers()->wherePivot('traveller_id',$iTravellerId)->first();
-        if ($oTrip != null){
-            $oTrip->pivot->is_organizer = false;
-            $oTrip->pivot->save();     
-        }
+    $oTrip = Trip::where('trip_id', $iTripId)->first()
+        ->travellers()->wherePivot('traveller_id',$iTravellerId)->first();
+    if ($oTrip != null){
+        $oTrip->pivot->is_organizer = false;
+        $oTrip->pivot->save();     
     }
-    
-    public function getDestinations() {
-        $aDestinations = Destination::get()->pluck('destination_name','destination_name');
-        return $aDestinations;
     }
 }
