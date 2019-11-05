@@ -98,7 +98,7 @@ interface TravellerRepository {
      * @param $sUserId
      * @return string
      */
-    public function getFirstNameByUserId($UserId);
+    public function getFirstNameByUserId($sUserId);
     /**
      * get last name by user id
      * 
@@ -107,7 +107,7 @@ interface TravellerRepository {
      * @param $sUserId
      * @return string
      */
-    public function getLastNameByUserId($UserId);
+    public function getLastNameByUserId($sUserId);
 
     /**
      * get traveller id by user id
@@ -117,6 +117,6 @@ interface TravellerRepository {
      * @param $sUserId
      * @return int
      */
-    public function getTravellerIdByUserId($UserId);
+    public function getTravellerIdByUserId($sUserId);
     
 }

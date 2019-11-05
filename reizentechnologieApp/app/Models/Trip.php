@@ -27,4 +27,9 @@ class Trip extends Model
     {
         return $query->whereNotNull('Contact_mail');
     }
+
+    public function hotels()
+    {
+        return $this->belongsToMany(Hotel::class, null, 'trip_id', 'hotel_id');
+    }
 }

@@ -103,6 +103,7 @@ return [
             'query' => [
                 // 'example_query' => ExampleQuery::class,
                 'info' => App\GraphQL\Queries\InfoQuery::class,
+                'trip' => App\GraphQL\Queries\TripQuery::class,
             ],
             'mutation' => [
                 // 'example_mutation'  => ExampleMutation::class,
@@ -126,6 +127,8 @@ return [
         // 'relation_example'  => ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,
         'info' => App\GraphQL\Types\InfoType::class,
+        'hotel' => App\GraphQL\Types\HotelType::class,
+        'trip' => App\GraphQL\Types\TripType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request

@@ -304,7 +304,7 @@ class EloquentTraveller implements TravellerRepository
         }
 
         /**
-         * get last name by user id
+         * get traveller id by user id
          * 
          * @author Koen De Deckers
          * 

@@ -48,8 +48,8 @@ class UsersTableSeeder extends Seeder
 
         // Daan Vandebosch
         DB::table('users')->insert([
-            'username' => 'r0664592',
-            'password' => bcrypt('daan'),
+            'username' => 'test',
+            'password' => bcrypt('test'),
             'role' => 'traveller',
             'api_token' => Str::random(60),
         ]);

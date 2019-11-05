@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             TravellersTableSeeder::class,
             TravellerTripSeeder::class,
             InformationTableSeeder::class,
-            HotelsTableSeeder::class,
-            HotelTripTableSeeder::class,
+            HotelsSeeder::class,
+            HotelTripSeeder::class,
         ]);
     }
 }

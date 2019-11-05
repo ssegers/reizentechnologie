@@ -10,6 +10,6 @@ class Hotel extends Model
 
     public function trips()
     {
-        return $this->hasMany('App\Models\Trip', 'trip_id', 'trip_id');
+        return $this->belongsToMany(Trip::class,null,'hotel_id','trip_id');
     }
 }
