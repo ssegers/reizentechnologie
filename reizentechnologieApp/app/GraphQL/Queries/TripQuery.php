@@ -10,7 +10,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Rebing\GraphQL\Support\SelectFields;
 use Rebing\GraphQL\Support\Query;
 use Rebing\GraphQL\Support\Facades\GraphQL;
-use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 use App\Models\Trip;
 use App\Models\Traveller;
@@ -39,7 +39,7 @@ class TripQuery extends Query
         //dd($args['traveller_id']);
         //$t = Traveller::where("traveller_id", $args['traveller_id'])->get();
         //dd($t->trips());
-        //return Trip::where('trip_id', 1)->get();
-        return Trip::all();
+        return Trip::where('trip_id', 1)->get();
+        //return Trip::all();
     }
 }

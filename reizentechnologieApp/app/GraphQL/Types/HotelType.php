@@ -24,11 +24,31 @@ class HotelType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'hotel name',
             ],
-            'hotel_address' => [
+            'address' => [
                 'type' => Type::string(),
                 'description' => 'hotel address',
             ],
-            'hotel_phone' => [
+            'phone' => [
+                'type' => Type::string(),
+                'description' => 'hotel phone',
+            ],
+            'type_of_accomodation' => [
+                'type' => Type::string(),
+                'description' => 'hotel phone',
+            ],
+            'email' => [
+                'type' => Type::string(),
+                'description' => 'hotel phone',
+            ],
+            'website_link' => [
+                'type' => Type::string(),
+                'description' => 'hotel phone',
+            ],
+            'picture1_link' => [
+                'type' => Type::string(),
+                'description' => 'hotel phone',
+            ],
+            'picture2_link' => [
                 'type' => Type::string(),
                 'description' => 'hotel phone',
             ],
