@@ -32,4 +32,9 @@ class Trip extends Model
     {
         return $this->belongsToMany(Hotel::class, null, 'trip_id', 'hotel_id');
     }
+
+    public function transports()
+    {
+        return $this->hasMany('App\Models\Transport', 'trip_id', 'trip_id');
+    }
 }

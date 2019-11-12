@@ -75,7 +75,6 @@ class TravellerType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'traveller medical info',
             ],
-
         ];
     }
 }

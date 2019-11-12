@@ -30,7 +30,7 @@ class TripQuery extends Query
     public function args(): array
     {
         return [
-            'traveller_id' => ['name' => 'traveller_id', 'type' => Type::int()],
+            'trip_id' => ['name' => 'trip_id', 'type' => Type::int()],
         ];
     }
 
@@ -39,7 +39,7 @@ class TripQuery extends Query
         //dd($args['traveller_id']);
         //$t = Traveller::where("traveller_id", $args['traveller_id'])->get();
         //dd($t->trips());
-        return Trip::where('trip_id', 1)->get();
+        return Trip::where('trip_id', $args['trip_id'])->get();
         //return Trip::all();
     }
 }
