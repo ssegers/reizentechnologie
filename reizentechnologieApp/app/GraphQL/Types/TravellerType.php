@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Types;
 
-use App\Models\Traveller;
 use GraphQL\Type\Definition\Type;
+
+use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
+use App\Models\Traveller;
 
 class TravellerType extends GraphQLType
 {
@@ -74,6 +76,10 @@ class TravellerType extends GraphQLType
             'medical_info' => [
                 'type' => Type::string(),
                 'description' => 'traveller medical info',
+            ],
+            'major' => [
+                'type' => GraphQL::type('major'),
+                'description' => 'traveller major',
             ],
         ];
     }
