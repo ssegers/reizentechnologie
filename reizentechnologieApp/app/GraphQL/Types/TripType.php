@@ -32,6 +32,14 @@ class TripType extends GraphQLType
             'travellers' => [
                 'type' => Type::listOf(GraphQL::type('traveller')),
                 'description' => 'a list of all travellers on this trip',
+            ],
+            'dayplannings' =>[
+                'type' => Type::listof(GraphQl::type('dayplanning')),
+                'description' => 'a list of all the days on this trip',
+            ],
+            'activities' =>[
+                'type' => Type::listof(GraphQl::type('activities')),
+                'description' => 'an object of an activity',
             ]
         ];
     }
