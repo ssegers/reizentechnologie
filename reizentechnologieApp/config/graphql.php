@@ -131,6 +131,7 @@ return [
         'trip' => App\GraphQL\Types\TripType::class,
         'traveller' => App\GraphQL\Types\TravellerType::class,
         'major' => App\GraphQL\Types\MajorType::class,
+        'room' => App\GraphQL\Types\RoomType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request

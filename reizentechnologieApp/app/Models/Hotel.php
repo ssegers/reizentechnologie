@@ -12,4 +12,9 @@ class Hotel extends Model
     {
         return $this->belongsToMany(Trip::class,null,'hotel_id','trip_id');
     }
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class, null, 'hotel_id', 'room_id');
+    }
 }

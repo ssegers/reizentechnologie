@@ -6,6 +6,7 @@ namespace App\GraphQL\Types;
 
 use GraphQL\Type\Definition\Type;
 
+use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 use App\Models\Hotel;
 
@@ -52,6 +53,10 @@ class HotelType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'hotel phone',
             ],
+            'rooms' => [
+                'type' => Type::listOf(GraphQL::type('room')),
+                'description' => 'a list of all rooms in this hotel',
+            ]
         ];
     }
 }
