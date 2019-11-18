@@ -21,6 +21,22 @@ class TravellerType extends GraphQLType
     public function fields(): array
     {
         return [
+            'traveller_id' => [
+                'type' => Type::string(),
+                'description' => 'traveller id',
+            ],
+            'user_id' => [
+                'type' => Type::string(),
+                'description' => 'user id',
+            ],
+            'zip_id' => [
+                'type' => Type::string(),
+                'description' => 'zip id',
+            ],
+            'major_id' => [
+                'type' => Type::string(),
+                'description' => 'major id',
+            ],
             'first_name' => [
                 'type' => Type::string(),
                 'description' => 'traveller firstname',
