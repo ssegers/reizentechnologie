@@ -36,6 +36,10 @@ class DayPlanningType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'location'
             ],
+            'activities' =>[
+                'type' => Type::listof(GraphQl::type('activities')),
+                'description' => 'an object of an activity',
+            ]
         ];
     }
 }
