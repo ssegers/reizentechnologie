@@ -24,7 +24,7 @@ class RoomType extends GraphQLType
             'room_id' => [
                 'type' => Type::string(),
                 'description' => 'room id',
-            ],'
+            ],
         ];
     }
 }

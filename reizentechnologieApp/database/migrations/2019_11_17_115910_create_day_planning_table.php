@@ -14,8 +14,8 @@ class CreateDayPlanningTable extends Migration
     public function up()
     {
         Schema::create('day_planning', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
+            $table->increments('day_planning_id');
+            $table->date('date');
             $table->string('highlight');
             $table->string('description');
             $table->string('location');

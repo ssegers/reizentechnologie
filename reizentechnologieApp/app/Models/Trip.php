@@ -38,7 +38,7 @@ class Trip extends Model
         return $this->hasMany('App\Models\Transport', 'trip_id', 'trip_id');
     }
 
-    public function dayplanning(){
-        return $this->hasMany(DayPlanning::class, null, 'trip_id', 'day_planning_id');
+    public function dayplannings(){
+        return $this->belongsTo(DayPlanning::class, null, 'trip_id', 'trip_id');
     }
 }
