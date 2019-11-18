@@ -33,8 +33,8 @@ class TripType extends GraphQLType
                 'type' => Type::listOf(GraphQL::type('traveller')),
                 'description' => 'a list of all travellers on this trip',
             ],
-            'dayplannings' =>[
-                'type' => Type::listof(GraphQl::type('dayplanning')),
+            'day_plannings' =>[
+                'type' => Type::listof(GraphQl::type('day_planning')),
                 'description' => 'a list of all the days on this trip',
             ],
             'activities' =>[
@@ -44,7 +44,11 @@ class TripType extends GraphQLType
             'transport' => [
                 'type' => Type::listOf(GraphQL::type('transport')),
                 'description' => 'a list of all cars/busses on this trip',
-            ]
+            ],
+            'emergency_numbers' =>[
+                'type' => Type::listOf(GraphQL::type('emergency_number')),
+                'description' => 'a list of all the emergency numbers on this trip',
+            ],
         ];
     }
 }

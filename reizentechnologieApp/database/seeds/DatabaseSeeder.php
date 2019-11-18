@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
             HotelTripSeeder::class,
             TransportTableSeeder::class,
             TransportTravellerTableSeeder::class,
+            ActivitiesSeeder::class,
+            DayPlanningSeeder::class,
+            EmergencyNumbersTableSeeder::class,
         ]);
     }
 }
