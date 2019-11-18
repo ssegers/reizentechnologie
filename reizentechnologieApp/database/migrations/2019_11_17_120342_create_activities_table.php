@@ -15,6 +15,7 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('day_planning_id')->unsigned();
             $table->foreign('day_planning_id')->references('day_planning_id')->on('day_planning')->onDelete("cascade");
             $table->string('name');
             $table->string('start_hour');

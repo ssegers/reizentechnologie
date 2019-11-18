@@ -16,6 +16,7 @@ class CreateEmergencyNumbersTable extends Migration
         Schema::create('emergency_numbers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('number');
+            $table->integer('traveller_id')->unsigned();
             $table->foreign('traveller_id')->references('traveller_id')->on('travellers')->onDelete("cascade");
             $table->timestamps();
         });

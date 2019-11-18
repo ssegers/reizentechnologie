@@ -15,6 +15,8 @@ class CreateDayplanningTripTable extends Migration
     {
         Schema::create('dayplanning_trip', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('day_planning_id')->unsigned();
+            $table->integer('trip_id')->unsigned();
             $table->foreign('day_planning_id')->references("day_planning_id")->on('day_planning')->onDelete('cascade');
             $table->foreign('trip_id')->references('trip_id')->on('trips')->onDelete("cascade");
             $table->timestamps();
