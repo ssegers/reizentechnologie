@@ -53,10 +53,10 @@ class HotelType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'hotel phone',
             ],
-            'rooms' => [
+            /*'rooms' => [
                 'type' => Type::listOf(GraphQL::type('room')),
                 'description' => 'a list of all rooms in this hotel',
-            ]
+            ]*/
         ];
     }
 }

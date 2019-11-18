@@ -6,6 +6,7 @@ namespace App\GraphQL\Types;
 
 use GraphQL\Type\Definition\Type;
 
+use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 use App\Models\DayPlanning;
 
@@ -36,6 +37,10 @@ class DayPlanningType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'location'
             ],
+            'activities' =>[
+                'type' => Type::listof(GraphQL::type('activities')),
+                'description' => 'an object of an activity',
+            ]
         ];
     }
 }
