@@ -75,4 +75,6 @@ interface TripRepository {
     public function setTravellerAsTripOrganizer($iTripId,$iTravellerId);
     
     public function removeOrganizerFromTrip($iTripId,$iTravellerId);
+    
+    public function getDestinations();
 }
