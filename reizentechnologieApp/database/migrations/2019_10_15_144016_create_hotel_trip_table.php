@@ -13,7 +13,7 @@ class CreateHoteltripTable extends Migration
      */
     public function up()
     {
-        Schema::create('hotel_trip', function (Blueprint $table) {
+        Schema::create('hotel_trips', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('hotel_id')->unsigned();
             $table->integer('trip_id')->unsigned();

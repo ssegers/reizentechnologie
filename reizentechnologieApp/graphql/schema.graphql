@@ -1,0 +1,72 @@
+type Query @middleware(checks: ["auth:api"]){
+    trip(trip_id: ID! @eq): Trip @find
+}
+
+
+type Trip {
+    name: String!
+    travellers: [Traveller!]
+    hotels: [Hotel!]! @belongsToMany
+    dayplannings: [DayPlanning!]!
+    emergencynumbers: [EmergencyNumber!]!
+    transports: [Transport!]!
+    
+}
+
+type Traveller {
+    traveller_id: ID!
+    first_name: String!
+    last_name: String!
+
+}
+
+type Hotel {
+    hotel_id: ID!
+    hotel_name: String!
+    hoteltrips: [HotelTrip!]!
+}
+
+type DayPlanning {
+    day_planning_id: ID!
+    date: String!
+    highlight: String!
+    description: String!
+    location: String!
+    activities: [Activity!]!
+}
+
+type Activity {
+    activities_id: ID!
+    name: String!
+    start_hour: String!
+    end_hour: String!
+    description: String!
+    location: String!
+}
+
+type EmergencyNumber {
+    emergency_number_id: ID!
+    number: String!
+    first_name: String!
+    last_name: String!
+}
+
+type Transport {
+    transport_id: ID!
+    driver_id: Int!
+    size: Int!
+}
+
+type HotelTrip {
+    id: ID!
+    hotel_id: Int!
+    start_date: String!
+    end_date: String!
+    rooms: [Room!]!
+}
+
+type Room {
+    room_id: ID!
+    hotel_trip_id: Int!
+    size: Int!
+}

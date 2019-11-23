@@ -34,8 +34,4 @@ class Traveller extends Model
     public function payments(){
         return $this->hasMany('App\Models\Payment','traveller_id','traveller_id');
     }
-
-    public function emergencyNumbers(){
-        return $this->hasMany(EmergencyNumbers::class, null, traveller_id, emergencynumber_id);
-    }
 }

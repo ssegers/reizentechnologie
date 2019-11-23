@@ -19,7 +19,7 @@ class CreateRoomsTable extends Migration
             $table->integer('size');
             $table->timestamps();
 
-            $table->foreign('hotel_trip_id')->references('id')->on('hotel_trip');
+            $table->foreign('hotel_trip_id')->references('id')->on('hotel_trips');
         });
     }
 

@@ -8,7 +8,7 @@ class Room extends Model
 {
     protected $primary_key = "room_id";
 
-    public function hotel() {
-        return $this->hasOne('App\Models\Hotel', 'hotel_id', 'room_id');
+    public function hoteltrips() {
+        return $this->belongsTo(HotelTrip::class, null, 'room_id', 'id');
     }
 }

@@ -8,13 +8,8 @@ class Hotel extends Model
 {
     protected $primaryKey = 'hotel_id';
 
-    public function trips()
+    public function hotelTrips()
     {
-        return $this->belongsToMany(Trip::class,null,'hotel_id','trip_id');
-    }
-
-    public function rooms()
-    {
-        return $this->belongsToMany(Room::class, null, 'hotel_id', 'room_id');
+        return $this->hasMany('App\Models\HotelTrip', 'hotel_id', 'hotel_id');
     }
 }

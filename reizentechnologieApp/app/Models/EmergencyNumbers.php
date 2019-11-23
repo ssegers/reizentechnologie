@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class EmergencyNumbers extends Model
 {
     public function travellers(){
-        return $this->belongsTo(Travellers::class, null, 'emergencynumber_id', 'traveller_id');
+        return $this->belongsToMany(Trips::class, null, 'emergencynumber_id', 'trip_id');
     }
 }
