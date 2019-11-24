@@ -30,7 +30,7 @@ class Trip extends Model
 
     public function hotels()
     {
-        return $this->belongsToMany(Hotel::class, null, 'trip_id', 'hotel_id');
+        return $this->belongsToMany(Hotel::class, 'hotel_trips', 'trip_id', 'hotel_id');
     }
 
     public function transports()
@@ -39,6 +39,6 @@ class Trip extends Model
     }
 
     public function dayplannings(){
-        return $this->belongsTo(DayPlanning::class, null, 'trip_id', 'trip_id');
+        return $this->hasMany('App\Models\DayPlanning', 'trip_id', 'trip_id');
     }
 }
