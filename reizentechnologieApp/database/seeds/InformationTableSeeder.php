@@ -12,8 +12,12 @@ class InformationTableSeeder extends Seeder
     public function run()
     {
         DB::table('information')->insert([
-            'info_name' => 'algemeen',
-            'info_value' => "dit is de algemene info van onze app, als je dit leest dan werkt de algemene info",
+            'info_name' => 'algemene_voorwaarde',
+            'info_value' => "dit is de algemene voorwaarde die je moet goedkeuren voordat je de app kan gebruiken.",
+        ]);
+        DB::table('information')->insert([
+            'info_name' => 'algemene_info',
+            'info_value' => "dit is de algemene info van onze app, hier vind je meer informatie over de reis.",
         ]);
     }
 }

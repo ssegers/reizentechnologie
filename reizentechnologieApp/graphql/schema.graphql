@@ -1,3 +1,11 @@
+type Query @middleware(checks: ["auth:api]) {
+    info(info_name: String! @eq): Info @find
+}
+
+type Info {
+    info_value: String!
+}
+
 type Query @middleware(checks: ["auth:api"]){
     trip(trip_id: ID! @eq): Trip @find
 }
