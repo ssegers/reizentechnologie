@@ -13,20 +13,20 @@ class HotelTripSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('hotel_trip')->insert(array(
+        DB::table('hotel_trips')->insert(array(
             'hotel_id' => 1,
             'trip_id' => 1,
             'start_date'=>Carbon::create('2018', '12', '15'),
             'end_date'=>Carbon::create('2018', '12', '16')
         ));
-        DB::table('hotel_trip')->insert(array(
+        DB::table('hotel_trips')->insert(array(
             'hotel_id' => 2,
             'trip_id' => 1,
             'start_date'=>Carbon::create('2018', '12', '16'),
             'end_date'=>Carbon::create('2018', '12', '19')
 
         ));
-        DB::table('hotel_trip')->insert(array(
+        DB::table('hotel_trips')->insert(array(
             'hotel_id' => 3,
             'trip_id' => 2,
             'start_date'=>Carbon::create('2018', '12', '19'),

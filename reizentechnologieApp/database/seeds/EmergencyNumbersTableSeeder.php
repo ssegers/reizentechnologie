@@ -12,12 +12,16 @@ class EmergencyNumbersTableSeeder extends Seeder
     public function run()
     {
         DB::table('emergency_numbers')->insert(array(
+            'trip_id' => 1,
             'number' => '123456789',
-            'traveller_id' => 1,
+            'first_name' => "Stefan",
+            "last_name" => "Segers"
         ));
         DB::table('emergency_numbers')->insert(array(
+            'trip_id' => 1,
             'number' => '123456789',
-            'traveller_id' => 2,
+            'first_name' => "Rudi",
+            "last_name" => "Roox"
         ));
     }
 }

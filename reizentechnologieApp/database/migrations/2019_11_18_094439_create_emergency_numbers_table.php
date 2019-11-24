@@ -14,10 +14,12 @@ class CreateEmergencyNumbersTable extends Migration
     public function up()
     {
         Schema::create('emergency_numbers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('emergency_number_id');
+            $table->integer("trip_id")->unsigned();
+            $table->foreign('trip_id')->references('trip_id')->on('trips')->onDelete("cascade");
             $table->string('number');
-            $table->integer('traveller_id')->unsigned();
-            $table->foreign('traveller_id')->references('traveller_id')->on('travellers')->onDelete("cascade");
+            $table->string('first_name');
+            $table->string('last_name');
             $table->timestamps();
         });
     }
