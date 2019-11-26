@@ -34,4 +34,8 @@ class Traveller extends Model
     public function payments(){
         return $this->hasMany('App\Models\Payment','traveller_id','traveller_id');
     }
+
+    public function transports() {
+        return $this->belongsToMany(Transport::class, 'transport_traveller' , 'traveller_id', 'transport_id');
+    }
 }
