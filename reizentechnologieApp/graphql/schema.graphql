@@ -1,7 +1,11 @@
 type Query @middleware(checks: ["auth:api"]){
     trip(trip_id: ID! @eq): Trip @find
+    info(info_name: String! @eq): Information @find
 }
 
+type Information {
+    info_value: String!
+}
 
 type Trip {
     name: String!
@@ -16,12 +20,17 @@ type Traveller {
     traveller_id: ID!
     first_name: String!
     last_name: String!
-        
+    
+    phone: String!
+    major: Major!
+    rooms: [Room!]!
 }
 
 type Hotel {
     hotel_id: ID!
     hotel_name: String!
+    address: String!
+    picture1_link: String
     hoteltrips: [HotelTrip!]!
 }
 
@@ -70,4 +79,9 @@ type Room {
     room_id: ID!
     hotel_trip_id: Int!
     size: Int!
+}
+
+type Major {
+    major_id: ID!
+    major_name: String!
 }
