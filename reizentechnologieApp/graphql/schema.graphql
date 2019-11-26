@@ -1,3 +1,5 @@
+
+
 type Query @middleware(checks: ["auth:api"]){
     trip(trip_id: ID! @eq): Trip @find
     info(info_name: String! @eq): Information @find

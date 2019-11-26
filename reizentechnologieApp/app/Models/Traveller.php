@@ -38,4 +38,7 @@ class Traveller extends Model
     public function transports() {
         return $this->belongsToMany(Transport::class, 'transport_traveller' , 'traveller_id', 'transport_id');
     }
+    public function rooms() {
+        return $this->hasMany('App\Models\Room', 'room_id', 'traveller_id');
+    }
 }

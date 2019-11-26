@@ -39,7 +39,7 @@ class TripQuery extends Query
         //dd($args['traveller_id']);
         //$t = Traveller::where("traveller_id", $args['traveller_id'])->get();
         //dd($t->trips());
-        //return Trip::where('trip_id', $args['trip_id'])->get();
-        return Trip::all();
+        return Trip::where('trip_id', $args['trip_id'])->get();
+        //return Trip::all();
     }
 }
