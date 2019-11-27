@@ -79,6 +79,7 @@ type Room {
     room_id: ID!
     hotel_trip_id: Int!
     size: Int!
+    travellers: [Traveller!]!
 }
 
 type Major {

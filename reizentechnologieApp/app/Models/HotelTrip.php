@@ -17,6 +17,6 @@ class HotelTrip extends Model
     }
 
     public function rooms(){
-        return $this->hasMany('App\Models\Room', 'id', 'hotel_trip_id');
+        return $this->hasMany('App\Models\Room', 'hotel_trip_id', 'id');
     }
 }

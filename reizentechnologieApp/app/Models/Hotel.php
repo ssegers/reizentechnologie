@@ -12,4 +12,10 @@ class Hotel extends Model
     {
         return $this->hasMany('App\Models\HotelTrip', 'hotel_id', 'hotel_id');
     }
+
+    public function rooms()
+    {
+        $hotelTripId = $this->hotelTrips()->first()->id;
+        return Room::where('hotel_trip_id', '=', $hotelTripId)->get();
+    }
 }

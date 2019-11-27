@@ -36,6 +36,7 @@ class Traveller extends Model
     }
 
     public function rooms() {
-        return $this->hasMany('App\Models\Room', 'room_id', 'traveller_id');
+        //return $this->hasMany('App\Models\Room', 'room_id', 'traveller_id');
+        return $this->belongsToMany(Room::class, null, 'traveller_id', 'room_id');
     }
 }
