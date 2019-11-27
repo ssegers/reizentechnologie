@@ -12,16 +12,44 @@ class RoomTravellerTableSeeder extends Seeder
     public function run()
     {
         DB::table('room_traveller')->insert(array(
-            'traveller_id' => 3,
+            'traveller_id' => 1,
             'room_id' => 1,
         ));
         DB::table('room_traveller')->insert(array(
-            'traveller_id' => 5,
+            'traveller_id' => 2,
             'room_id' => 1,
         ));
         DB::table('room_traveller')->insert(array(
-            'traveller_id' => 7,
-            'room_id' => 1,
+            'traveller_id' => 4,
+            'room_id' => 2,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 6,
+            'room_id' => 2,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 8,
+            'room_id' => 2,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 10,
+            'room_id' => 2,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 12,
+            'room_id' => 4,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 14,
+            'room_id' => 4,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 16,
+            'room_id' => 4,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 18,
+            'room_id' => 4,
         ));
     }
 }

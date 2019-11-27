@@ -14,7 +14,7 @@ class RoomsTableSeeder extends Seeder
         //
         DB::table('rooms')->insert(array(
             'hotel_trip_id' => 1,
-            'size' => 4,
+            'size' => 2,
         ));
         DB::table('rooms')->insert(array(
             'hotel_trip_id' => 1,
@@ -22,6 +22,10 @@ class RoomsTableSeeder extends Seeder
             ));
         DB::table('rooms')->insert(array(
             'hotel_trip_id' => 2,
+            'size' => 4,
+        ));
+        DB::table('rooms')->insert(array(
+            'hotel_trip_id' => 1,
             'size' => 4,
         ));
     }

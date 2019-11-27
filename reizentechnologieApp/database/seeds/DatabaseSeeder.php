@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             DayPlanningSeeder::class,
             ActivitiesSeeder::class,            
             EmergencyNumbersTableSeeder::class,
+            RoomsTableSeeder::class,
+            RoomTravellerTableSeeder::class,
         ]);
     }
 }
