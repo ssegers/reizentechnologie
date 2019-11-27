@@ -16,13 +16,13 @@ type Trip {
     dayplannings: [DayPlanning!]!
     emergencynumbers: [EmergencyNumber!]!
     transports: [Transport!]!
-    
 }
 
 type Traveller {
     traveller_id: ID!
     first_name: String!
     last_name: String!
+    
     phone: String!
     major: Major!
     rooms: [Room!]!
@@ -65,6 +65,7 @@ type Transport {
     transport_id: ID!
     driver_id: Int!
     size: Int!
+    travellers: [Traveller!]!
 }
 
 type HotelTrip {
@@ -72,8 +73,9 @@ type HotelTrip {
     hotel_id: Int!
     start_date: String!
     end_date: String!
-    rooms: [Room!]!
+        rooms: [Room!]!
 }
+
 
 type Room {
     room_id: ID!

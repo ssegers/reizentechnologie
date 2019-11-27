@@ -10,8 +10,8 @@ class Transport extends Model
 {
     protected $primaryKey = 'transport_id';
 
-    public function trip() {
-        return $this->belongsTo(Trip::class, 'trip_id', 'trip_id');
+    public function trip(){
+        return $this->belongsTo(Trip::class, null, 'transport_id', 'trip_id');
     }
 
     public function driver() {
@@ -19,6 +19,6 @@ class Transport extends Model
     }
 
     public function travellers() {
-        return $this->belongsToMany(Traveller::class, null, 'trip_id', 'hotel_id');
+        return $this->belongsToMany(Traveller::class, 'transport_traveller', 'transport_id', 'traveller_id');
     }
 }
