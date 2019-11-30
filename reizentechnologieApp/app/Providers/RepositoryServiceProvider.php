@@ -23,6 +23,9 @@ use App\Repositories\Eloquent\EloquentPage;
 
 use App\Repositories\Contracts\PaymentRepository;
 use App\Repositories\Eloquent\EloquentPayment;
+
+use App\Repositories\Contracts\InfoRepository;
+use App\Repositories\Eloquent\EloquentInfo;
 /**
  * Description of RepositoryServiceProvider
  *
@@ -40,5 +43,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(CityRepository::class, EloquentCity::class);
         $this->app->singleton(PageRepository::class, EloquentPage::class);
         $this->app->singleton(PaymentRepository::class, EloquentPayment::class); 
+        
+        $this->app->singleton(InfoRepository::class, EloquentInfo::class);
     }
 }

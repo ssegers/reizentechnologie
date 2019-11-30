@@ -33,6 +33,11 @@ Route::get('contact','GuestAccess\ContactPageController@getInfo')->name('contact
 Route::post('contact', 'GuestAccess\ContactPageController@sendMail');
 Route::get('refresh_captcha', 'GuestAccess\ContactPageController@refreshCaptcha')->name('refresh_captcha');
 
+
+// Info test page
+Route::get('info', 'GuestAccess\InfoController@index')->name('info');
+
+
 //login
 Route::get('/log','Auth\AuthController@showView')->name("log");
 Route::post('/auth', 'Auth\AuthController@login');
