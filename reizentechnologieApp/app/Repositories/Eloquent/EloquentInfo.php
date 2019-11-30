@@ -13,6 +13,6 @@ class EloquentInfo implements InfoRepository
     }
 
     public function getAlgemeneInfo() {
-        return \Illuminate\Support\Facades\DB::table('information')->select("id", "info_value")->where(["info_name" => "algemeen"])->first();
+        return \Illuminate\Support\Facades\DB::table('information')->select("id", "info_value")->where(["info_name" => "algemene_info"])->first();
     }
 }
