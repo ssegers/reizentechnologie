@@ -129,7 +129,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\ictProjects\reizentechnologie\reizentechnologieApp\resources\js\dropdown\cascadingDropDownStudyMajors.js */"./resources/js/dropdown/cascadingDropDownStudyMajors.js");
+module.exports = __webpack_require__(/*! C:\Users\Pieter Coenen\Documents\UCLL\homesteadProjects\reizentechnologie\reizentechnologieApp\resources\js\dropdown\cascadingDropDownStudyMajors.js */"./resources/js/dropdown/cascadingDropDownStudyMajors.js");
 
 
 /***/ })

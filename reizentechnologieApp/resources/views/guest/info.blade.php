@@ -18,3 +18,8 @@
 </form>
 </div>
 @endsection
+
+@section('page_specific_scripts')
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script>CKEDITOR.replace( 'info_content',{ height:450} ); </script>
+@endsection
