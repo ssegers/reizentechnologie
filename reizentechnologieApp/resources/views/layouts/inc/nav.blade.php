@@ -27,7 +27,8 @@
                                 <a class="dropdown-item" href="{{ route('paymentslist') }}">Betalingen</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('home') }}">Hotels</a>
-                                <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>
+                                <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>                              
+                                <a class="dropdown-item" href="{{ route('info') }}">Algemene info</a>
                             </div>
                         </li>
                     @endif

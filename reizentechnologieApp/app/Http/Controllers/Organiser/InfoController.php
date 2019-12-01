@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\GuestAccess;
+namespace App\Http\Controllers\Organiser;
 
 
 use Illuminate\Http\Request;
@@ -38,7 +38,7 @@ class InfoController extends Controller
             $length = $lastIndex - $firstIndex - 4;
             $content = substr($info_content, $firstIndex + 4, $length);*/
 
-            return view('guest.info', ['info_content' => $info_content->info_value]);
+            return view('organizer.info', ['info_content' => $info_content->info_value]);
         }
     }
 }
