@@ -13,17 +13,17 @@ class TransportTableSeeder extends Seeder
     {
         DB::table('transports')->insert(array(
             'trip_id' => 1,
-            'driver_id' => 3,
+            'driver_id' => 1,
             'size' => 10,
         ));
         DB::table('transports')->insert(array(
             'trip_id' => 1,
-            'driver_id' => 10,
+            'driver_id' => 2,
             'size' => 10,
         ));
         DB::table('transports')->insert(array(
             'trip_id' => 1,
-            'driver_id' => 17,
+            'driver_id' => 4,
             'size' => 7,
         ));
     }

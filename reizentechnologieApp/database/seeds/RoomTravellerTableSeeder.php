@@ -51,5 +51,21 @@ class RoomTravellerTableSeeder extends Seeder
             'traveller_id' => 18,
             'room_id' => 4,
         ));
+		DB::table('room_traveller')->insert(array(
+            'traveller_id' => 20,
+            'room_id' => 3,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 22,
+            'room_id' => 3,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 24,
+            'room_id' => 3,
+        ));
+        DB::table('room_traveller')->insert(array(
+            'traveller_id' => 28,
+            'room_id' => 3,
+        ));
     }
 }

@@ -13,19 +13,7 @@ class TransportTravellerTableSeeder extends Seeder
     {
         DB::table('transport_traveller')->insert(array(
             'transport_id' => 1,
-            'traveller_id' => 4,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 1,
-            'traveller_id' => 5,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 1,
             'traveller_id' => 6,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 1,
-            'traveller_id' => 7,
         ));
         DB::table('transport_traveller')->insert(array(
             'transport_id' => 1,
@@ -33,47 +21,59 @@ class TransportTravellerTableSeeder extends Seeder
         ));
         DB::table('transport_traveller')->insert(array(
             'transport_id' => 1,
-            'traveller_id' => 9,
+            'traveller_id' => 10,
         ));
         DB::table('transport_traveller')->insert(array(
-            'transport_id' => 2,
-            'traveller_id' => 11,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 2,
+            'transport_id' => 1,
             'traveller_id' => 12,
         ));
         DB::table('transport_traveller')->insert(array(
-            'transport_id' => 2,
-            'traveller_id' => 13,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 2,
+            'transport_id' => 1,
             'traveller_id' => 14,
         ));
         DB::table('transport_traveller')->insert(array(
-            'transport_id' => 2,
-            'traveller_id' => 15,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 2,
+            'transport_id' => 1,
             'traveller_id' => 16,
         ));
         DB::table('transport_traveller')->insert(array(
-            'transport_id' => 3,
+            'transport_id' => 2,
             'traveller_id' => 18,
         ));
         DB::table('transport_traveller')->insert(array(
-            'transport_id' => 3,
-            'traveller_id' => 19,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 3,
+            'transport_id' => 2,
             'traveller_id' => 20,
         ));
         DB::table('transport_traveller')->insert(array(
+            'transport_id' => 2,
+            'traveller_id' => 22,
+        ));
+        DB::table('transport_traveller')->insert(array(
+            'transport_id' => 2,
+            'traveller_id' => 24,
+        ));
+        DB::table('transport_traveller')->insert(array(
+            'transport_id' => 2,
+            'traveller_id' => 26,
+        ));
+        DB::table('transport_traveller')->insert(array(
+            'transport_id' => 2,
+            'traveller_id' => 28,
+        ));
+        DB::table('transport_traveller')->insert(array(
             'transport_id' => 3,
-            'traveller_id' => 21,
+            'traveller_id' => 30,
+        ));
+        DB::table('transport_traveller')->insert(array(
+            'transport_id' => 3,
+            'traveller_id' => 32,
+        ));
+        DB::table('transport_traveller')->insert(array(
+            'transport_id' => 3,
+            'traveller_id' => 34,
+        ));
+        DB::table('transport_traveller')->insert(array(
+            'transport_id' => 3,
+            'traveller_id' => 36,
         ));
     }
 }
