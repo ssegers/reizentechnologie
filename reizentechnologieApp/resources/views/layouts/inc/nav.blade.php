@@ -20,14 +20,17 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="personalDropdown">
                                 @if(Auth::user()->isOrganizer())
-                                <a class="dropdown-item" href="{{ route('partisipantslist') }}">Reizigers</a>
+                                    <a class="dropdown-item" href="{{ route('partisipantslist') }}">Reizigers</a>
                                     @if(Auth::user()->role!='admin')
-                                    <a class="dropdown-item" href="{{ route('composeemail') }}">Verstuur mail</a>
+                                        <a class="dropdown-item" href="{{ route('composeemail') }}">Verstuur mail</a>
                                     @endif
-                                <a class="dropdown-item" href="{{ route('paymentslist') }}">Betalingen</a>
+                                    <a class="dropdown-item" href="{{ route('paymentslist') }}">Betalingen</a>
+                                    <a class="dropdown-item" href="{{ route('accomodationOverview') }}">Hotels</a>
+                                    <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>
+                                @else
+                                    <a class="dropdown-item" href="{{ route('accomodationOverviewTraveller') }}">Hotels</a>
+                                    <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>
                                 @endif
-                                <a class="dropdown-item" href="{{ route('home') }}">Hotels</a>
-                                <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>
                             </div>
                         </li>
                     @endif
