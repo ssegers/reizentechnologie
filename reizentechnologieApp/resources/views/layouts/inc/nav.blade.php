@@ -24,11 +24,11 @@
                                     @if(Auth::user()->role!='admin')
                                     <a class="dropdown-item" href="{{ route('composeemail') }}">Verstuur mail</a>
                                     @endif
-                                <a class="dropdown-item" href="{{ route('paymentslist') }}">Betalingen</a>
+                                <a class="dropdown-item" href="{{ route('paymentslist') }}">Betalingen</a>                              
+                                <a class="dropdown-item" href="{{ route('info') }}">Algemene info</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('home') }}">Hotels</a>
-                                <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>                              
-                                <a class="dropdown-item" href="{{ route('info') }}">Algemene info</a>
+                                <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>
                             </div>
                         </li>
                     @endif
