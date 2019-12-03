@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Organiser;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 use App\Repositories\Contracts\TripRepository;
 use App\Repositories\Contracts\AccomodationRepository;
+use App\Repositories\Contracts\TravellerRepository;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +29,11 @@ class Accomodation extends Controller
      */
     private $accomodations;
 
-
+    /**
+     *
+     * @var travellerRepository
+     */
+    private $travellers;
 
     /**
      * accomodationController Constructor
@@ -35,13 +41,42 @@ class Accomodation extends Controller
      * @param tripRepository $trip
      * @param accomodationRepository $accomodation
      */
-    public function __construct(TripRepository $trip, AccomodationRepository $accomodation) 
+    public function __construct(TripRepository $trip, 
+            AccomodationRepository $accomodation,
+            TravellerRepository $traveller) 
     {
        $this->trips = $trip;
        $this->accomodations = $accomodation;
+       $this->travellers = $traveller;
     }
     
-    public function overview(Request $request, $iTripId = null)
+    /**
+     * 
+     * @return boolean
+     */
+    private function hasRights() 
+    {
+        //checks if the current user is admin or organiser for the trip
+        $oUser = Auth::user();
+        $bIsOrganizer=false;
+        
+        if($oUser->role!='admin'){          
+            $bIsOrganizer = $this->travellers->isOrganizerForTheTrip(session('tripId'));
+            
+        }
+        if (($oUser->role == 'guide'&& $bIsOrganizer)||($oUser->role=='admin')){
+         // dd($this->travellers->isOrganizerForTheTrip(session('tripId')),$bIsOrganizer,$oUser->role);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    /**
+     * 
+     * @param type $iTripId
+     * @return type
+     */
+    public function overview($iTripId = null)
     {
         $oUser = Auth::user();
         /* Get all active trips and number of partisipants */
@@ -70,6 +105,9 @@ class Accomodation extends Controller
         if ($iTripId == null) {
             $iTripId = $aTripsByOrganiser[0]->trip_id;
         }
+        /* store active trip to session   */
+        Session::put('tripId', $iTripId);
+        
         /* Check if user can access the data of the requested trip */
         if (!$aTripsByOrganiser->contains('trip_id',$iTripId)){
             return abort(403);
@@ -78,13 +116,12 @@ class Accomodation extends Controller
         /* Get the current trip */
         $oCurrentTrip = $this->trips->get($iTripId);
         $accomodationsPerTrip = $this->accomodations->getAccomodationsPerTrip($iTripId);
-        
+
         /* get accomodations list for the current trip */
         $aAccomodations = $this->accomodations->getAccomodationsByDestination($oCurrentTrip->name);
-        //dd($aAccomodations->pluck('hotel_name','hotel_id'));
         return view('organizer.lists.accomodations',
             [
-               'accomodationsPerTrip' => $accomodationsPerTrip,
+                'accomodationsPerTrip' => $accomodationsPerTrip,
                 'aAccomodations' => $aAccomodations,
                 'oCurrentTrip' => $oCurrentTrip,
                 'aTripsAndNumberOfAttendants' => $aTripsAndNumberOfAttendants,
@@ -96,21 +133,23 @@ class Accomodation extends Controller
     /**
      * add accomodation to trip
      *
-     * @author Michiel Guilliams
+     * @author 
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function addAccomodationToTrip(Request $request){
-     
-        $aData['trip_id'] = $request->post('trip_id');
-        $aData['hotel_id'] = $request->post('hotel_id');
-        $aData['start_date'] = $request->post('checkIn');
-        $aData['end_date'] = $request->post('checkOut');
         
-        $this->accomodations->addAccomodationsToTrip($aData);
-
-        return redirect()->back();
+        if ($this->hasRights()){ 
+            $aData['trip_id'] = $request->post('trip_id');
+            $aData['hotel_id'] = $request->post('hotel_id');
+            $aData['start_date'] = $request->post('checkIn');
+            $aData['end_date'] = $request->post('checkOut');        
+            $this->accomodations->addAccomodationsToTrip($aData);
+            return redirect()->back();
+        }else{
+            return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');
+        } 
     }
     
     /**
@@ -122,12 +161,35 @@ class Accomodation extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function createAccomodation(Request $request){
-     
-        $this->accomodations->storeAccomodation($request);
-
-        return redirect()->back();
+        if ($this->hasRights()){   
+            $this->accomodations->storeAccomodation($request);
+            return redirect()->back()->with('successmessage','verblijfsaccomodatie succesvol aangemaakt');
+        }else{
+            return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');
+        }
     }
     
+    /**
+     * update accomodation
+     *
+     * @author
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateAccomodation(Request $request){
+       
+        if ($this->hasRights()){
+            
+            $this->accomodations->updateAccomodation($request);
+             
+            return redirect()->back();
+            dd($this->hasRights());
+        }else{
+            return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');
+        }
+    }
+
     /**
      * delete accomodation
      *
@@ -136,13 +198,12 @@ class Accomodation extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteAccomodation(Request $request){
-
-        $this->accomodations->deleteAccomodation($request->input('hotel_trip_id'));
-        $aRoomsId=RoomsPerHotelPerTrip::where('hotels_per_trip_id',$hotels_per_trip_id)->select('rooms_hotel_trip_id')->get();
-        TravellersPerRoom::whereIn('rooms_hotel_trip_id',$aRoomsId)->delete();
-        RoomsPerHotelPerTrip::where('hotels_per_trip_id',$hotels_per_trip_id)->delete();
-        HotelsPerTrip::where('hotels_per_trip_id',$hotels_per_trip_id)->delete();
-        return redirect()->back()->with('message', 'Het verblijf is verwijderd');
-    }    
+    public function deleteAccomodation($hotelTripId){
+        if ($this->hasRights()){   
+            $this->accomodations->deleteAccomodationFromTrip($hotelTripId);
+            return redirect()->back()->with('message', 'Het verblijf is verwijderd uit deze reis');
+        }else{
+            return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');
+        }
+    } 
 }

@@ -67,7 +67,7 @@
             </div>
             <div class="d-flex align-items-end"> 
                 <div class="form-group ml-md-4">
-                    {{ Form::submit('Voeg toe aan reis',['class' => 'btn btn-primary form-control','onclick' => "connectHotelToTrip()"]) }}
+                    {{ Form::button('Voeg toe aan reis',['class' => 'btn btn-primary form-control','onclick' => "connectHotelToTrip()"]) }}
                 </div>
             </div>
                        
@@ -100,16 +100,10 @@
                             <td><?php echo $dd = date("d-m-Y", strtotime($oAccomodation->pivot->start_date)); ?></td>
                             <td><?php echo $dd = date("d-m-Y", strtotime($oAccomodation->pivot->end_date)); ?></td>
                             <td style="width:1%; white-space:nowrap;">
-                                {{--{{ Form::open(array('action' => '/listrooms/'.$oAccomodation->pivot->id, 'method' => 'post')) }}--}}
-                                <form method="POST" action="/hotel/listrooms/{{$oAccomodation->pivot->id}}/{{$oAccomodation->hotel_name}}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('POST') }}
-                                {{ Form::submit('Bekijk kamers',array('class'=>"btn btn-primary")) }}
-                                </form>
+                                <a href="{{route('roomsOverview', [$oAccomodation->pivot->id, $oAccomodation->hotel_id])}}" class="btn btn-primary badge-custom"">kamerverdeling</a>
                             </td>
                             <td style="width:1%; white-space:nowrap;">
-                                {{ Form::open(array('action' => 'Organiser\Accomodation@deleteHotel', 'method' => 'post','onsubmit' => 'return ConfirmDelete()')) }}
-                                {{ Form::hidden('hotel_trip_id', $oAccomodation->pivot->id) }}
+                                {{ Form::open(array('url' => route('deleteAccomodation',[$oAccomodation->pivot->id]), 'method' => 'post','onsubmit' => 'return ConfirmDelete()')) }}
                                 {{ Form::submit('Delete',array('class'=>"btn btn-primary")) }}
                                 {{ Form::close()}}
                             </td>
@@ -172,17 +166,18 @@
         </div>
     </div>
 
-    <div class="modal fade" id="hotelEditPopup" tabindex="-1" role="dialog" aria-labelledby="hotelPopupLabel">
+    <div class="modal fade" id="hotelEditPopup" tabindex="-1" role="dialog" aria-labelledby="hotelEditPopupLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="hotelEditPopupLabel">Gegevens Aanpassen</h4>
                     {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
                 </div>
-                {{ Form::open(array('action' => 'Organiser\Accomodation@createAccomodation', 'method' => 'post', 'files' => true)) }}
+                {{ Form::open(array('action' => 'Organiser\Accomodation@updateAccomodation', 'method' => 'post', 'files' => true)) }}
                 {!! Form::hidden('Destination', $oCurrentTrip->name) !!}
                 <div class="modal-body">
                     <div class="form-group">
+                        {{Form::hidden('AccomodationId',null,array('id' => 'Eid'))}}
                         {{Form::label('AccomodationName','naam van de accomodatie:')}}
                         {{Form::text('AccomodationName', null, array('id'=>'Ename','class' => 'form-control','required' => 'required'))}}
                         {{Form::label('TypeOfAccomodation','type Accomodatie')}}
@@ -197,14 +192,14 @@
                         {{Form::tel('Phone', null, array('id'=>'Ephone','class' => 'form-control'))}}
                         {{Form::label('AccomodationImages',"Foto's van de accomodatie") }}
                         <div class="input-group">
-                            <a id="lfm1" data-input="Epicture1" class="btn btn-primary">
+                            <a id="lfm3" data-input="Epicture1" class="btn btn-primary">
                                <i class="far fa-file-image"></i> foto 1
                             </a>                            
                             {{Form::text('AccomodationImage1', null, array('class' => 'form-control','id'=>'Epicture1'))}}
                         </div>
                         <br>
                         <div class="input-group" id="AccomodationsImages2">                       
-                            <a id="lfm2" data-input="Epicture2" class="btn btn-primary">
+                            <a id="lfm4" data-input="Epicture2" class="btn btn-primary">
                                <i class="far fa-file-image"></i> foto 2
                             </a>                            
                             {{Form::text('AccomodationImage2', null, array('class' => 'form-control','id'=>'Epicture2'))}}
@@ -281,6 +276,8 @@
         var domain = "";
         $('#lfm1').filemanager('image',{prefix: domain});
         $('#lfm2').filemanager('image',{prefix: domain});
+        $('#lfm3').filemanager('image',{prefix: domain});
+        $('#lfm4').filemanager('image',{prefix: domain});
         </script>
 <script>
     var accomodation = document.getElementById('dropAccomodations');
@@ -288,14 +285,10 @@
         if(accomodation.options[accomodation.selectedIndex].value === '') {
             window.alert('je moet een accomodatie selecteren om te editeren');
         }else{
-            $('#hotelEditPopup').modal("show");
-        }
-        
-        $('#hotelEditPopup').on('show.bs.modal', function (event) {
             var accomodations = <?php echo(json_encode($aAccomodations)) ?>;
             var selectedAccomodation = accomodations[accomodation.options[accomodation.selectedIndex].value];
-            var modal = $(this);
 
+            document.getElementById("Eid").value = selectedAccomodation["hotel_id"];
             document.getElementById("Ename").value = selectedAccomodation["hotel_name"];
             var dd = document.getElementById('Etype');
             for (var i = 0; i < dd.options.length; i++) {
@@ -311,7 +304,8 @@
             document.getElementById("Eemail").value = selectedAccomodation["email"];
             document.getElementById("Epicture1").value = selectedAccomodation["picture1_link"];
             document.getElementById("Epicture2").value = selectedAccomodation["picture2_link"];
-        });
+            $('#hotelEditPopup').modal("show");
+        }
     }
    
     $('#hotelinfoPopup').on('show.bs.modal', function (event) {

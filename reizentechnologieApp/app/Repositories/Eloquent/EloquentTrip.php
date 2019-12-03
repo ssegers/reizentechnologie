@@ -84,8 +84,17 @@ class EloquentTrip implements TripRepository
                 ->trips()->where('is_active',true)->wherePivot('is_organizer', true)
                 ->select('trips.trip_id','trips.name','trips.year')
                 ->get();
-               
         return $aActiveTripsByOrganiser;
+    }
+    
+    public function getActiveTripsForTraveller($iUserId)
+    {
+        $aActiveTripsForTraveller = Traveller::where('user_id', $iUserId)->first()
+                ->trips()->where('is_active',true)
+                ->select('trips.trip_id','trips.name','trips.year')
+                ->get();
+               
+        return $aActiveTripsForTraveller;
     }
     public function getAllActiveWithContact() {
         return Trip::IsActive()->HasContact()->pluck('name','trip_id');

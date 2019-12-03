@@ -8,7 +8,12 @@ namespace App\Repositories\Contracts;
  */
 interface AccomodationRepository {
     
-
+    /**
+     * get the accomodation name
+     * 
+     * @return string
+     */
+    public function getAccomodationName($accomodationId);
     
     /**
      * get all accomodations for a specific trip
@@ -36,12 +41,19 @@ interface AccomodationRepository {
      * 
      * @return 
      */
-    public function storeAccomodation($aData);
+    public function storeAccomodation($data);
+
+    /**
+     * update accomodation
+     * 
+     * @return 
+     */
+    public function updateAccomodation($data);
     
     /**
      * delete accomodation
      * 
      * @return 
      */
-    public function deleteAccomodation($iId);        
+    public function deleteAccomodationFromTrip($iId);        
 }
