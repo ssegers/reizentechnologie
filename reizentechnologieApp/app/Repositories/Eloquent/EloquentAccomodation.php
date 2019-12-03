@@ -49,11 +49,14 @@ class EloquentAccomodation implements AccomodationRepository
     public function getAccomodationsByDestination($sDestinationName)
     {
         $accomodations = Hotel::where('trip_destination',$sDestinationName)->get();
-        foreach ($accomodations as $accomodation){
-            $aKeys[] = $accomodation->hotel_id;
-            $aValues[] = $accomodation;
+        
+        if (!$accomodations->isempty()){
+            foreach ($accomodations as $accomodation){
+                $aKeys[] = $accomodation->hotel_id;
+                $aValues[] = $accomodation;
+            }
+            $accomodations = collect(array_combine($aKeys, $aValues));
         }
-        $accomodations = collect(array_combine($aKeys, $aValues));
         return $accomodations;
     }
     
