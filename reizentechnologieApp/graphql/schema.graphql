@@ -81,6 +81,7 @@ type HotelTrip {
 type Room {
     room_id: ID!
     hotel_trip_id: Int!
+    room_number: Int
     size: Int!
     travellers: [Traveller!]!
 }

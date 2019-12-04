@@ -51,7 +51,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'test',
             'password' => bcrypt('test'),
             'role' => 'traveller',
-            'api_token' => Str::random(60),
+            'api_token' => 'arKbun2FJ3lvx0TZIVBcPDvEbmnU1dUIxMaBBZRj8nPt3dwTQ8hwHiPHTwN3',
         ]);
 
         // Kaan Akpinar

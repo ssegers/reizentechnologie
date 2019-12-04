@@ -42,7 +42,7 @@ class ActivitiesSeeder extends Seeder
             'start_hour' => '09:00',
             "end_hour" => '12:00',
             'description' => 'We are going to visit the Statue of Liberty',
-            'location' => 'New York'
+            'location' => 'San Fransisco'
         ));
         DB::table('activities')->insert(array(
             'day_planning_id' => 2,
@@ -50,7 +50,7 @@ class ActivitiesSeeder extends Seeder
             'start_hour' => '13:00',
             "end_hour" => '15:00',
             'description' => 'We are going to visit a company',
-            'location' => 'New York'
+            'location' => 'San Fransisco'
         ));
         DB::table('activities')->insert(array(
             'day_planning_id' => 2,
@@ -58,7 +58,7 @@ class ActivitiesSeeder extends Seeder
             'start_hour' => '16:00',
             "end_hour" => '18:00',
             'description' => 'We are going to visit a company',
-            'location' => 'New York'
+            'location' => 'Los Angeles'
         ));
         DB::table('activities')->insert(array(
             'day_planning_id' => 3,

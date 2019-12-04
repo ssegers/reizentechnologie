@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             EmergencyNumbersTableSeeder::class,
             RoomsTableSeeder::class,
             RoomTravellerTableSeeder::class,
+            DestinationTableSeeder::class,
         ]);
     }
 }
