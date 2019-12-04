@@ -20,6 +20,10 @@ class RoomTravellerTableSeeder extends Seeder
             'room_id' => 1,
         ));
         DB::table('room_traveller')->insert(array(
+            'traveller_id' => 3,
+            'room_id' => 2,
+        ));
+        DB::table('room_traveller')->insert(array(
             'traveller_id' => 4,
             'room_id' => 2,
         ));

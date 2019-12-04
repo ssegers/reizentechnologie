@@ -25,7 +25,7 @@ class AuthController extends Controller
                 "first_name" => $this->travellerRepository->getFirstNameByUserId(Auth::id()),
                 "last_name" => $this->travellerRepository->getLastNameByUserId(Auth::id()),
                 "traveller_id" => $this->travellerRepository->getTravellerIdByUserId(Auth::id()),
-                "trip_id" => 1, //verder implementeren
+                "trip_id" => $this->travellerRepository->getCurrentTripByUserId(Auth::id()),
             );
         }
         return Array(

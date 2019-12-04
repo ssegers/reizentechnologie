@@ -41,7 +41,7 @@ class TravellerTripSeeder extends Seeder
         ]);
 
         DB::table('traveller_trip')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 3,
             'is_guide' => false,
             'is_organizer' => false,

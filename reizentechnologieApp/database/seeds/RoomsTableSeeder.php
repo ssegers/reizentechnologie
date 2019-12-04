@@ -19,7 +19,7 @@ class RoomsTableSeeder extends Seeder
         ));
         DB::table('rooms')->insert(array(
             'hotel_trip_id' => 1,
-            'size' => 4,
+            'size' => 5,
             'room_number' => 215,
             ));
         DB::table('rooms')->insert(array(

@@ -315,4 +315,18 @@ class EloquentTraveller implements TravellerRepository
             $traveller = Traveller::where('user_id', $sUserId)->get()->first();
             return $traveller->traveller_id;
         }
+
+        /**
+         * get trip id by user id
+         * 
+         * @author Koen De Deckers
+         * 
+         * @param $sUserId
+         * @return string
+         */
+        public function getCurrentTripByUserId($sUserId) {
+            $traveller = Traveller::where('user_id', $sUserId)->get()->first();
+            $trip = $traveller->trips()->latest()->first();
+            return $trip->trip_id;
+        }
     }

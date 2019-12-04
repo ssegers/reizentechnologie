@@ -16,21 +16,36 @@ class HotelTripSeeder extends Seeder
         DB::table('hotel_trips')->insert(array(
             'hotel_id' => 1,
             'trip_id' => 1,
-            'start_date'=>Carbon::create('2018', '12', '15'),
-            'end_date'=>Carbon::create('2018', '12', '16')
+            'start_date'=>Carbon::create('2020', '05', '21'),
+            'end_date'=>Carbon::create('2020', '05', '23')
         ));
         DB::table('hotel_trips')->insert(array(
             'hotel_id' => 2,
             'trip_id' => 1,
-            'start_date'=>Carbon::create('2018', '12', '16'),
-            'end_date'=>Carbon::create('2018', '12', '19')
+            'start_date'=>Carbon::create('2020', '05', '24'),
+            'end_date'=>Carbon::create('2020', '05', '25')
 
         ));
         DB::table('hotel_trips')->insert(array(
             'hotel_id' => 3,
-            'trip_id' => 2,
-            'start_date'=>Carbon::create('2018', '12', '19'),
-            'end_date'=>Carbon::create('2018', '12', '20')
+            'trip_id' => 1,
+            'start_date'=>Carbon::create('2020', '05', '26'),
+            'end_date'=>Carbon::create('2020', '05', '26')
+
+        ));
+        DB::table('hotel_trips')->insert(array(
+            'hotel_id' => 4,
+            'trip_id' => 1,
+            'start_date'=>Carbon::create('2020', '05', '27'),
+            'end_date'=>Carbon::create('2020', '05', '28')
+
+        ));
+        DB::table('hotel_trips')->insert(array(
+            'hotel_id' => 5,
+            'trip_id' => 1,
+            'start_date'=>Carbon::create('2020', '05', '19'),
+            'end_date'=>Carbon::create('2020', '05', '30')
+
         ));
     }
 }

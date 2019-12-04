@@ -23,7 +23,7 @@ class TransportTableSeeder extends Seeder
         ));
         DB::table('transports')->insert(array(
             'trip_id' => 1,
-            'driver_id' => 4,
+            'driver_id' => 3,
             'size' => 7,
         ));
     }
