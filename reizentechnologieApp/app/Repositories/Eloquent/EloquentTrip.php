@@ -5,6 +5,7 @@ use App\Repositories\Contracts\TripRepository;
 
 use App\Models\Traveller;
 use App\Models\Trip;
+use App\Models\Destination;
 
 /**
  * accessing trip data
@@ -83,8 +84,17 @@ class EloquentTrip implements TripRepository
                 ->trips()->where('is_active',true)->wherePivot('is_organizer', true)
                 ->select('trips.trip_id','trips.name','trips.year')
                 ->get();
-               
         return $aActiveTripsByOrganiser;
+    }
+    
+    public function getActiveTripsForTraveller($iUserId)
+    {
+        $aActiveTripsForTraveller = Traveller::where('user_id', $iUserId)->first()
+                ->trips()->where('is_active',true)
+                ->select('trips.trip_id','trips.name','trips.year')
+                ->get();
+               
+        return $aActiveTripsForTraveller;
     }
     public function getAllActiveWithContact() {
         return Trip::IsActive()->HasContact()->pluck('name','trip_id');
@@ -149,11 +159,16 @@ class EloquentTrip implements TripRepository
      */     
     public function removeOrganizerFromTrip($iTripId,$iTravellerId)
     {
-    $oTrip = Trip::where('trip_id', $iTripId)->first()
-        ->travellers()->wherePivot('traveller_id',$iTravellerId)->first();
-    if ($oTrip != null){
-        $oTrip->pivot->is_organizer = false;
-        $oTrip->pivot->save();     
+        $oTrip = Trip::where('trip_id', $iTripId)->first()
+            ->travellers()->wherePivot('traveller_id',$iTravellerId)->first();
+        if ($oTrip != null){
+            $oTrip->pivot->is_organizer = false;
+            $oTrip->pivot->save();     
+        }
     }
+    
+    public function getDestinations() {
+        $aDestinations = Destination::get()->pluck('destination_name','destination_name');
+        return $aDestinations;
     }
 }

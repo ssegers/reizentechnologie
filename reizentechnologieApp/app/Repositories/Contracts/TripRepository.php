@@ -55,6 +55,13 @@ interface TripRepository {
      * @return $aActiveTrips all Active trips
      */
     public function getActiveByOrganiser($iUserId);
+    
+    /**
+     * get All active trips for a specific traveller
+     * 
+     * @return $aActiveTrips all Active trips
+     */
+    public function getActiveTripsForTraveller($iUserId);    
 
     /**
      * get attendants per trip
@@ -75,4 +82,6 @@ interface TripRepository {
     public function setTravellerAsTripOrganizer($iTripId,$iTravellerId);
     
     public function removeOrganizerFromTrip($iTripId,$iTravellerId);
+    
+    public function getDestinations();
 }
