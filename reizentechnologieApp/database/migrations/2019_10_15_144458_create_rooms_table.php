@@ -17,10 +17,10 @@ class CreateRoomsTable extends Migration
             $table->increments('room_id');
             $table->integer('hotel_trip_id')->unsigned();
             $table->integer('size');
-            $table->integer('room_number');
+            $table->integer('room_number')->nullable();
             $table->timestamps();
 
-            $table->foreign('hotel_trip_id')->references('id')->on('hotel_trips');
+            $table->foreign('hotel_trip_id')->references('id')->on('hotel_trip')->onDelete("cascade");
         });
     }
 
