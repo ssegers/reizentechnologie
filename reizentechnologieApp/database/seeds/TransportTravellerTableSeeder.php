@@ -11,6 +11,15 @@ class TransportTravellerTableSeeder extends Seeder
      */
     public function run()
     {
+        // busje 1
+        DB::table('transport_traveller')->insert(array(
+            'transport_id' => 1,
+            'traveller_id' => 3,
+        ));
+        DB::table('transport_traveller')->insert(array(
+            'transport_id' => 1,
+            'traveller_id' => 4,
+        ));
         DB::table('transport_traveller')->insert(array(
             'transport_id' => 1,
             'traveller_id' => 6,
@@ -35,6 +44,8 @@ class TransportTravellerTableSeeder extends Seeder
             'transport_id' => 1,
             'traveller_id' => 16,
         ));
+
+        // busje 2
         DB::table('transport_traveller')->insert(array(
             'transport_id' => 2,
             'traveller_id' => 18,
@@ -58,22 +69,6 @@ class TransportTravellerTableSeeder extends Seeder
         DB::table('transport_traveller')->insert(array(
             'transport_id' => 2,
             'traveller_id' => 28,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 3,
-            'traveller_id' => 30,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 3,
-            'traveller_id' => 32,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 3,
-            'traveller_id' => 34,
-        ));
-        DB::table('transport_traveller')->insert(array(
-            'transport_id' => 3,
-            'traveller_id' => 36,
         ));
     }
 }

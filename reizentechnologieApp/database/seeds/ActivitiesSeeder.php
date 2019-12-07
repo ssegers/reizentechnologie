@@ -12,77 +12,66 @@ class ActivitiesSeeder extends Seeder
      */
     public function run()
     {
+        // activiteiten dag 1
         DB::table('activities')->insert(array(
             'day_planning_id' => 1,
-            'name' => 'Big Apple',
-            'start_hour' => '09:00',
-            "end_hour" => '12:00',
-            'description' => 'We are going to visit the Big Apple',
-            'location' => 'New York'
+            'name' => 'Heen vlucht',
+            'start_hour' => '07:00',
+            "end_hour" => '23:59',
+            'description' => 'Vlucht van Brussel naar Amerika',
+            'location' => 'Brussel National Airport'
         ));
         DB::table('activities')->insert(array(
             'day_planning_id' => 1,
-            'name' => 'Company visit a',
+            'name' => 'inchecken hotel',
             'start_hour' => '13:00',
             "end_hour" => '15:00',
             'description' => 'We are going to visit a company',
-            'location' => 'New York'
+            'location' => '20 Airport Blvd South San Francisco CA 94080'
         ));
+
+        // activiteiten dag 2
         DB::table('activities')->insert(array(
-            'day_planning_id' => 1,
-            'name' => 'Company visit b',
-            'start_hour' => '16:00',
-            "end_hour" => '18:00',
-            'description' => 'We are going to visit a company',
-            'location' => 'New York'
+            'day_planning_id' => 2,
+            'name' => 'Bezoek Alcatraz',
+            'start_hour' => '07:15',
+            "end_hour" => '12:00',
+            'description' => 'Bezoek aan de gevangenis op het eiland',
+            'location' => 'Pier 33'
         ));
         DB::table('activities')->insert(array(
             'day_planning_id' => 2,
-            'name' => 'Statue of Liberty',
-            'start_hour' => '09:00',
-            "end_hour" => '12:00',
-            'description' => 'We are going to visit the Statue of Liberty',
+            'name' => '49 miles scenic drive',
+            'start_hour' => '13:00',
+            "end_hour" => '18:30',
+            'description' => 'rondrit doorheen San Francisco, bezoek aan diverse bezienswaardigheden zoals: Golden Gate Bridge, Twitter, Cable Car Museum, Lombard Street.',
             'location' => 'San Fransisco'
         ));
+
+        // activiteiten dag 3
         DB::table('activities')->insert(array(
-            'day_planning_id' => 2,
-            'name' => 'Company visit a',
-            'start_hour' => '13:00',
-            "end_hour" => '15:00',
-            'description' => 'We are going to visit a company',
-            'location' => 'San Fransisco'
-        ));
-        DB::table('activities')->insert(array(
-            'day_planning_id' => 2,
-            'name' => 'Company visit b',
-            'start_hour' => '16:00',
-            "end_hour" => '18:00',
-            'description' => 'We are going to visit a company',
-            'location' => 'Los Angeles'
+            'day_planning_id' => 3,
+            'name' => 'Bedrijfsbezoeken',
+            'start_hour' => '08:45',
+            "end_hour" => '10:30',
+            'description' => 'bezoek aan Facebook Like Sign, Google garage, Original Hewlett Packard Garage',
+            'location' => 'Silicon Valley'
         ));
         DB::table('activities')->insert(array(
             'day_planning_id' => 3,
-            'name' => 'Washinton Monument',
-            'start_hour' => '09:00',
-            "end_hour" => '12:00',
-            'description' => 'We are going to visit the Washinton Monument',
-            'location' => 'Washinton DC'
+            'name' => 'Bezoek Standford University',
+            'start_hour' => '10:30',
+            "end_hour" => '12:30',
+            'description' => 'rondleiding en eten',
+            'location' => 'Standford University'
         ));
         DB::table('activities')->insert(array(
             'day_planning_id' => 3,
-            'name' => 'Company visit a',
-            'start_hour' => '13:00',
-            "end_hour" => '15:00',
-            'description' => 'We are going to visit a company',
-            'location' => 'Washinton DC'
-        ));
-        DB::table('activities')->insert(array(
-            'day_planning_id' => 3,
-            'name' => 'Company visit b',
-            'start_hour' => '16:00',
-            "end_hour" => '18:00',
-            'description' => 'We are going to visit a company',
-            'location' => 'Washinton DC'
+            'name' => 'vervolg bedrijfsbezoeken',
+            'start_hour' => '12:30',
+            "end_hour" => '18:30',
+            'description' => 'Bezoek aan Google Plex, Android Sculpture Garden, Intel Museum, Apple\'s Company Store and Headquarters, ...',
+            'location' => 'Silicon Valley'
         ));
     }
 }

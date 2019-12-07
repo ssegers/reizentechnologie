@@ -43,7 +43,7 @@ class HotelTripSeeder extends Seeder
         DB::table('hotel_trips')->insert(array(
             'hotel_id' => 5,
             'trip_id' => 1,
-            'start_date'=>Carbon::create('2020', '05', '19'),
+            'start_date'=>Carbon::create('2020', '05', '29'),
             'end_date'=>Carbon::create('2020', '05', '30')
 
         ));

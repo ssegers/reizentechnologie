@@ -14,24 +14,24 @@ class DayPlanningSeeder extends Seeder
     {
         DB::table('day_plannings')->insert(array(
             'trip_id' => 1,
-            'date' => '2020/05/18',
-            'highlight' => 'Big Apple',
-            'description' => 'We are going to visit the Big Apple',
-            'location' => 'New York'
+            'date' => '2020/05/21',
+            'highlight' => 'Brussel National Airport',
+            'description' => 'Vertrek naar Amerika',
+            'location' => 'Brussel'
         ));
         DB::table('day_plannings')->insert(array(
             'trip_id' => 1,
-            'date' => '2020/05/19',
-            'highlight' => 'Statue of Liberty',
-            'description' => 'We are going to visit the Statue of Liberty',
-            'location' => 'New York'
+            'date' => '2020/05/22',
+            'highlight' => 'Alcatraz',
+            'description' => 'Bezoek aan Alcatraz, de gevangenis op het eiland',
+            'location' => 'San Francisco'
         ));
         DB::table('day_plannings')->insert(array(
-            'trip_id' => 2,
-            'date' => '2020/05/20',
-            'highlight' => 'Washington Monument',
-            'description' => 'We are going to visit the Washington Monument',
-            'location' => 'Washington DC'
+            'trip_id' => 1,
+            'date' => '2020/05/23',
+            'highlight' => 'Rondrit Silicon Valley',
+            'description' => 'Rondrit door Silicon Valley, we passeren enkele grote bedrijven gelijk Google, Intel, Stanford University',
+            'location' => 'Silicon Valley'
         ));
         
     }
