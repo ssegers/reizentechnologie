@@ -56,17 +56,17 @@ Route::middleware(['auth','guest'])->group(function () {
         Route::prefix('registrationform')->group(function() {
             route::get('step-0', 'Auth\RegisterController@step0')->name('registerTripMessage');
             route::post('step-0', 'Auth\RegisterController@step0Post');
-            
+
             route::get('step-1', 'Auth\RegisterController@step1')->name('registerTrip');
             route::post('step-1', 'Auth\RegisterController@step1Post');
-            
+
             route::get('step-2', 'Auth\RegisterController@step2');
             route::post('step-2', 'Auth\RegisterController@step2Post');
             route::post('step-add-zip', 'Auth\RegisterController@createZip');
-            
+
             route::get('step-3', 'Auth\RegisterController@step3');
             route::post('step-3', 'Auth\RegisterController@step3Post');
-            
+
         });
     });
 });
@@ -95,7 +95,7 @@ Route::middleware(['auth','checkloggedin'])->group(function () {
         Route::get('/listrooms/{hotelTripId}/{hotelId}', 'Traveller\Rooms@overview')->name("roomsOverviewTraveller");
         Route::post('/selectRoom/{roomId}', 'Traveller\Rooms@selectRoom')->name("selectRoomTraveller");
         Route::post('/leaveRoom/{roomId}/{travellerId?}', 'Traveller\Rooms@leaveRoom')->name("leaveRoomTraveller");
-    
+
     });
     Route::get('/logout','Auth\AuthController@logout')->name("logout");
 });
@@ -156,19 +156,22 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
         Route::get('/homepage', 'Admin\HomePageController@getInfo')->name('homePage');
         Route::post('/homepage', 'Admin\HomePageController@updateInfo')->name('updateHomePage');
-        
+
         Route::get('overviewPages', 'Admin\InfoPagesController@index')->name('infoPages');
         Route::post('createPage', 'Admin\InfoPagesController@createPage');
         Route::post('updatePage','Admin\InfoPagesController@updateContent');
         Route::post('editPage','Admin\InfoPagesController@editPage');
         Route::post('deletePage','Admin\InfoPagesController@deletePage');
-        
+
         Route::get('trips','Admin\TripController@showAllTrips')->name('showtrips');
         Route::post('trips', 'Admin\TripController@UpdateOrCreateTrip');
-        
+
         Route::get('organizer/{trip?}', 'Admin\OrganizerController@show')->name('showorganizers');
         Route::get('organizers/get/{tripId}','DataController@getOrganizersByTrip');
         Route::post('organizers/add','DataController@addOrganizersToTrip');
         Route::delete('organizer/delete','DataController@removeOrganizerFromTrip');
+
+        //test activity
+        Route::get('/activity', 'Admin\ActivityController@showAllActivities')->name('showtrips');
     });
 });

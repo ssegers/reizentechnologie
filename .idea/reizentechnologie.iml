@@ -53,8 +53,10 @@
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/myclabs/deep-copy" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/nexmo/client" />
+      <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/nexmo/client-core" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/nunomaduro/collision" />
+      <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/nuwave/lighthouse" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/opis/closure" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/phar-io/manifest" />
@@ -98,10 +100,12 @@
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/seld/phar-utils" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/setasign/fpdi" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/spatie/laravel-cookie-consent" />
+      <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/staudenmeir/eloquent-has-many-deep" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/symfony/css-selector" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/symfony/debug" />
+      <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/symfony/event-dispatcher-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/reizentechnologieApp/vendor/symfony/filesystem" />
