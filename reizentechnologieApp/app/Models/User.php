@@ -47,11 +47,12 @@ class User extends Authenticatable
         $oUser = Auth::user();
         if($oUser->role=='admin'){
             return true;
-        }
-        foreach($oUser->traveller->trips->where('is_active', true) as $oTrip){
-            if ($oTrip->pivot->is_organizer == true){
-                return true;
-            }       
+        }elseif($oUser->role =='guide'){
+            foreach($oUser->traveller->trips->where('is_active', true) as $oTrip){
+                if ($oTrip->pivot->is_organizer == true){
+                    return true;
+                }       
+            }
         }
         return false;
 

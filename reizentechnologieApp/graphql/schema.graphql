@@ -1,8 +1,9 @@
-
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query @middleware(checks: ["auth:api"]){
     trip(trip_id: ID! @eq): Trip @find
     info(info_name: String! @eq): Information @find
+    latest: DateTime!
 }
 
 type Information {
@@ -80,6 +81,7 @@ type HotelTrip {
 type Room {
     room_id: ID!
     hotel_trip_id: Int!
+    room_number: Int
     size: Int!
     travellers: [Traveller!]!
 }

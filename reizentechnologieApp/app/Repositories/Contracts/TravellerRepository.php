@@ -118,5 +118,15 @@ interface TravellerRepository {
      * @return int
      */
     public function getTravellerIdByUserId($sUserId);
+
+    /**
+     * get traveller id by user id
+     * 
+     * @author Koen De Deckers
+     * 
+     * @param $sUserId
+     * @return int
+     */
+    public function getCurrentTripByUserId($sUserId);
     
 }

@@ -14,6 +14,12 @@ class Trip extends Model
             ->withTimestamps()
             ->withPivot(['is_guide','is_organizer']);
     }
+    public function accomodations()
+    {
+        return $this->belongsToMany(Hotel::class,null,'trip_id','hotel_id')
+            ->withTimestamps()
+            ->withPivot(['id','start_date','end_date']);
+    }
     public function payments()
     {
         return $this->hasMany('App\Models\Payment','trip_id','trip_id');
