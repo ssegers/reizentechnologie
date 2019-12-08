@@ -112,6 +112,7 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::post('updatepartisipant/{trip?}/{username?}', 'Organiser\Partisipants@updatePartisipantsProfile');
         Route::delete('deletepartisipant/{trip?}/{username?}','Organiser\Partisipants@destroyPartisipantsProfile')->name("userdestroy");
         Route::get('info', 'Organiser\InfoController@index')->name('info');
+        Route::get('dayplanning', 'Organiser\DayPlanningController@index')->name('dayplanning');
     });
     Route::prefix('payments')->group(function () {
         Route::get('overview/{trip?}','Organiser\Payments@showPaymentsTable')->name("paymentslist");
