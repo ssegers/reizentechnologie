@@ -33,8 +33,8 @@ class HotelsSeeder extends Seeder
             'phone' => '001 530 622 6700',
             'email' => "example@ucll.be",
             'website_link' => 'http://www.americanriverresort.com/',
-            'picture1_link' => 'http://www.americanriverresort.com/index.php/whitewater-boating',
-            'picture2_link' => 'http://www.americanriverresort.com/index.php/group-camping',
+            'picture1_link' => 'http://www.americanriverresort.com/media/rokgallery/3/3054c425-30fc-4e20-d4e9-cb38cab75e85/6aeaa353-fb39-4d50-f9bc-b8b5ee3af3cd.jpg',
+            'picture2_link' => 'http://www.americanriverresort.com/media/rokgallery/5/530a392f-7d38-4c8b-f19b-7361c4dc74d2/55912a1b-a215-4f68-8858-4dd1401e641a.jpg',
         ));
 
         DB::table('hotels')->insert(array(
@@ -45,7 +45,7 @@ class HotelsSeeder extends Seeder
             'phone' => '+1 760 876 8700',
             'email' => "example@ucll.be",
             'website_link' => 'http://www.comfortinnlonepine.com/',
-            'picture1_link' => '',
+            'picture1_link' => 'https://www.alcatrazcruises.com/wp-content/uploads/2018/02/revolving-hero3-1600x650.jpg',
             'picture2_link' => '',
         ));
 
@@ -57,7 +57,7 @@ class HotelsSeeder extends Seeder
             'phone' => '+1 702 794 0888',
             'email' => "example@ucll.be",
             'website_link' => 'http://www.super8vegas.com/',
-            'picture1_link' => '',
+            'picture1_link' => 'https://img.cinemablend.com/filter:scale/quill/9/f/a/d/b/e/9fadbe0c981cabb39921bc2c2d069694a1aa115c.jpg?mw=600',
             'picture2_link' => '',
         ));
 

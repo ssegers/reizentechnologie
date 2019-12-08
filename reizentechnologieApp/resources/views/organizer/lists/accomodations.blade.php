@@ -83,7 +83,7 @@
 
             <div class="table-responsive">
                 <table class="table table-striped table-hover" width="100%">
-                    <thead
+                    <thead>
                         <tr>
                             <th></th>
                             <th>Hotel Naam</th>
