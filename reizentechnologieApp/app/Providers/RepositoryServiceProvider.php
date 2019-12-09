@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\ActivityRepository;
+use App\Repositories\Eloquent\EloquentActivity;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Eloquent\EloquentUser;
@@ -50,8 +52,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(PageRepository::class, EloquentPage::class);
         $this->app->singleton(PaymentRepository::class, EloquentPayment::class);
         $this->app->singleton(AccomodationRepository::class, EloquentAccomodation::class);
-        $this->app->singleton(RoomRepository::class, EloquentRoom::class);  
-        
+        $this->app->singleton(RoomRepository::class, EloquentRoom::class);
+        $this->app->singleton(ActivityRepository::class, EloquentActivity::class);
+
         $this->app->singleton(InfoRepository::class, EloquentInfo::class);
     }
 }

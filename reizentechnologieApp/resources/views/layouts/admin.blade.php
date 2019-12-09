@@ -33,15 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Frontend</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}"">Afmelden</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-  
+
     <div class="flex-container">
         <div class="d-flex flex-row flex-nowrap py-3" style="height: calc(100vh - 200px);">
-            <div class="d-flex flex-column col-auto overflow-auto" id="left">    
+            <div class="d-flex flex-column col-auto overflow-auto" id="left">
 
                 <div class="btn-group-vertical">
                     <a class="btn btn-warning btn_sm btn-block " href="{{ route('home') }}" role="button">Dashboard</a>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="d-flex flex-column flex-grow-1 overflow-auto" id="main">
-                
+
                             @yield('content')
 
             </div>
