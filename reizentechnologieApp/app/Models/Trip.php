@@ -44,8 +44,8 @@ class Trip extends Model
         return $this->hasMany('App\Models\Transport', 'trip_id', 'trip_id');
     }
 
-    public function dayplannings(){
-        return $this->hasMany('App\Models\DayPlanning', 'trip_id', 'trip_id');
+    public function days(){
+        return $this->hasMany('App\Models\Day', 'trip_id', 'trip_id');
     }
 
     public function emergencynumbers(){

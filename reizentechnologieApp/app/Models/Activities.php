@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activities extends Model
 {
-    protected $primaryKey = 'activities_id';
+    protected $primaryKey = 'activity_id';
 
-    public function day_planning(){
-        return $this->belongsTo(DayPlanning::class, null, 'activities_id', 'day_planning_id');
+    public function planning(){
+        return $this->belongsTo(Planning::class, 'activity_id', 'activity_id');
     }
 }

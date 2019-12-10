@@ -79,7 +79,7 @@ type HotelTrip {
     hotel_id: Int!
     start_date: String!
     end_date: String!
-        rooms: [Room!]!
+    rooms: [Room!]!
 }
 
 
