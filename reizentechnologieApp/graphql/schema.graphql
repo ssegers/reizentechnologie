@@ -14,13 +14,13 @@ type Trip {
     name: String!
     travellers: [Traveller!]
     hotels: [Hotel!]! @belongsToMany
-    dayplannings: [DayPlanning!]!
+    days: [Day!]!
     emergencynumbers: [EmergencyNumber!]!
     transports: [Transport!]!
 }
 
 type Traveller {
-    traveller_id: ID!
+    traveller_id: ID!Planning
     first_name: String!
     last_name: String!
     
@@ -37,20 +37,25 @@ type Hotel {
     hoteltrips: [HotelTrip!]!
 }
 
-type DayPlanning {
-    day_planning_id: ID!
+type Day {
+    day_id: ID!
     date: String!
     highlight: String!
     description: String!
     location: String!
-    activities: [Activity!]!
+    plannings: [Planning!]!
+}
+
+type Planning {
+    planning_id: ID!
+    start_hour: String!
+    end_hour: String!
+    activity: [Activity!]!
 }
 
 type Activity {
     activities_id: ID!
     name: String!
-    start_hour: String!
-    end_hour: String!
     description: String!
     location: String!
 }
