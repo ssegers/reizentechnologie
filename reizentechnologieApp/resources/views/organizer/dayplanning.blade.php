@@ -47,10 +47,33 @@
         </div>
         <div class="d-flex flex-row justify-content-between">
             <div>
-                <h1>DayPlannings {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
+                <h1>Dayplannings {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary badge-custom" data-toggle="modal" data-target="#dayplanningPopup">Nieuwe dayplanning</button>
+                <a href="" class="btn btn-primary badge-custom">Export to Excel</a>
             </div>
         </div>
-        
+        <div class="d-flex flex-row justify-content-start">
+            <div class="d-flex align-items-end"> 
+                    
+                <div class="form-group ml-md-4 ">
+                    {{ Form::label('DayPlanning','dayplannings '.$oCurrentTrip->name.'*')}}
+                    
+                </div>
+            </div>
+            <div class="d-flex align-items-end"> 
+                <div class="form-group ml-md-4">
+                    {{ Form::button('Voeg toe aan reis',['class' => 'btn btn-primary form-control','onclick' => ""]) }}
+                </div>
+            </div>
+                    
+            <div class="d-flex align-items-end">
+                <div class="form-group ml-md-4">
+                    <button type="button" class="btn btn-primary" onclick="edit()"><i class="fas fa-edit"></i>edit</button>     
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
