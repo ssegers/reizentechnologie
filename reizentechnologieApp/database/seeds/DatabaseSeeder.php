@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             RoomsTableSeeder::class,
             RoomTravellerTableSeeder::class,
             DestinationTableSeeder::class,
+            PlanningTableSeeder::class,
         ]);
     }
 }
