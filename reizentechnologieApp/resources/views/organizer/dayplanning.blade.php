@@ -74,7 +74,41 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex flex-row flex-nowrap py-3" style="height: calc(100vh - 400px);">
+            
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" width="100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Dayplanning</th>
+                            <th>Highlight</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th colspan="1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($dayplanningsPerTrip as $oDayplanning)
+                        <tr>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dayplanninginfoPopup" data-accomodation="{{$oDayplanning}}"><i class="fas fa-info-circle"></i></button></td>
+                            <td><?php echo $oDayplanning->dayplanning_id; ?></td>
+                            <td><?php echo $oDayplanning->highlight; ?></td>
+                            <td><?php echo $oDayplanning->location; ?></td>
+                            <td><?php echo $oDayplanning->description; ?></td>
+                            <td style="width:1%; white-space:nowrap;">
+                                
+                            </td>
+
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 </div>
 
 @endsection
