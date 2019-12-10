@@ -14,6 +14,10 @@ class EloquentDayPlanning implements DayPlanningRepository
         $this->model = $model;
     }
 
+    public function getDayPlannings(){
+        return \Illuminate\Support\Facades\DB::table('dayplanning')->select("id", "highlight")->first();
+    }
+
     public function getDayPlanningsPerTrip($iTripId){
         $dayplannings = Trip::where('trip_id',$iTripId)->first()->dayplannings()->orderBy('date','asc')->get();
         return $dayplannings; 

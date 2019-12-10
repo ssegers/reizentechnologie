@@ -2,9 +2,6 @@
 
 @section('styles')
 <style>
-    .carousel-inner > .item > img, .carousel-inner > .item > a > img{
-    margin:auto;
-}
 
 .container{
     text-align: center;
@@ -14,6 +11,7 @@
 @endsection
 
 @section('content')
+
 
 <div class="d-flex justify-content-center">
     <div class="d-inline-flex ">
@@ -49,7 +47,7 @@
         </div>
         <div class="d-flex flex-row justify-content-between">
             <div>
-                <h1>Accomodaties {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
+                <h1>DayPlannings {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
             </div>
         </div>
         

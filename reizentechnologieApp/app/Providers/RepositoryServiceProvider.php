@@ -34,6 +34,9 @@ use App\Repositories\Eloquent\EloquentRoom;
 
 use App\Repositories\Contracts\InfoRepository;
 use App\Repositories\Eloquent\EloquentInfo;
+
+use App\Repositories\Contracts\DayPlanningRepository;
+use App\Repositories\Eloquent\EloquentDayPlanning; 
 /**
  * Description of RepositoryServiceProvider
  *
@@ -54,7 +57,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(AccomodationRepository::class, EloquentAccomodation::class);
         $this->app->singleton(RoomRepository::class, EloquentRoom::class);
         $this->app->singleton(ActivityRepository::class, EloquentActivity::class);
-
+        $this->app->singleton(DayPlanningRepository::class, EloquentDayPlanning::class);
         $this->app->singleton(InfoRepository::class, EloquentInfo::class);
     }
 }

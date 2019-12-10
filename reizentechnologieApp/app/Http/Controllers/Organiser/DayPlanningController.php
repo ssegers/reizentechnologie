@@ -6,15 +6,50 @@ namespace App\Http\Controllers\Organiser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\Repositories\Contracts\TripRepository;
+use App\Repositories\Contracts\TravellerRepository;
 use App\Repositories\Contracts\DayPlanningRepository;
 
 class DayPlanningController extends Controller
 {
+
+    /**
+     *
+     * @var tripRepository
+     */
+    private $trips;
+
+    /**
+     *
+     * @var travellerRepository
+     */
+    private $travellers;
+
+    /**
+     * 
+     * @var dayplanningRepository
+     */
     private $dayplanning;
     
-    public function __construct(DayPlanningRepository $dayplanning) {
-        $this->dayplanning = $dayplanning;
+
+
+    /**
+     * dayplanningController Constructor
+     * 
+     * @param tripRepository $trip
+     * @param dayplanningRepository $dayplanning
+     */
+    public function __construct(TripRepository $trip, 
+            DayPlanningRepository $dayplanning,
+            TravellerRepository $traveller) 
+    {
+       $this->trips = $trip;
+       $this->dayplannings = $dayplanning;
+       $this->travellers = $traveller;
     }
     
     public function CheckDbConnection(){
@@ -43,7 +78,7 @@ class DayPlanningController extends Controller
         }
     }
     
-    public function index() {
+    public function index($iTripId = null) {
         $oUser = Auth::user();
         /* Get all active trips and number of partisipants */
         $aActiveTrips = $this->trips->getAllActive();
@@ -81,8 +116,15 @@ class DayPlanningController extends Controller
       
         /* Get the current trip */
         $oCurrentTrip = $this->trips->get($iTripId);
-        
+        $dayplanningsPerTrip = $this->dayplannings->getDayPlanningsPerTrip($iTripId);
 
+        return view('organizer.dayplanning',
+            [
+                'dayplanningsPerTrip' => $dayplanningsPerTrip,
+                'oCurrentTrip' => $oCurrentTrip,
+                'aTripsAndNumberOfAttendants' => $aTripsAndNumberOfAttendants,
+                'aTripsByOrganiser' => $aTripsByOrganiser,
+            ]);
 
     }
 }
