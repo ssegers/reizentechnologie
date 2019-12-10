@@ -13,8 +13,8 @@ class CreateDayPlanningTable extends Migration
      */
     public function up()
     {
-        Schema::create('day_plannings', function (Blueprint $table) {
-            $table->increments('day_planning_id');
+        Schema::create('days', function (Blueprint $table) {
+            $table->increments('day_id');
             $table->integer('trip_id')->unsigned();
             $table->foreign('trip_id')->references('trip_id')->on('trips')->onDelete("cascade");
             $table->date('date');
