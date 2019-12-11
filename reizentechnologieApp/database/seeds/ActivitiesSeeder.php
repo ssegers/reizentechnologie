@@ -27,7 +27,7 @@ class ActivitiesSeeder extends Seeder
         // activiteiten dag 2
         DB::table('activities')->insert(array(
             'name' => 'Bezoek Alcatraz',
-            'description' => 'Bezoek aan de gevangenis op het eiland',
+            'description' => 'Bezoek aan Alcatraz, de gevangenis op het eiland, ookwel de Rock genoemd',
             'location' => 'Pier 33'
         )); // id 3
         DB::table('activities')->insert(array(

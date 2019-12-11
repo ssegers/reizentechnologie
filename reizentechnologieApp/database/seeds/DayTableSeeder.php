@@ -25,7 +25,7 @@ class DaysTableSeeder extends Seeder
             'trip_id' => 1,
             'date' => '2020/05/22',
             'highlight' => 'Alcatraz',
-            'description' => 'Bezoek aan Alcatraz, de gevangenis op het eiland',
+            'description' => 'Bezoek aan Alcatraz, rondrit in San Fransisco',
             'location' => 'San Francisco'
         ));
 		//Dag 3 = ID 3

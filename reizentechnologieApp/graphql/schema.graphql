@@ -20,7 +20,7 @@ type Trip {
 }
 
 type Traveller {
-    traveller_id: ID!Planning
+    traveller_id: ID!
     first_name: String!
     last_name: String!
     
@@ -50,7 +50,7 @@ type Planning {
     planning_id: ID!
     start_hour: String!
     end_hour: String!
-    activity: [Activity!]!
+    activity: Activity!
 }
 
 type Activity {
