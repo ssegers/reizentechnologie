@@ -33,7 +33,7 @@
         <div class="d-flex flex-row">
             @foreach($aTripsAndNumberOfAttendants as $aTripData)
                 @if($aTripsByOrganiser->contains('trip_id',$aTripData['trip_id']))
-                    <a href="/dayplannings/overview/{{ $aTripData['trip_id'] }}" class="btn btn-success badge-custom">
+                    <a href="/dayplannings/index/{{ $aTripData['trip_id'] }}" class="btn btn-success badge-custom">
                         {{ $aTripData['name'] }} {{ $aTripData['year'] }}
                         <span class="badge badge-light">{{ $aTripData['numberOfAttends'] }}</span>
                     </a>
@@ -49,28 +49,11 @@
             <div>
                 <h1>Dayplannings {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
             </div>
-            <div>
-                <button type="button" class="btn btn-primary badge-custom" data-toggle="modal" data-target="#dayplanningPopup">Nieuwe dayplanning</button>
-                <a href="" class="btn btn-primary badge-custom">Export to Excel</a>
-            </div>
         </div>
         <div class="d-flex flex-row justify-content-start">
-            <div class="d-flex align-items-end"> 
-                    
-                <div class="form-group ml-md-4 ">
-                    {{ Form::label('DayPlanning','dayplannings '.$oCurrentTrip->name.'*')}}
-                    
-                </div>
-            </div>
-            <div class="d-flex align-items-end"> 
-                <div class="form-group ml-md-4">
-                    {{ Form::button('Voeg toe aan reis',['class' => 'btn btn-primary form-control','onclick' => ""]) }}
-                </div>
-            </div>
-                    
             <div class="d-flex align-items-end">
                 <div class="form-group ml-md-4">
-                    <button type="button" class="btn btn-primary" onclick="edit()"><i class="fas fa-edit"></i>edit</button>     
+                    <button type="button" class="btn btn-primary badge-custom" data-toggle="modal" data-target="#dayplanningPopup">Nieuwe dayplanning</button>  
                 </div>
             </div>
         </div>
@@ -82,7 +65,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Dayplanning</th>
+                            <th>Date</th>
                             <th>Highlight</th>
                             <th>Location</th>
                             <th>Description</th>
@@ -93,12 +76,12 @@
                         @foreach ($dayplanningsPerTrip as $oDayplanning)
                         <tr>
                             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dayplanninginfoPopup" data-accomodation="{{$oDayplanning}}"><i class="fas fa-info-circle"></i></button></td>
-                            <td><?php echo $oDayplanning->dayplanning_id; ?></td>
+                            <td><?php echo $oDayplanning->date; ?></td>
                             <td><?php echo $oDayplanning->highlight; ?></td>
                             <td><?php echo $oDayplanning->location; ?></td>
                             <td><?php echo $oDayplanning->description; ?></td>
                             <td style="width:1%; white-space:nowrap;">
-                                
+                                <button type="button" class="btn btn-primary" onclick="edit()"><i class="fas fa-edit"></i>edit</button>
                             </td>
 
                         </tr>
