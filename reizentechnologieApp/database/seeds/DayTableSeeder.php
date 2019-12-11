@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DayPlanningSeeder extends Seeder
+class DaysTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class DayPlanningSeeder extends Seeder
     public function run()
     {
 		//Dag 1 = ID 1
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/21',
             'highlight' => 'Brussel National Airport',
@@ -21,7 +21,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Brussel'
         ));
 		//Dag 2 = ID 2
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/22',
             'highlight' => 'Alcatraz',
@@ -29,7 +29,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'San Francisco'
         ));
 		//Dag 3 = ID 3
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/23',
             'highlight' => 'Rondrit Silicon Valley',
@@ -37,7 +37,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Silicon Valley'
         ));
 		//Dag 4 = ID 4
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/24',
             'highlight' => 'USS Hornet en Jelly Belly',
@@ -45,7 +45,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Alameda'
         ));
 		//Dag 5 = ID 5
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/25',
             'highlight' => 'Middle Fork American River',
@@ -53,7 +53,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Coloma'
         ));
 		//Dag 6 = ID 6
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/26',
             'highlight' => 'Las Vegas 1',
@@ -61,7 +61,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Coloma'
         ));
 		//Dag 7 = ID 7
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/27',
             'highlight' => 'Las Vegas 2',
@@ -69,7 +69,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Las Vegas'
         ));
 		//Dag 8 = ID 8
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/28',
             'highlight' => 'Bezoek aan Valley of Fire of naar de Hooverdam',
@@ -77,7 +77,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Las Vegas'
         ));
 		//Dag 9 = ID 9
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/29',
             'highlight' => 'Los Angeles',
@@ -85,7 +85,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Las Vegas'
         ));
 		//Dag 10 = ID 10
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/30',
             'highlight' => 'Hollywood Studios',
@@ -93,7 +93,7 @@ class DayPlanningSeeder extends Seeder
             'location' => 'Las Vegas'
         ));
 		//Dag 11 = ID 11
-        DB::table('day_plannings')->insert(array(
+        DB::table('days')->insert(array(
             'trip_id' => 1,
             'date' => '2020/05/31',
             'highlight' => 'Back Home',

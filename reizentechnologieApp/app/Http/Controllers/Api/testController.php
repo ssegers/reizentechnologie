@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Room;
+use App\Models\Trip;
 
 class testController extends Controller
 {
     public function test() {
-        $h = Room::find(1);
-        //dd($h);
-        return $h->travellers()->get();
+        $t = Trip::find(1);
+        $d = $t->days()->first();
+        $p = $d->plannings()->skip(1)->first();
+
+        return $p->activity()->first();
     }
 }

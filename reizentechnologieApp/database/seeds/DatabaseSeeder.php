@@ -26,12 +26,13 @@ class DatabaseSeeder extends Seeder
             HotelTripSeeder::class,
             TransportTableSeeder::class,
             TransportTravellerTableSeeder::class,
-            DayPlanningSeeder::class,
+            DaysTableSeeder::class,
             ActivitiesSeeder::class,            
             EmergencyNumbersTableSeeder::class,
             RoomsTableSeeder::class,
             RoomTravellerTableSeeder::class,
             DestinationTableSeeder::class,
+            PlanningTableSeeder::class,
         ]);
     }
 }
