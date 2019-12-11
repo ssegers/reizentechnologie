@@ -11,8 +11,8 @@ class testController extends Controller
     public function test() {
         $t = Trip::find(1);
         $d = $t->days()->first();
-        $p = $d->plannings()->first();
+        $p = $d->plannings()->skip(1)->first();
 
-        return $p->activity()->get();
+        return $p->activity()->first();
     }
 }
