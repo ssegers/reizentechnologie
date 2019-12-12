@@ -3,34 +3,34 @@
 namespace App\Repositories\Eloquent;
 use App\Repositories\Contracts\DayPlanningRepository;
 use Illuminate\Support\Facades\DB;
-use App\Models\DayPlanning;
+use App\Models\Day;
 use App\Models\Trip;
 
 class EloquentDayPlanning implements DayPlanningRepository
 {
     private $model;
     
-    public function __construct(DayPlanning $model) {
+    public function __construct(Day $model) {
         $this->model = $model;
     }
 
     public function getDayPlannings(){
-        return \Illuminate\Support\Facades\DB::table('dayplanning')->select("id", "highlight")->first();
+        return \Illuminate\Support\Facades\DB::table('days')->select("id", "highlight")->first();
     }
 
     public function getDayPlanningsPerTrip($iTripId){
-        $dayplannings = Trip::where('trip_id',$iTripId)->first()->dayplannings()->orderBy('date','asc')->get();
+        $dayplannings = Trip::where('trip_id',$iTripId)->first()->days()->orderBy('date','asc')->get();
         return $dayplannings; 
     }
 
     public function addDayPlanningToTrip($aData){
         $trip = Trip::find($aData['trip_id']);
-        $trip->dayplannings()->attach($aData['dayplanning_id'],['date' => $aData['date'], 'highlight' => $aData['highlight'], 'description' => $aData['description'], 'location' =>$aData['location']]);
+        $trip->days()->attach($aData['day_id'],['date' => $aData['date'], 'highlight' => $aData['highlight'], 'description' => $aData['description'], 'location' =>$aData['location']]);
         return true;
     }
 
     public function updateDayPlanning($data){
-        $dayplanning = DayPlanning::find($request->DayPlanningId);
+        $dayplanning = Day::find($request->DayId);
         $dayplanning->date = $request->Date;
         $dayplanning->highlight = $request->Highlight;
         $dayplanning->description = $request->Description;
@@ -40,19 +40,20 @@ class EloquentDayPlanning implements DayPlanningRepository
     }
 
     public function deleteDayPlanningFromTrip($iId){
-        $sqlDelete = "delete from dayplanning where id=$iId";
+        $sqlDelete = "delete from days where id=$iId";
         DB::select($sqlDelete);
 
         return true;
     }
 
     public function storeDayPlanning($request){
-        /*$dayplanning = new DayPlanning();
+        $dayplanning = new Day();
         $dayplanning->date = $request->Date;
         $dayplanning->highlight = $request->Highlight;
         $dayplanning->description = $request->Description;
         $dayplanning->location = $request->Location;
+        $dayplanning->trip_id = $request->Trip_id;
         $dayplanning->save();
-        return true;*/
+        return true;
     }
 }

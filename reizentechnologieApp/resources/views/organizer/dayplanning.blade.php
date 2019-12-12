@@ -92,6 +92,60 @@
         </div>
     </div>
 
+    <!--    modals-->
+    <div class="modal fade" id="dayplanningPopup" tabindex="-1" role="dialog" aria-labelledby="dayPlanningPopupLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="dayPlanningPopupLabel">Day Toevoegen</h4>
+                    {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
+                </div>
+                {{ Form::open(array('action' => 'Organiser\DayPlanningController@createDayPlanning', 'method' => 'post', 'files' => true)) }}
+                {!! Form::hidden('Destination', $oCurrentTrip->name) !!}
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{Form::label('Highlight','highlight van de dag:')}}
+                        {{Form::text('Highlight', null, array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::label('Description','descriptie van de dag')}}
+                        {{Form::text('Description', null,  array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::label('Date','Date:')}}
+                        {{Form::text('Date', null, array('class' => 'form-control','required' => 'required')) }}
+                        {{Form::label('Location','locatie van de dag:')}}
+                        {{Form::text('Location', null, array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::hidden('Trip_id', $oCurrentTrip->trip_id)}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
+                    {{Form::button('Opslaan',array('class' => 'btn btn-primary', 'type' => 'submit'))}}
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="dayplanninginfoPopup" tabindex="-1" role="dialog" aria-labelledby="dayplanninginfoLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="dayplanninginfoLabel">Day Info</h4>
+                    {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr><td>Highlight:</td><td><p id="highlight" > </p></td></tr>
+                        <tr><td>Description:</td><td><p id="description"></p></td></tr>
+                        <tr><td>Date:</td><td><p id="date"></p></td></tr>
+                        <tr><td>Location:</td><td><p id="location"></p></td></tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    endmodals-->
 </div>
 
 @endsection

@@ -127,7 +127,7 @@ class DayPlanningController extends Controller
             ]);
     }
 
-    public function addAccomodationToTrip(Request $request){
+    public function addDayPlanningToTrip(Request $request){
         
         if ($this->hasRights()){ 
             $aData['trip_id'] = $request->post('trip_id');
@@ -135,10 +135,19 @@ class DayPlanningController extends Controller
             $aData['location'] = $request->post('location');
             $aData['description'] = $request->post('description');  
             $aData['highlight'] = $request->post('highlight');
-            $this->accomodations->addDayPlanningToTrip($aData);
+            $this->days->addDayPlanningToTrip($aData);
             return redirect()->back();
         }else{
             return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');
         } 
+    }
+
+    public function createDayPlanning(Request $request){
+        if ($this->hasRights()){   
+            $this->dayplannings->storeDayPlanning($request);
+            return redirect()->back()->with('successmessage','dag succesvol aangemaakt');
+        }else{
+            return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');
+        }
     }
 }
