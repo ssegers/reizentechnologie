@@ -147,5 +147,23 @@
     </div>
     <!--    endmodals-->
 </div>
+@endsection
 
+@section('scripts')
+<script>
+    $('#dayplanninginfoPopup').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var dayplanning = button.data('dayplanning');
+        var modal = $(this);
+
+        modal.find('.modal-body #highlight').text(dayplanning["highlight"]);
+        modal.find('.modal-body #description').text(dayplanning["description"]);
+        modal.find('.modal-body #date').text(dayplanning["date"]);
+        modal.find('.modal-body #location').text(dayplanning["location"]);
+    });
+
+    function ConfirmDelete(){
+        return confirm('Bent u zeker?');
+    }
+</script>
 @endsection
