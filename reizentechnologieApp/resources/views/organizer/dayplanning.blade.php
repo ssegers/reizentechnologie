@@ -80,10 +80,7 @@
                             <td><?php echo $oDayplanning->highlight; ?></td>
                             <td><?php echo $oDayplanning->location; ?></td>
                             <td><?php echo $oDayplanning->description; ?></td>
-                            <td style="width:1%; white-space:nowrap;">
-                                <button type="button" class="btn btn-primary" onclick="edit()"><i class="fas fa-edit"></i>edit</button>
-                            </td>
-
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dayplanningeditPopup" data-accomodation="{{$oDayplanning}}"><i class="fas fa-edit"></i>edit</button></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -133,15 +130,58 @@
                 </div>
                 <div class="modal-body">
                     <table class="table">
-                        <tr><td>Highlight:</td><td><p id="highlight" > </p></td></tr>
+                    <div class="form-group">
+                        {{Form::label('Highlight','Highlight:')}}
+                        {{Form::label('HighlightData',$oDayplanning->highlight)}}
+                        <br>
+                        {{Form::label('Description','Description:')}}
+                        {{Form::label('DescriptionData',$oDayplanning->description)}}
+                        <br>
+                        {{Form::label('Date','Date:')}}
+                        {{Form::label('DateData',$oDayplanning->date)}}
+                        <br>
+                        {{Form::label('Location','Location:')}}
+                        {{Form::label('LocationData',$oDayplanning->location)}}
+                    </div>
+                        <!--<tr><td>Highlight:</td><td><p id="highlight" > </p></td></tr>
                         <tr><td>Description:</td><td><p id="description"></p></td></tr>
                         <tr><td>Date:</td><td><p id="date"></p></td></tr>
                         <tr><td>Location:</td><td><p id="location"></p></td></tr>
-                    </table>
+                    </table>-->
                 </div>
                 <div class="modal-footer">
                     {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="dayplanningeditPopup" tabindex="-1" role="dialog" aria-labelledby="dayPlanningeditPopupLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="dayPlanningeditPopupLabel">Day Aanpassen</h4>
+                    {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
+                </div>
+                {{ Form::open(array('action' => 'Organiser\DayPlanningController@updateDayPlanning', 'method' => 'post', 'files' => true)) }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{Form::label('Highlight','highlight van de dag:')}}
+                        {{Form::text('Highlight', $oDayplanning->highlight, array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::label('Description','descriptie van de dag')}}
+                        {{Form::text('Description', $oDayplanning->description,  array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::label('Date','Date:')}}
+                        {{Form::text('Date', $oDayplanning->date, array('class' => 'form-control','required' => 'required')) }}
+                        {{Form::label('Location','locatie van de dag:')}}
+                        {{Form::text('Location', $oDayplanning->location, array('class' => 'form-control','required' => 'required'))}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
+                    {{Form::button('Opslaan',array('class' => 'btn btn-primary', 'type' => 'submit'))}}
+                    
+                </div>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
@@ -150,7 +190,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<!--<script>
     $('#dayplanninginfoPopup').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var dayplanning = button.data('dayplanning');
@@ -163,7 +203,7 @@
     });
 
     function ConfirmDelete(){
-        return confirm('Bent u zeker?');
+        return confirm('Bent u zeker? \n Als u de dag verwijderd, zal alle info verloren gaan!');
     }
-</script>
+</script>-->
 @endsection

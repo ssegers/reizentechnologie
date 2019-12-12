@@ -29,7 +29,7 @@ class EloquentDayPlanning implements DayPlanningRepository
         return true;
     }
 
-    public function updateDayPlanning($data){
+    public function updateDayPlanning($request){
         $dayplanning = Day::find($request->DayId);
         $dayplanning->date = $request->Date;
         $dayplanning->highlight = $request->Highlight;
