@@ -157,7 +157,7 @@
                     <h4 class="modal-title" id="dayPlanningeditPopupLabel">Day Aanpassen</h4>
                     {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
                 </div>
-                {{ Form::open(array('action' => 'Organiser\DayPlanningController@updateDayPlanning', 'method' => 'put', 'files' => true)) }}
+                {{ Form::open(array('action' => 'Organiser\DayPlanningController@updateDayPlanning', 'method' => 'post', 'files' => true)) }}
                 {!! Form::hidden('Destination', $oCurrentTrip->name) !!}
                 <div class="modal-body">
                     <div class="form-group">
@@ -170,7 +170,7 @@
                         {{Form::label('Location','locatie van de dag:')}}
                         {{Form::text('Location', $oDayplanning->location, array('class' => 'form-control','required' => 'required'))}}
                         {{Form::hidden('Trip_id', $oCurrentTrip->trip_id)}}
-                        <!--{{Form::hidden('Day_id', $oCurrentTrip->day_id)}}-->
+                        {{Form::hidden('Day_id', $oCurrentTrip->day_id)}}
                     </div>
                 </div>
                 <div class="modal-footer">

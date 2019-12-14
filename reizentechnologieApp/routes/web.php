@@ -126,7 +126,7 @@ Route::middleware(['auth','guide'])->group(function () {
     });
     Route::prefix('days')->group(function() {
         Route::post('/createDayPlanning', 'Organiser\DayPlanningController@createDayPlanning')->name("createDayPlanning");
-        Route::put('/editDayPlanning', 'Organiser\DayPlanningController@updateDayPlanning')->name("updateDayPlanning");
+        Route::post('/editDayPlanning', 'Organiser\DayPlanningController@updateDayPlanning')->name("updateDayPlanning");
     });
 });
 
