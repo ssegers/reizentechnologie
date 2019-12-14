@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Day extends Model
 {
+    protected $primaryKey = 'day_id';
+
     public function plannings() {
         return $this->hasMany('App\Models\Planning', 'day_id', 'day_id');
     }

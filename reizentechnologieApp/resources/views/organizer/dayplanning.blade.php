@@ -33,7 +33,7 @@
         <div class="d-flex flex-row">
             @foreach($aTripsAndNumberOfAttendants as $aTripData)
                 @if($aTripsByOrganiser->contains('trip_id',$aTripData['trip_id']))
-                    <a href="/dayplannings/index/{{ $aTripData['trip_id'] }}" class="btn btn-success badge-custom">
+                    <a href="dayplanning/{{ $aTripData['trip_id'] }}" class="btn btn-success badge-custom">
                         {{ $aTripData['name'] }} {{ $aTripData['year'] }}
                         <span class="badge badge-light">{{ $aTripData['numberOfAttends'] }}</span>
                     </a>
@@ -129,7 +129,6 @@
                     {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
                 </div>
                 <div class="modal-body">
-                    <table class="table">
                     <div class="form-group">
                         {{Form::label('Highlight','Highlight:')}}
                         {{Form::label('HighlightData',$oDayplanning->highlight)}}
@@ -143,11 +142,6 @@
                         {{Form::label('Location','Location:')}}
                         {{Form::label('LocationData',$oDayplanning->location)}}
                     </div>
-                        <!--<tr><td>Highlight:</td><td><p id="highlight" > </p></td></tr>
-                        <tr><td>Description:</td><td><p id="description"></p></td></tr>
-                        <tr><td>Date:</td><td><p id="date"></p></td></tr>
-                        <tr><td>Location:</td><td><p id="location"></p></td></tr>
-                    </table>-->
                 </div>
                 <div class="modal-footer">
                     {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
@@ -163,7 +157,8 @@
                     <h4 class="modal-title" id="dayPlanningeditPopupLabel">Day Aanpassen</h4>
                     {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
                 </div>
-                {{ Form::open(array('action' => 'Organiser\DayPlanningController@updateDayPlanning', 'method' => 'post', 'files' => true)) }}
+                {{ Form::open(array('action' => 'Organiser\DayPlanningController@updateDayPlanning', 'method' => 'put', 'files' => true)) }}
+                {!! Form::hidden('Destination', $oCurrentTrip->name) !!}
                 <div class="modal-body">
                     <div class="form-group">
                         {{Form::label('Highlight','highlight van de dag:')}}
@@ -174,12 +169,14 @@
                         {{Form::text('Date', $oDayplanning->date, array('class' => 'form-control','required' => 'required')) }}
                         {{Form::label('Location','locatie van de dag:')}}
                         {{Form::text('Location', $oDayplanning->location, array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::hidden('Trip_id', $oCurrentTrip->trip_id)}}
+                        <!--{{Form::hidden('Day_id', $oCurrentTrip->day_id)}}-->
                     </div>
                 </div>
                 <div class="modal-footer">
                     {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
                     {{Form::button('Opslaan',array('class' => 'btn btn-primary', 'type' => 'submit'))}}
-                    
+                    {{Form::button('Verwijderen',array('class' => 'btn btn-primary', 'type' => 'delete'))}}
                 </div>
                 {{ Form::close() }}
             </div>
@@ -190,20 +187,10 @@
 @endsection
 
 @section('scripts')
-<!--<script>
-    $('#dayplanninginfoPopup').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var dayplanning = button.data('dayplanning');
-        var modal = $(this);
-
-        modal.find('.modal-body #highlight').text(dayplanning["highlight"]);
-        modal.find('.modal-body #description').text(dayplanning["description"]);
-        modal.find('.modal-body #date').text(dayplanning["date"]);
-        modal.find('.modal-body #location').text(dayplanning["location"]);
-    });
-
+<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+<script>
     function ConfirmDelete(){
         return confirm('Bent u zeker? \n Als u de dag verwijderd, zal alle info verloren gaan!');
     }
-</script>-->
+</script>
 @endsection

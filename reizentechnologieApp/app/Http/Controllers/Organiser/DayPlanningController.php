@@ -131,11 +131,11 @@ class DayPlanningController extends Controller
         
         if ($this->hasRights()){ 
             $aData['trip_id'] = $request->post('trip_id');
-            $aData['dayplanning_id'] = $request->post('dayplanning_id');
+            $aData['day_id'] = $request->post('day_id');
             $aData['location'] = $request->post('location');
             $aData['description'] = $request->post('description');  
             $aData['highlight'] = $request->post('highlight');
-            $this->days->addDayPlanningToTrip($aData);
+            $this->dayplannings->addDayPlanningToTrip($aData);
             return redirect()->back();
         }else{
             return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');
