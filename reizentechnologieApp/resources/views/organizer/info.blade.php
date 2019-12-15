@@ -1,50 +1,54 @@
 @extends('layouts.app')
+
 @section('styles')
 <style>
-    .carousel-inner > .item > img, .carousel-inner > .item > a > img{
-    margin:auto;
-}
-
-textarea{
+.form-group{
     margin-top: 20px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-
-}
-
-h1{
-    margin-top: 20px;
-}
-
-input{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-}
-
-.container{
-    text-align: center;
-}
-
+    width: 70%;
 </style>
 @endsection
+
 @section('content')
-<div class="container">
-<h1>Algemene info</h1>
-<hr />
-<form method="POST" class="htmlEditor" action="/admin/info">
-    <div>
-        <textarea cols="80" rows="12" id="info_content" name="info_content"> <?php echo $info_content; ?>
-        </textarea>
-        <input type="submit" value="Opslaan" name="action"/>
-        <input type="submit" value="Annuleren" name="action"/>
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {!! session()->get('message') !!}
+        </div>
+    @endif
+    @if(session()->has('errormessage'))
+        <div class="alert alert-danger">
+            {{ session()->get('errormessage') }}
+        </div>
+    @endif
+    <div class="d-flex justify-content-center">
+        <h2>Algemene info aanpassen</h2>
     </div>
-</form>
-</div>
+    <div class="form-group">
+    {{ Form::open(array('url' => 'organiser\info', 'method' => 'post')) }}
+    {{ Form::textArea('info_value', $oInfo->info_value, ['class' => 'form-control, html-editor']) }}
+    {{ Form::submit('Opslaan') }}
+    {{ Form::button('Annuleren', array('type' => 'button', 'onclick' => 'history.go(0)', 'value' => 'Annuleren')) }}
+    {{ Form::close() }}
+    </div>
+@endsection
+@section('scripts')
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
+  
+    <script>
+
+    $( 'textarea.html-editor' ).ckeditor({
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{csrf_token()}}',
+        filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+        filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{csrf_token()}}',
+        contentsCss: '{{ asset("css/app.css") }}',
+        height: '200px',
+        width: '98%'
+    });
+
+    </script>
 @endsection
 
-@section('page_specific_scripts')
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>CKEDITOR.replace( 'info_content',{ height:450} ); </script>
-@endsection

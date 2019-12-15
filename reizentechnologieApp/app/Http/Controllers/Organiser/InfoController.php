@@ -1,45 +1,64 @@
 <?php
 
 namespace App\Http\Controllers\Organiser;
-
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 use App\Repositories\Contracts\InfoRepository;
 
+        
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+
+
 class InfoController extends Controller
 {
-    private $info;
-    
-    public function __construct(InfoRepository $info) {
+    /**
+     *
+     * @var PageRepository
+     */
+    private $info;        
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(InfoRepository $info)
+    {
         $this->info = $info;
     }
-    
-    public function CheckDbConnection(){
-        try {
-            DB::connection()->getPdo();
-        } catch (\Exception $e) {
-            return  true ;  
-        }
-    }
-    
-    public function index() {
-        if($this->CheckDbConnection()){
-            return redirect()->route('home')->withErrors(["DB connectie mislukt" => "Kan niet met de database connecteren."]);
-        }
-        else{
-            $info_content = $this->info->getAlgemeneInfo();
-            //dd($info_content);
-            /*$info_content = trim($info_content);
-            $firstIndex = strpos($info_content, 'e":"');
-            $lastIndex = strrpos($info_content, '"');
-            $length = $lastIndex - $firstIndex - 4;
-            $content = substr($info_content, $firstIndex + 4, $length);*/
 
-            return view('organizer.info', ['info_content' => $info_content->info_value]);
+
+    /**
+     * This function fills the editor with its saved content
+     *
+     * @author Michiel Guilliams
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getInfo(){
+        $oInfo = $this->info->get('algemene_info');
+        //return view('organizer.info', ['test' => $oInfo]);
+
+        return view('organizer.info', array(
+            'oInfo' => $oInfo,
+        ));
+    }
+
+    /**
+     * This function updates the content of the infoPage
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateInfo(Request $request){
+        $sInfoContent = $request->post('info_value');
+        if (strlen($sInfoContent) == 0){
+            $sInfoContent = "";
         }
+        $this->info->updateInfoPage($sInfoContent);
+        return redirect()->back()->with('message', 'De info pagina is aangepast');
     }
 }
-

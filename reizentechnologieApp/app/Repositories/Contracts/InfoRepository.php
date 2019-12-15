@@ -4,5 +4,6 @@ namespace App\Repositories\Contracts;
 
 interface InfoRepository
 {
-    public function getAlgemeneInfo();
+    public function get($sInfoName);
+    public function updateInfoPage($sInfoContent);
 }
