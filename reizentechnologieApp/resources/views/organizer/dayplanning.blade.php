@@ -80,7 +80,7 @@
                             <td><?php echo $oDayplanning->highlight; ?></td>
                             <td><?php echo $oDayplanning->location; ?></td>
                             <td><?php echo $oDayplanning->description; ?></td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dayplanningeditPopup" data-accomodation="{{$oDayplanning}}"><i class="fas fa-edit"></i>edit</button></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dayplanningeditPopup" data-day='{{$oDayplanning}}'><i class="fas fa-edit"></i>edit</button></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -131,10 +131,10 @@
                 <div class="modal-body">
                     <div class="form-group">
                         {{Form::label('Highlight','Highlight:')}}
-                        {{Form::label('HighlightData',$oDayplanning->highlight)}}
+                        {{Form::label('HighlightData')}}
                         <br>
                         {{Form::label('Description','Description:')}}
-                        {{Form::label('DescriptionData',$oDayplanning->description)}}
+                        {{Form::label('DescriptionData')}}
                         <br>
                         {{Form::label('Date','Date:')}}
                         {{Form::label('DateData',$oDayplanning->date)}}
@@ -162,15 +162,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         {{Form::label('Highlight','highlight van de dag:')}}
-                        {{Form::text('Highlight', $oDayplanning->highlight, array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::text('Highlight', "", array('class' => 'form-control','required' => 'required'))}}
                         {{Form::label('Description','descriptie van de dag')}}
-                        {{Form::text('Description', $oDayplanning->description,  array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::text('Description', "",  array('class' => 'form-control','required' => 'required'))}}
                         {{Form::label('Date','Date:')}}
-                        {{Form::text('Date', $oDayplanning->date, array('class' => 'form-control','required' => 'required')) }}
+                        {{Form::text('Date', "", array('class' => 'form-control','required' => 'required')) }}
                         {{Form::label('Location','locatie van de dag:')}}
-                        {{Form::text('Location', $oDayplanning->location, array('class' => 'form-control','required' => 'required'))}}
-                        {{Form::hidden('Trip_id', $oCurrentTrip->trip_id)}}
-                        {{Form::hidden('Day_id', $oCurrentTrip->day_id)}}
+                        {{Form::text('Location', "", array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::hidden('Trip_id', "", array('required' => 'required'))}}
+                        {{Form::hidden('Day_id', "", array('required' => 'required'))}}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -192,5 +192,20 @@
     function ConfirmDelete(){
         return confirm('Bent u zeker? \n Als u de dag verwijderd, zal alle info verloren gaan!');
     }
+
+    $('#dayplanningeditPopup').on('show.bs.modal', function(event){
+        var button = $(event.relatedTarget);
+        var data = button.data('day');
+        console.log(data);
+
+        var modal = $(this);
+        modal.find('#Highlight').val(data.highlight);
+        modal.find('#Description').val(data.description);
+        modal.find('#Date').val(data.date);
+        modal.find('#Location').val(data.location);
+        //laravel maakt voor deze geen html id aan, object wordt verkregen via het name attribute
+        modal.find('[name="Trip_id"]').val(data.trip_id);
+        modal.find('[name="Day_id"]').val(data.day_id);
+    });
 </script>
 @endsection

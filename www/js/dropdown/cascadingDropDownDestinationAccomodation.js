@@ -129,7 +129,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/vagrant/reizentechnologie/reizentechnologieApp/resources/js/dropdown/cascadingDropDownDestinationAccomodation.js */"./resources/js/dropdown/cascadingDropDownDestinationAccomodation.js");
+module.exports = __webpack_require__(/*! /data/www/reizentechnologie/reizentechnologieApp/resources/js/dropdown/cascadingDropDownDestinationAccomodation.js */"./resources/js/dropdown/cascadingDropDownDestinationAccomodation.js");
 
 
 /***/ })

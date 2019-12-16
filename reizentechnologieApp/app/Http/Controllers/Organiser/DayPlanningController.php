@@ -158,7 +158,7 @@ class DayPlanningController extends Controller
             $this->dayplannings->updateDayPlanning($request);
              
             return redirect()->back();
-            dd($this->hasRights());
+            //dd($this->hasRights());
         }else{
             return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');
         }

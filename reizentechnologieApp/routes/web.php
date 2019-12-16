@@ -337,8 +337,3 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::get('/activity', 'Admin\ActivityController@showAllActivities')->name('showtrips');
     });
 });
-//<<<<<<< HEAD
-//>>>>>>> 8477149d48a1aeffc5405d975527250f972c69ce
-//=======
-//>>>>>>> 494b4885884aef8d070aebd2773ead1c98aa8c72
-
