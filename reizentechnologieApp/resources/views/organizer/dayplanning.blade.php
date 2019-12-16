@@ -131,17 +131,17 @@
                 {{ Form::open(array('action' => 'Organiser\DayPlanningController@deleteDayPlanning', 'method' => 'post', 'files' => true)) }}
                 <div class="modal-body">
                     <div class="form-group">
-                        {{Form::label('Highlight','Highlight:')}}
-                        {{Form::label('HighlightData')}}
+                        {{Form::label('HighlightView','Highlight:')}}
+                        {{Form::label("", "", array('id' => 'HighlightView'))}}
                         <br>
                         {{Form::label('Description','Description:')}}
-                        {{Form::label('DescriptionData')}}
+                        {{Form::label("", "", array('id' => 'DescriptionView'))}}
                         <br>
                         {{Form::label('Date','Date:')}}
-                        {{Form::label('DateData')}}
+                        {{Form::label("", "", array('id' => 'DateView'))}}
                         <br>
                         {{Form::label('Location','Location:')}}
-                        {{Form::label('LocationData')}}
+                        {{Form::label("", "", array('id' => 'LocationView'))}}
                         {{Form::hidden('Trip_id')}}
                         {{Form::hidden('Day_id')}}
                     </div>
@@ -217,6 +217,10 @@
         console.log(data);
 
         var modal = $(this);
+        modal.find('#HighlightView').text(data.highlight);
+        modal.find('#DescriptionView').text(data.description);
+        modal.find('#DateView').text(data.date);
+        modal.find('#LocationView').text(data.location);
         //laravel maakt voor deze geen html id aan, object wordt verkregen via het name attribute
         modal.find('[name="Trip_id"]').val(data.trip_id);
         modal.find('[name="Day_id"]').val(data.day_id);
