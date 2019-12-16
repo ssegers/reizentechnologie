@@ -75,7 +75,7 @@
                     <tbody>
                         @foreach ($dayplanningsPerTrip as $oDayplanning)
                         <tr>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dayplanninginfoPopup" data-accomodation="{{$oDayplanning}}"><i class="fas fa-info-circle"></i></button></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dayplanninginfoPopup" data-day="{{$oDayplanning}}"><i class="fas fa-info-circle"></i></button></td>
                             <td><?php echo $oDayplanning->date; ?></td>
                             <td><?php echo $oDayplanning->highlight; ?></td>
                             <td><?php echo $oDayplanning->location; ?></td>
@@ -138,12 +138,12 @@
                         {{Form::label('DescriptionData')}}
                         <br>
                         {{Form::label('Date','Date:')}}
-                        {{Form::label('DateData',$oDayplanning->date)}}
+                        {{Form::label('DateData')}}
                         <br>
                         {{Form::label('Location','Location:')}}
-                        {{Form::label('LocationData',$oDayplanning->location)}}
-                        {{Form::hidden('Trip_id', $oCurrentTrip->trip_id)}}
-                        {{Form::hidden('Day_id', $oDayplanning->day_id)}}
+                        {{Form::label('LocationData')}}
+                        {{Form::hidden('Trip_id')}}
+                        {{Form::hidden('Day_id')}}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -200,13 +200,23 @@
     $('#dayplanningeditPopup').on('show.bs.modal', function(event){
         var button = $(event.relatedTarget);
         var data = button.data('day');
-        console.log(data);
 
         var modal = $(this);
         modal.find('#Highlight').val(data.highlight);
         modal.find('#Description').val(data.description);
         modal.find('#Date').val(data.date);
         modal.find('#Location').val(data.location);
+        //laravel maakt voor deze geen html id aan, object wordt verkregen via het name attribute
+        modal.find('[name="Trip_id"]').val(data.trip_id);
+        modal.find('[name="Day_id"]').val(data.day_id);
+    });
+
+    $('#dayplanninginfoPopup').on('show.bs.modal', function(event){
+        var button = $(event.relatedTarget);
+        var data = button.data('day');
+        console.log(data);
+
+        var modal = $(this);
         //laravel maakt voor deze geen html id aan, object wordt verkregen via het name attribute
         modal.find('[name="Trip_id"]').val(data.trip_id);
         modal.find('[name="Day_id"]').val(data.day_id);
