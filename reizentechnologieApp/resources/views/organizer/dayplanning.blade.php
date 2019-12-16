@@ -128,6 +128,7 @@
                     <h4 class="modal-title" id="dayplanninginfoLabel">Day Info</h4>
                     {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
                 </div>
+                {{ Form::open(array('action' => 'Organiser\DayPlanningController@deleteDayPlanning', 'method' => 'post', 'files' => true)) }}
                 <div class="modal-body">
                     <div class="form-group">
                         {{Form::label('Highlight','Highlight:')}}
@@ -141,10 +142,13 @@
                         <br>
                         {{Form::label('Location','Location:')}}
                         {{Form::label('LocationData',$oDayplanning->location)}}
+                        {{Form::hidden('Trip_id', $oCurrentTrip->trip_id)}}
+                        {{Form::hidden('Day_id', $oDayplanning->day_id)}}
                     </div>
                 </div>
                 <div class="modal-footer">
                     {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
+                    {{Form::button('Verwijderen',array('class' => 'btn btn-primary', 'type' => 'delete'))}}
                 </div>
             </div>
         </div>
@@ -176,7 +180,6 @@
                 <div class="modal-footer">
                     {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
                     {{Form::button('Opslaan',array('class' => 'btn btn-primary', 'type' => 'submit'))}}
-                    {{Form::button('Verwijderen',array('class' => 'btn btn-primary', 'type' => 'delete'))}}
                 </div>
                 {{ Form::close() }}
             </div>
