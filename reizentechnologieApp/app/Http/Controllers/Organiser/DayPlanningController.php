@@ -164,9 +164,11 @@ class DayPlanningController extends Controller
         }
     }
 
-    public function deleteDayplanning($dayId){
+    public function deleteDayplanning(Request $request){
+        //dd($request);
+        $dayId = $request->Day_id;
         if ($this->hasRights()){   
-            $this->accomodations->deleteDayPlanningFromTrip($dayId);
+            $this->dayplannings->deleteDayPlanningFromTrip($dayId);
             return redirect()->back()->with('message', 'De dag is verwijderd uit deze reis');
         }else{
             return redirect()->back()->with('errormessage', 'je hebt onvoldoende rechten voor deze bewerking');

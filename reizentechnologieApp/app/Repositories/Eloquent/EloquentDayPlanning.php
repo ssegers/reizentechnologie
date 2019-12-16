@@ -43,7 +43,7 @@ class EloquentDayPlanning implements DayPlanningRepository
     }
 
     public function deleteDayPlanningFromTrip($iId){
-        $sqlDelete = "delete from days where id=$iId";
+        $sqlDelete = "delete from days where day_id=$iId";
         DB::select($sqlDelete);
 
         return true;
