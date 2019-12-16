@@ -170,7 +170,7 @@
                         {{Form::label('Location','locatie van de dag:')}}
                         {{Form::text('Location', $oDayplanning->location, array('class' => 'form-control','required' => 'required'))}}
                         {{Form::hidden('Trip_id', $oCurrentTrip->trip_id)}}
-                        {{Form::hidden('Day_id', $oCurrentTrip->day_id)}}
+                        {{Form::hidden('Day_id', $oDayplanning->day_id)}}
                     </div>
                 </div>
                 <div class="modal-footer">
