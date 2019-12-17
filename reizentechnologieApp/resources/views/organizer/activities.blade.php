@@ -13,6 +13,11 @@
         p {
             font-size: 16px;
         }
+
+        #buttonBack, #buttonSave{
+            float: right;
+        }
+
         #links, #rechts {
             margin-top: 20px;
             margin-bottom: 20px;
@@ -78,6 +83,9 @@
     @endif
 
     <button type="button" style="width:170px; margin-left: 15px;margin-top: 10px" class="btn btn-primary" data-toggle="modal" data-target="#addActivityModal" onclick="openModalAdd()">Activity toevoegen</button>
+    <button class="btn btn-primary" id="buttonSave" onclick="saveActivities()">Opslaan</button>
+    <a class="btn btn-default" id="buttonBack" href="{{route("dayplanning")}}">Terug</a>
+
     <div id="container"></div>
 
 
@@ -96,14 +104,24 @@
                         {{Form::text('activity-name', null, array('class' => 'form-control', 'required'))}}
                     </div>
                     <div class="form-group">
-                        {{Form::label('activity-description','Beschrijving:')}}
-                        {{Form::text('activity-description', null, array('class' => 'form-control', 'required'))}}
+                        {{Form::label('activity-start','start uur:')}}
+                        {{Form::time('activity-start', null, array('class' => 'form-control', 'required'))}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('activity-end','eind uur:')}}
+                        {{Form::time('activity-end', null, array( 'class' => 'form-control', 'required'))}}
                     </div>
                     <div class="form-group">
                         {{Form::label('activity-location','Locatie:')}}
                         {{Form::text('activity-location', null, array('class' => 'form-control', 'required'))}}
                     </div>
+                    <div class="form-group">
+                        {{Form::label('activity-description','Beschrijving:')}}
+                        {{Form::text('activity-description', null, array('class' => 'form-control', 'required'))}}
+                    </div>
+
                     {{ Form::hidden('activity-id','activity-id',array('id'=>'activity-id')) }}
+                    {{ Form::hidden('day-id',Request::route('dayId'),array('id'=> 'day_id')) }}
                 </div>
                 <div class="modal-footer">
                     {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
@@ -130,12 +148,27 @@
                         {{Form::text('activity-name', null, array('class' => 'form-control', 'required'))}}
                     </div>
                     <div class="form-group">
-                        {{Form::label('activity-description','Beschrijving:')}}
-                        {{Form::text('activity-description', null, array('class' => 'form-control', 'required'))}}
+                        {{Form::label('activity-start','start uur:')}}
+                        {{Form::time('activity-start', null, array('class' => 'form-control', 'required'))}}
                     </div>
+                    <div class="form-group">
+                        {{Form::label('activity-end','eind uur:')}}
+                        {{Form::time('activity-end', null, array( 'class' => 'form-control', 'required'))}}
+                    </div>
+{{--                    <div class="form-group" style="padding-bottom: 30px">--}}
+{{--                        {{Form::label('activity-start','start uur:', ['style' => 'float:left'])}}--}}
+{{--                        {{Form::text('activity-start', null, array('style' => 'width: 150px; float:left', 'class' => 'form-control', 'required'))}}--}}
+
+{{--                        {{Form::label('activity-end','eind uur:', ['style' => 'padding-left:20px'])}}--}}
+{{--                        {{Form::text('activity-end', null, array('style' => 'width: 150px; float:right;', 'class' => 'form-control', 'required'))}}--}}
+{{--                    </div>--}}
                     <div class="form-group">
                         {{Form::label('activity-location','Locatie:')}}
                         {{Form::text('activity-location', null, array('class' => 'form-control', 'required'))}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('activity-description','Beschrijving:')}}
+                        {{Form::text('activity-description', null, array('class' => 'form-control', 'required'))}}
                     </div>
                     {{ Form::hidden('activity-id','activity-id',array('id'=>'activity-id')) }}
                 </div>
@@ -153,9 +186,6 @@
             </div>
         </div>
     </div>
-
-    <a class="btn btn-default" id="buttonBack" href="{{route("dayplanning")}}">Terug</a>
-    <button class="btn btn-primary" id="buttonSave" onclick="saveActivities()">Opslaan</button>
 
 @endsection
 
@@ -208,6 +238,8 @@
             var activityName = button.data('activity-name');
             var activitydescription = button.data('activity-description');
             var activitylocation = button.data('activity-location');
+            var activitystarthour = button.data('activity-start');
+            var activityendhour = button.data('activity-end');
 
             // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -217,6 +249,8 @@
             modal.find('.modal-body #activity-name').val(activityName);
             modal.find('.modal-body #activity-description').val(activitydescription);
             modal.find('.modal-body #activity-location').val(activitylocation);
+            modal.find('.modal-body #activity-start').val(activitystarthour);
+            modal.find('.modal-body #activity-end').val(activityendhour);
 
             var route = "{{route('deleteActivity', ':id')}}";
             route = route.replace(':id', activityId);
@@ -233,8 +267,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    {{--    <script src="{{asset('/js/activityDragAndDrop.js')}}"></script>--}}
 
     <script>
         class App extends React.Component {
@@ -256,7 +288,9 @@
                                 activityDescription: "{{$oActivity->description}}",
                                 activityLocation: "{{$oActivity->location}}",
                                 @foreach($plannings as $oPlanning)
-                                    @if($oActivity->activity_id == $oPlanning->planning_id)
+                                    @if($oActivity->activity_id == $oPlanning->activity_id)
+                                        activityStartHour:"{{$oPlanning->start_hour}}",
+                                        activityEndHour: "{{$oPlanning->end_hour}}",
                                         timeBegin: "{{$oPlanning->start_hour}}",
                                         timeEnding: "{{$oPlanning->end_hour}}"
                                     @endif
@@ -280,10 +314,12 @@
                                             activityDescription: "{{$oActivity->description}}",
                                             activityLocation: "{{$oActivity->location}}",
                                             @foreach($plannings as $oPlanning)
-                                                @if($oActivity->activity_id == $oPlanning->planning_id)
-                                            timeBegin: "{{$oPlanning->start_hour}}",
-                                            timeEnding: "{{$oPlanning->end_hour}}"
-                                            @endif
+                                                @if($oActivity->activity_id == $oPlanning->activity_id)
+                                                    activityStartHour:"{{$oPlanning->start_hour}}",
+                                                    activityEndHour: "{{$oPlanning->end_hour}}",
+                                                    timeBegin: "{{$oPlanning->start_hour}}",
+                                                    timeEnding: "{{$oPlanning->end_hour}}"
+                                                @endif
                                             @endforeach
                                         },),
                                     @endif
@@ -311,6 +347,8 @@
                                     'data-activity-name': this.props.activityName,
                                     'data-activity-description': this.props.activityDescription,
                                     'data-activity-location': this.props.activityLocation,
+                                    'data-activity-start': this.props.activityStartHour,
+                                    'data-activity-end': this.props.activityEndHour,
                                 })),
 
                         ),

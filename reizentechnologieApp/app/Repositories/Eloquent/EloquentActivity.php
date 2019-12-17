@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories\Eloquent;
+use App\Http\Requests\ActivityForm;
 use App\Repositories\Contracts\ActivityRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -41,11 +42,16 @@ class EloquentActivity implements ActivityRepository
         try{
             $oActivity = new Activities();
             $oActivity->name = $data['name'];
-           // $oActivity->start_hour = $data['start_hour'];
-           // $oActivity->end_hour = $data['end_hour'];
             $oActivity->description = $data['description'];
             $oActivity->location = $data['location'];
             $oActivity->save();
+
+            $planning = new Planning();
+            $planning->activity_id = $oActivity->activity_id;
+            $planning->day_id = $data['day_id'];
+            $planning->start_hour = $data['start_hour'];
+            $planning->end_hour = $data['end_hour'];
+            $planning->save();
         }
         catch(\Exception $e)
         {
@@ -65,11 +71,13 @@ class EloquentActivity implements ActivityRepository
         try{
             $oActivity = Activities::find($iActivityId);
             $oActivity->name = $data['name'];
-           // $oActivity->start_hour = $data['start_hour'];
-           // $oActivity->end_hour = $data['end_hour'];
+            //$oActivity->start_hour = $data['start_hour'];
+            //$oActivity->end_hour = $data['end_hour'];
             $oActivity->description = $data['description'];
             $oActivity->location = $data['location'];
             $oActivity->save();
+
+            Planning::where('activity_id', $iActivityId)->update(array('start_hour' => $data['start_hour'], 'end_hour' => $data['end_hour']));
         }
         catch(\Exception $e)
         {
@@ -92,7 +100,7 @@ class EloquentActivity implements ActivityRepository
         return $activities;
     }
 
-    public function saveOrDeleteActivities($dayId, $activityIds)
+    public function saveOrDeleteActivities($dayId, $activityIds, $aHours)
     {
         if($activityIds != -1) {
             for ($i = 0; $i < strlen($activityIds); $i++) {
@@ -101,8 +109,8 @@ class EloquentActivity implements ActivityRepository
                 $activityInPlanning = new Planning();
                 $activityInPlanning->activity_id = $activityIds[$i];
                 $activityInPlanning->day_id = $dayId;
-                $activityInPlanning->start_hour = "00:00";
-                $activityInPlanning->end_hour = "00:00";
+                $activityInPlanning->start_hour = $aHours['start_hour'];
+                $activityInPlanning->end_hour = $aHours['end_hour'];
                 $activityInPlanning->save();
             }
         }else{

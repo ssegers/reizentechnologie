@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories\Contracts;
 
+use App\Http\Requests\ActivityForm;
+
 /**
  * Description of ActivityRepository
  *
@@ -40,5 +42,5 @@ interface ActivityRepository {
 
     public function getActivitiesInDay($dayId);
 
-    public function saveOrDeleteActivities($dayId, $activityIds);
+    public function saveOrDeleteActivities($dayId, $activityIds, $aHours);
 }

@@ -190,8 +190,5 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::get('organizers/get/{tripId}','DataController@getOrganizersByTrip');
         Route::post('organizers/add','DataController@addOrganizersToTrip');
         Route::delete('organizer/delete','DataController@removeOrganizerFromTrip');
-
-        //test activity
-        Route::get('/activity', 'Admin\ActivityController@showAllActivities')->name('showtrips');
     });
 });

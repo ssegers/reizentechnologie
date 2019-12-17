@@ -27,8 +27,8 @@ class ActivityForm extends FormRequest
     {
         return [
             'activity-name.required'    => 'U heeft de naam van de activity niet ingevuld.',
-//            'activity-start_hour.required'    => 'U heeft de start tijd van de activity niet ingevuld.',
-//            'activity-end_hour.required'   => 'U heeft de eind tijd van de activity niet ingevuld.',
+            'activity-start.required'    => 'U heeft de start tijd van de activity niet ingevuld.',
+            'activity-end.required'   => 'U heeft de eind tijd van de activity niet ingevuld.',
             'activity-description.required'       => 'U heeft geen beschrijving ingevuld.',
             'activity-location.required'   => 'U heeft geen locatie ingevuld.',
         ];
@@ -42,8 +42,8 @@ class ActivityForm extends FormRequest
     {
         return [
             'activity-name'     => 'required',
-//            'activity-start_hour'     => 'required',
-//            'activity-end_hour'    => 'required',
+            'activity-start'     => 'required',
+            'activity-end'    => 'required',
             'activity-description'     => 'required',
             'activity-location'     => 'required',
         ];

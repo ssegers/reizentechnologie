@@ -38,10 +38,11 @@ class ActivityController extends Controller
     {
         $iActivityId = $request->post('activity-id');
         $aData['name'] = $request->input('activity-name');
-        // $aData['start_hour'] = $request->input('activity-start_hour');
-        // $aData['end_hour'] = $request->input('activity-end_hour');
+        $aData['start_hour'] = $request->input('activity-start');
+        $aData['end_hour'] = $request->input('activity-end');
         $aData['description'] = $request->input('activity-description');
         $aData['location'] = $request->post('activity-location');
+        $aData['day_id'] = $request->post('day-id');
 
         $this->activities->addActivity($aData);
         return redirect()->back()->with('message', 'De activiteit is succesvol opgeslagen');
@@ -52,8 +53,8 @@ class ActivityController extends Controller
     {
         $iActivityId = $request->post('activity-id');
         $aData['name'] = $request->input('activity-name');
-       // $aData['start_hour'] = $request->input('activity-start_hour');
-       // $aData['end_hour'] = $request->input('activity-end_hour');
+        $aData['start_hour'] = $request->input('activity-start');
+        $aData['end_hour'] = $request->input('activity-end');
         $aData['description'] = $request->input('activity-description');
         $aData['location'] = $request->post('activity-location');
 
@@ -67,15 +68,19 @@ class ActivityController extends Controller
         return redirect()->back()->with('message', 'Je hebt succesvol de activiteit verwijdert.');
     }
 
-    public function saveActivities($dayId, $activityIds){
+    public function saveActivities($dayId, $activityIds, ActivityForm $request){
+        $aHours['start_hour'] = $request->input('activity-start');
+        $aHours['end_hour'] = $request->input('activity-end');
+
+
         if ($activityIds != 0) {
             $activityIds = str_replace(',', '', $activityIds);
             $activityIds = count_chars($activityIds, 3);
-            $this->activities->saveOrDeleteActivities($dayId, $activityIds);
+            $this->activities->saveOrDeleteActivities($dayId, $activityIds, $aHours);
 
             return redirect()->back()->with('message', 'Je hebt succesvol de activiteiten aan de dag gelinkt.');
         } else{
-            $this->activities->saveOrDeleteActivities($dayId, -1);
+            $this->activities->saveOrDeleteActivities($dayId, -1, $aHours);
 
             return redirect()->back()->with('message', 'Je hebt succesvol de activiteiten aan de dag gelinkt.');
         }
