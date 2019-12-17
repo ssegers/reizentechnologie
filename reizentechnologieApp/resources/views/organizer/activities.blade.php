@@ -2,12 +2,10 @@
 
 @section('styles')
     <style>
-        html, body {
-            font-family: Lato, Arial, sans-serif;
-        }
 
-        h3 {
-            font-size: 18px !important;
+
+        h2 {
+            font-size: 18px ;
         }
 
         p {
@@ -65,7 +63,6 @@
             margin-right: 10px;
         }
     </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css'>
 @endsection
 
@@ -117,7 +114,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('activity-description','Beschrijving:')}}
-                        {{Form::text('activity-description', null, array('class' => 'form-control', 'required'))}}
+                        {{Form::textarea('activity-description', null, array('class' => 'form-control', 'required'))}}
                     </div>
 
                     {{ Form::hidden('activity-id','activity-id',array('id'=>'activity-id')) }}
@@ -147,28 +144,28 @@
                         {{Form::label('activity-name','Naam:')}}
                         {{Form::text('activity-name', null, array('class' => 'form-control', 'required'))}}
                     </div>
-                    <div class="form-group">
-                        {{Form::label('activity-start','start uur:')}}
-                        {{Form::time('activity-start', null, array('class' => 'form-control', 'required'))}}
-                    </div>
-                    <div class="form-group">
-                        {{Form::label('activity-end','eind uur:')}}
-                        {{Form::time('activity-end', null, array( 'class' => 'form-control', 'required'))}}
-                    </div>
-{{--                    <div class="form-group" style="padding-bottom: 30px">--}}
-{{--                        {{Form::label('activity-start','start uur:', ['style' => 'float:left'])}}--}}
-{{--                        {{Form::text('activity-start', null, array('style' => 'width: 150px; float:left', 'class' => 'form-control', 'required'))}}--}}
-
-{{--                        {{Form::label('activity-end','eind uur:', ['style' => 'padding-left:20px'])}}--}}
-{{--                        {{Form::text('activity-end', null, array('style' => 'width: 150px; float:right;', 'class' => 'form-control', 'required'))}}--}}
+{{--                    <div class="form-group">--}}
+{{--                        {{Form::label('activity-start','start uur:')}}--}}
+{{--                        {{Form::time('activity-start', null, array('class' => 'form-control', 'required'))}}--}}
 {{--                    </div>--}}
+{{--                    <div class="form-group">--}}
+{{--                        {{Form::label('activity-end','eind uur:')}}--}}
+{{--                        {{Form::time('activity-end', null, array( 'class' => 'form-control', 'required'))}}--}}
+{{--                    </div>--}}
+                    <div class="form-group" >
+                        {{Form::label('activity-start','start uur:', ['style' => 'float:left; padding-right:20px'])}}
+                        {{Form::text('activity-start', null, array('style' => 'width: 150px; float:left', 'class' => 'form-control', 'required'))}}
+
+                        {{Form::label('activity-end','eind uur:', ['style' => 'padding-left:20px'])}}
+                        {{Form::text('activity-end', null, array('style' => 'width: 150px; float:right;', 'class' => 'form-control', 'required'))}}
+                    </div>
                     <div class="form-group">
                         {{Form::label('activity-location','Locatie:')}}
                         {{Form::text('activity-location', null, array('class' => 'form-control', 'required'))}}
                     </div>
                     <div class="form-group">
                         {{Form::label('activity-description','Beschrijving:')}}
-                        {{Form::text('activity-description', null, array('class' => 'form-control', 'required'))}}
+                        {{Form::textarea('activity-description', null, array('class' => 'form-control', 'required'))}}
                     </div>
                     {{ Form::hidden('activity-id','activity-id',array('id'=>'activity-id')) }}
                 </div>
@@ -194,7 +191,7 @@
     <script>
 
         function ConfirmDelete(){
-            return confirm('Bent u zeker? \n Als u de dag verwijderd, zal alle info verloren gaan!');
+            return confirm('Bent u zeker? \n Als u de activiteit verwijderd, zal alle info verloren gaan!');
         }
 
         function openModalAdd() {
@@ -282,7 +279,7 @@
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { id: "links", className: "container" },
                             @foreach($activities as $oActivity)
-                            React.createElement(Card, { h3: "{{$oActivity->name}}" , body: "{{$oActivity->description}}",
+                            React.createElement(Card, { h3: "{{$oActivity->name}}" , body: "{{$oActivity->location}}",
                                 activityId: "{{$oActivity->activity_id}}",
                                 activityName:"{{$oActivity->name}}",
                                 activityDescription: "{{$oActivity->description}}",
@@ -308,7 +305,7 @@
                             @foreach($dayActivities as $dayActivity)
                                 @foreach($activities as $oActivity)
                                     @if($dayActivity->activity_id == $oActivity->activity_id)
-                                        React.createElement(Card, { h3: "{{$oActivity->name}}" , body: "{{$oActivity->description}}",
+                                        React.createElement(Card, { h3: "{{$oActivity->name}}" , body: "{{$oActivity->location}}",
                                             activityId: "{{$oActivity->activity_id}}",
                                             activityName:"{{$oActivity->name}}",
                                             activityDescription: "{{$oActivity->description}}",
@@ -340,7 +337,7 @@
                 return (
                     React.createElement("div", { className: "card" },
                         React.createElement("div", { className: "card-header" },
-                            React.createElement("h3",{id: "activityHeader"},this.props.h3,
+                            React.createElement("h2",{id: "activityHeader"},this.props.h3,
                                 React.createElement("button", {type: "button", className: "avtivityButton fas fa-edit float-right btn btn-primary",
                                     'data-toggle': "modal", 'data-target': "#editActivityModal",
                                     'data-activity-id': this.props.activityId,
