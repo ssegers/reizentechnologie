@@ -82,7 +82,7 @@ class DaysTableSeeder extends Seeder
             'date' => '2020/05/29',
             'highlight' => 'Los Angeles',
             'description' => 'Rit van Las Vegas naar Los Angeles via Route 66',
-            'location' => 'Las Vegas'
+            'location' => 'Los Angeles'
         ));
 		//Dag 10 = ID 10
         DB::table('days')->insert(array(
@@ -90,7 +90,7 @@ class DaysTableSeeder extends Seeder
             'date' => '2020/05/30',
             'highlight' => 'Hollywood Studios',
             'description' => 'Bezoek aan de Hollywood Studios',
-            'location' => 'Las Vegas'
+            'location' => 'Los Angeles'
         ));
 		//Dag 11 = ID 11
         DB::table('days')->insert(array(
