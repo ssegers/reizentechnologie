@@ -53,12 +53,12 @@
         <div class="d-flex flex-row justify-content-start">
             <div class="d-flex align-items-end">
                 <div class="form-group ml-md-4">
-                    <button type="button" class="btn btn-primary badge-custom" data-toggle="modal" data-target="#dayplanningPopup">Nieuwe dayplanning</button>  
+                    <button type="button" class="btn btn-primary badge-custom" data-toggle="modal" data-target="#dayplanningPopup">Nieuwe dayplanning</button>
                 </div>
             </div>
         </div>
         <div class="d-flex flex-row flex-nowrap py-3" style="height: calc(100vh - 400px);">
-            
+
 
             <div class="table-responsive">
                 <table class="table table-striped table-hover" width="100%">
@@ -80,6 +80,7 @@
                             <td><?php echo $oDayplanning->highlight; ?></td>
                             <td><?php echo $oDayplanning->location; ?></td>
                             <td><?php echo $oDayplanning->description; ?></td>
+                            <td><a href="{{route('activity', ['dayId' => $oDayplanning->day_id])}}"><button type="button" class="btn btn-primary" ><i class="far fa-calendar-check"></i> Activities</button></a></td>
                             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dayplanningeditPopup" data-day='{{$oDayplanning}}'><i class="fas fa-edit"></i>edit</button></td>
                         </tr>
                     @endforeach

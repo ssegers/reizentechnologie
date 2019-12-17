@@ -1,5 +1,6 @@
-@section('activityStyles')
+@extends('layouts.app')
 
+@section('styles')
     <style>
         html, body {
             font-family: Lato, Arial, sans-serif;
@@ -14,6 +15,7 @@
         }
         #links, #rechts {
             margin-top: 20px;
+            margin-bottom: 20px;
             padding-top: 20px;
             background-color : #AAAAAA;
             min-height: 700px;
@@ -25,6 +27,7 @@
         #links {
             width: 49%;
             float: left;
+
         }
 
         #rechts {
@@ -60,66 +63,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css'>
 @endsection
-@section('activityContent')
 
-    <div class="modal fade bd-example-modal-lg" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Activities bewerken </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <button type="button" style="width:170px; margin-left: 15px;margin-top: 10px" class="btn btn-primary" data-toggle="modal" data-target="#addActivityModal" onclick="openModalAdd()">Activity toevoegen</button>
-                <div id="container"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleer</button>
-                    <button type="button" class="btn btn-primary">Opslaan</button>
-                </div>
-            </div>
+@section('content')
+
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
         </div>
-    </div>
+    @endif
+    @if(session()->has('errormessage'))
+        <div class="alert alert-danger">
+            {{ session()->get('errormessage') }}
+        </div>
+    @endif
+
+    <button type="button" style="width:170px; margin-left: 15px;margin-top: 10px" class="btn btn-primary" data-toggle="modal" data-target="#addActivityModal" onclick="openModalAdd()">Activity toevoegen</button>
+    <div id="container"></div>
+
 
     {{--    modal toevoegen--}}
-    <div class="modal fade" id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="addActivityModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nieuwe activity</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Titel</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">beschrijving</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                    <button type="button" class="btn btn-primary">Voeg toe</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-{{--    modal wijzigen--}}
-    <div class="modal fade" id="editActivityModal" tabindex="-1" role="dialog" aria-labelledby="editActivityModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="editActivityModalLabel">Activiteit editeren</h4>
+                    <h4 class="modal-title" id="addActivityModalLabel">Activiteit toevoegen</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                {{ Form::open(array('action' => 'Organiser\DayPlanningController@updateOrCreateActivity', 'method' => 'post')) }}
+                {{ Form::open(array('action' => 'Organiser\ActivityController@createActivity', 'method' => 'post')) }}
                 <div class="modal-body">
                     <div class="form-group">
                         {{Form::label('activity-name','Naam:')}}
@@ -136,42 +106,66 @@
                     {{ Form::hidden('activity-id','activity-id',array('id'=>'activity-id')) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
-                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                    {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
+                    {{Form::button('Opslaan',array('class' => 'btn btn-primary', 'type' => 'submit'))}}
+                    {{ Form::close() }}
                 </div>
-                {{ Form::close() }}
+
             </div>
         </div>
     </div>
 
-
-
-
-    {{--    modal verwijderen--}}
-    <div class="modal fade" id="deleteActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{--    modal wijzigen--}}
+    <div class="modal fade" id="editActivityModal" tabindex="-1" role="dialog" aria-labelledby="editActivityModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Activity titel</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h4 class="modal-title" id="editActivityModalLabel">Activiteit editeren</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
+                {{ Form::open(array('action' => 'Organiser\ActivityController@updateActivity', 'method' => 'post')) }}
                 <div class="modal-body">
-                    <p>Bent u zeker dat u deze activiteit wilt verwijderen?</p>
+                    <div class="form-group">
+                        {{Form::label('activity-name','Naam:')}}
+                        {{Form::text('activity-name', null, array('class' => 'form-control', 'required'))}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('activity-description','Beschrijving:')}}
+                        {{Form::text('activity-description', null, array('class' => 'form-control', 'required'))}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('activity-location','Locatie:')}}
+                        {{Form::text('activity-location', null, array('class' => 'form-control', 'required'))}}
+                    </div>
+                    {{ Form::hidden('activity-id','activity-id',array('id'=>'activity-id')) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                    <button type="button" class="btn btn-danger">Verwijderen</button>
+                    {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
+                    {{Form::button('Opslaan',array('class' => 'btn btn-primary', 'type' => 'submit'))}}
+                    {{ Form::close() }}
+
+                    <form method="POST" id="#deleteActivity" action="" onsubmit="return confirm('Bent U zeker? Alle gegevens worden verwijderd')">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input class="btn btn-danger" type="submit" value="Verwijderen"/>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <a class="btn btn-default" id="buttonBack" href="{{route("dayplanning")}}">Terug</a>
+    <button class="btn btn-primary" id="buttonSave" onclick="saveActivities()">Opslaan</button>
+
 @endsection
-@section('activityScripts')
+
+@section('scripts')
 
     <script>
+
+        function ConfirmDelete(){
+            return confirm('Bent u zeker? \n Als u de dag verwijderd, zal alle info verloren gaan!');
+        }
 
         function openModalAdd() {
             $('#addActivityModal').modal('show')
@@ -185,6 +179,28 @@
             $('#editActivityModal').modal('show')
         }
 
+        function saveActivities(){
+            var cardsRight = document.getElementById("rechts").getElementsByTagName("button");
+
+            var route = "{{route('saveActivities', [':dayId', ':activityIds'])}}";
+            route = route.replace(':dayId', "{{Request::route('dayId')}}");
+
+            var activityIds = [];
+            for (i = 0; i < cardsRight.length; i++){
+               activityIds.push(cardsRight[i].dataset.activityId);
+
+            }
+
+            if (activityIds.length != 0){
+                route = route.replace(':activityIds', activityIds);
+            }else {
+                route = route.replace(':activityIds', 0);
+            }
+
+            window.location.href= route;
+
+
+        }
 
         $('#editActivityModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
@@ -202,6 +218,11 @@
             modal.find('.modal-body #activity-description').val(activitydescription);
             modal.find('.modal-body #activity-location').val(activitylocation);
 
+            var route = "{{route('deleteActivity', ':id')}}";
+            route = route.replace(':id', activityId);
+            document.getElementById('#deleteActivity').action = route ;
+
+
         })
     </script>
 
@@ -213,7 +234,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-{{--    <script src="{{asset('/js/activityDragAndDrop.js')}}"></script>--}}
+    {{--    <script src="{{asset('/js/activityDragAndDrop.js')}}"></script>--}}
 
     <script>
         class App extends React.Component {
@@ -229,22 +250,47 @@
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { id: "links", className: "container" },
                             @foreach($activities as $oActivity)
-                                React.createElement(Card, { h3: "{{$oActivity->name}}" , body: "{{$oActivity->description}}",
+                            React.createElement(Card, { h3: "{{$oActivity->name}}" , body: "{{$oActivity->description}}",
                                 activityId: "{{$oActivity->activity_id}}",
                                 activityName:"{{$oActivity->name}}",
                                 activityDescription: "{{$oActivity->description}}",
-                                activityLocation: "{{$oActivity->location}}"}),
+                                activityLocation: "{{$oActivity->location}}",
+                                @foreach($plannings as $oPlanning)
+                                    @if($oActivity->activity_id == $oPlanning->planning_id)
+                                        timeBegin: "{{$oPlanning->start_hour}}",
+                                        timeEnding: "{{$oPlanning->end_hour}}"
+                                    @endif
+                                @endforeach
+                            },),
+
 
                             @endForeach
-                        // lol
+                            //
                         ),
 
 
                         React.createElement("div", { id: "rechts", className: "container" },
-                            )));
 
-
-
+                            @foreach($dayActivities as $dayActivity)
+                                @foreach($activities as $oActivity)
+                                    @if($dayActivity->activity_id == $oActivity->activity_id)
+                                        React.createElement(Card, { h3: "{{$oActivity->name}}" , body: "{{$oActivity->description}}",
+                                            activityId: "{{$oActivity->activity_id}}",
+                                            activityName:"{{$oActivity->name}}",
+                                            activityDescription: "{{$oActivity->description}}",
+                                            activityLocation: "{{$oActivity->location}}",
+                                            @foreach($plannings as $oPlanning)
+                                                @if($oActivity->activity_id == $oPlanning->planning_id)
+                                            timeBegin: "{{$oPlanning->start_hour}}",
+                                            timeEnding: "{{$oPlanning->end_hour}}"
+                                            @endif
+                                            @endforeach
+                                        },),
+                                    @endif
+                                @endforeach
+                            @endforeach
+                            //
+                        )));
             }}
 
 
@@ -258,27 +304,28 @@
                 return (
                     React.createElement("div", { className: "card" },
                         React.createElement("div", { className: "card-header" },
-                            React.createElement("h3",null, this.props.h3,
+                            React.createElement("h3",{id: "activityHeader"},this.props.h3,
                                 React.createElement("button", {type: "button", className: "avtivityButton fas fa-edit float-right btn btn-primary",
-                                'data-toggle': "modal", 'data-target': "#editActivityModal",
-                                'data-activity-id': this.props.activityId,
-                                'data-activity-name': this.props.activityName,
-                                'data-activity-description': this.props.activityDescription,
-                                'data-activity-location': this.props.activityLocation,
-                            })),
+                                    'data-toggle': "modal", 'data-target': "#editActivityModal",
+                                    'data-activity-id': this.props.activityId,
+                                    'data-activity-name': this.props.activityName,
+                                    'data-activity-description': this.props.activityDescription,
+                                    'data-activity-location': this.props.activityLocation,
+                                })),
 
-                            ),
+                        ),
 
 
                         React.createElement("div", { className: "card-body" },
                             React.createElement("p", null, this.props.body),
                             React.createElement("b", null, 'begin:'),
-                            React.createElement("input",{id:'begin', type: 'time'} ),
+                            React.createElement("input",{id:'begin', type: 'time', value: this.props.timeBegin} ),
                             React.createElement("b", null, 'eind:'),
-                            React.createElement("input",{id:'eind', type: 'time',} ))));
+                            React.createElement("input",{id:'eind', type: 'time', value: this.props.timeEnding} ))));
             }}
 
 
         React.render(React.createElement(App, null), document.getElementById('container'));
     </script>
+
 @endsection

@@ -8,6 +8,8 @@ class Planning extends Model
 {
     protected $primaryKey = 'planning_id';
 
+    protected $fillable = ["activity_id"];
+
     public function activity(){
         return $this->hasOne('App\Models\Activities', 'activity_id', 'activity_id');
     }

@@ -15,6 +15,8 @@ interface ActivityRepository {
      */
     public function getActivities();
 
+    public function getPlannings();
+
     /**
      * add activity
      *
@@ -35,4 +37,8 @@ interface ActivityRepository {
      * @return
      */
     public function deleteActivity($id);
+
+    public function getActivitiesInDay($dayId);
+
+    public function saveOrDeleteActivities($dayId, $activityIds);
 }

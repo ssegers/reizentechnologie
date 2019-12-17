@@ -5,6 +5,7 @@ use App\Repositories\Contracts\ActivityRepository;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Activities;
+use App\Models\Planning;
 
 /**
  *
@@ -24,6 +25,10 @@ class EloquentActivity implements ActivityRepository
         return $activities;
     }
 
+    public function getPlannings() {
+        $plannings = Planning::all();
+        return $plannings;
+    }
 
     /**
      * add activity
@@ -35,10 +40,9 @@ class EloquentActivity implements ActivityRepository
         /* Create the activity */
         try{
             $oActivity = new Activities();
-            $oActivity->day_planning_id = $data['day_planning_id'];
             $oActivity->name = $data['name'];
-            $oActivity->start_hour = $data['start_hour'];
-            $oActivity->end_hour = $data['end_hour'];
+           // $oActivity->start_hour = $data['start_hour'];
+           // $oActivity->end_hour = $data['end_hour'];
             $oActivity->description = $data['description'];
             $oActivity->location = $data['location'];
             $oActivity->save();
@@ -59,11 +63,10 @@ class EloquentActivity implements ActivityRepository
     {
         /* Update the activity */
         try{
-            $oActivity = Trip::find($iActivityId);
-            $oActivity->day_planning_id = $data['day_planning_id'];
+            $oActivity = Activities::find($iActivityId);
             $oActivity->name = $data['name'];
-            $oActivity->start_hour = $data['start_hour'];
-            $oActivity->end_hour = $data['end_hour'];
+           // $oActivity->start_hour = $data['start_hour'];
+           // $oActivity->end_hour = $data['end_hour'];
             $oActivity->description = $data['description'];
             $oActivity->location = $data['location'];
             $oActivity->save();
@@ -82,5 +85,29 @@ class EloquentActivity implements ActivityRepository
     public function deleteActivity($id)
     {
         Activities::where('activity_id', $id)->delete();
+    }
+
+    public function getActivitiesInDay($dayId){
+        $activities = Planning::where('day_id', $dayId)->get();
+        return $activities;
+    }
+
+    public function saveOrDeleteActivities($dayId, $activityIds)
+    {
+        if($activityIds != -1) {
+            for ($i = 0; $i < strlen($activityIds); $i++) {
+
+                Planning::where(['activity_id' => $activityIds[$i], 'day_id' => $dayId])->delete();
+                $activityInPlanning = new Planning();
+                $activityInPlanning->activity_id = $activityIds[$i];
+                $activityInPlanning->day_id = $dayId;
+                $activityInPlanning->start_hour = "00:00";
+                $activityInPlanning->end_hour = "00:00";
+                $activityInPlanning->save();
+            }
+        }else{
+            Planning::where('day_id', $dayId)->delete();
+        }
+
     }
 }

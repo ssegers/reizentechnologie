@@ -61,17 +61,17 @@ Route::middleware(['auth','guest'])->group(function () {
         Route::prefix('registrationform')->group(function() {
             route::get('step-0', 'Auth\RegisterController@step0')->name('registerTripMessage');
             route::post('step-0', 'Auth\RegisterController@step0Post');
-            
+
             route::get('step-1', 'Auth\RegisterController@step1')->name('registerTrip');
             route::post('step-1', 'Auth\RegisterController@step1Post');
-            
+
             route::get('step-2', 'Auth\RegisterController@step2');
             route::post('step-2', 'Auth\RegisterController@step2Post');
             route::post('step-add-zip', 'Auth\RegisterController@createZip');
-            
+
             route::get('step-3', 'Auth\RegisterController@step3');
             route::post('step-3', 'Auth\RegisterController@step3Post');
-            
+
         });
     });
 });
@@ -123,6 +123,7 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::get('info', 'Organiser\InfoController@getInfo')->name('info');
         Route::post('info', 'Organiser\InfoController@updateInfo')->name('updateInfoPage');
         Route::get('dayplanning/{tripId?}', 'Organiser\DayPlanningController@index')->name('dayplanning');
+        Route::get('activities/{dayId}', 'Organiser\ActivityController@showAllActivities')->name('activity');
     });
     Route::prefix('payments')->group(function () {
         Route::get('overview/{trip?}','Organiser\Payments@showPaymentsTable')->name("paymentslist");
@@ -138,6 +139,12 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::post('/createDayPlanning', 'Organiser\DayPlanningController@createDayPlanning')->name("createDayPlanning");
         Route::post('/editDayPlanning', 'Organiser\DayPlanningController@updateDayPlanning')->name("updateDayPlanning");
         Route::post('/deleteDayPlanning', 'Organiser\DayPlanningController@deleteDayPlanning')->name("deleteDayPlanning");
+    });
+    Route::prefix('activities')->group(function() {
+        Route::post('/editActivity', 'Organiser\ActivityController@updateActivity')->name("updateActivity");
+        Route::post('/addActivity', 'Organiser\ActivityController@createActivity')->name("addActivity");
+        Route::delete('/deleteActivity/{id}','Organiser\ActivityController@deleteActivity')->name("deleteActivity");
+        Route::get('/saveActivity/{dayId}/{activityIds}', 'Organiser\ActivityController@saveActivities')->name("saveActivities");
     });
     //hotels
     Route::prefix('accomodations')->group(function() {
@@ -169,16 +176,16 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
         Route::get('/homepage', 'Admin\HomePageController@getInfo')->name('homePage');
         Route::post('/homepage', 'Admin\HomePageController@updateInfo')->name('updateHomePage');
-        
+
         Route::get('overviewPages', 'Admin\InfoPagesController@index')->name('infoPages');
         Route::post('createPage', 'Admin\InfoPagesController@createPage');
         Route::post('updatePage','Admin\InfoPagesController@updateContent');
         Route::post('editPage','Admin\InfoPagesController@editPage');
         Route::post('deletePage','Admin\InfoPagesController@deletePage');
-        
+
         Route::get('trips','Admin\TripController@showAllTrips')->name('showtrips');
         Route::post('trips', 'Admin\TripController@UpdateOrCreateTrip');
-        
+
         Route::get('organizer/{trip?}', 'Admin\OrganizerController@show')->name('showorganizers');
         Route::get('organizers/get/{tripId}','DataController@getOrganizersByTrip');
         Route::post('organizers/add','DataController@addOrganizersToTrip');
