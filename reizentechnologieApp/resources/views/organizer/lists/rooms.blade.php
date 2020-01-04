@@ -43,7 +43,7 @@
                 <a class="btn btn-primary" href="{{route('accomodationOverview',[$tripId])}}">Terug</a>
             </div>
         </div>
-        <div class="d-flex flex-row flex-nowrap py-3 justify-content-center" style="height: calc(100vh - 300px);">    
+        <div class="d-flex flex-row flex-nowrap py-3 justify-content-center overflow-auto" style="height: calc(100vh - 300px);">    
             
             <div class="container-fluid">
             <table class="table text-center">
@@ -147,6 +147,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
 <script>
     setTimeout(function(){
         if ($('#removeTimer').length > 0) {

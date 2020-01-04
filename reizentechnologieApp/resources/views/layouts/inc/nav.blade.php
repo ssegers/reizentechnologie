@@ -26,10 +26,10 @@
                                     @endif
                                     <a class="dropdown-item" href="{{ route('paymentslist') }}">Betalingen</a>
                                     <a class="dropdown-item" href="{{ route('accomodationOverview') }}">Hotels</a>
-                                    <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>
+                                    <a class="dropdown-item" href="{{ route('transportOverview') }}">Auto's</a>
                                 @else
                                     <a class="dropdown-item" href="{{ route('accomodationOverviewTraveller') }}">Hotels</a>
-                                    <a class="dropdown-item" href="{{ route('home') }}">Auto's</a>
+                                    <a class="dropdown-item" href="{{ route('transportOverviewTraveller') }}">Auto's</a>
                                 @endif
                             </div>
                         </li>

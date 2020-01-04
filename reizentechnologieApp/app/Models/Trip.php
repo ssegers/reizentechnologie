@@ -20,10 +20,17 @@ class Trip extends Model
             ->withTimestamps()
             ->withPivot(['id','start_date','end_date']);
     }
+    
+    public function vans()
+    {
+        return $this->hasMany('App\Models\Transport','trip_id','trip_id');
+    }
+    
     public function payments()
     {
         return $this->hasMany('App\Models\Payment','trip_id','trip_id');
     }
+    
     public function scopeIsActive($query)
     {
         return $query->whereIs_active(1)->orderBy('name');

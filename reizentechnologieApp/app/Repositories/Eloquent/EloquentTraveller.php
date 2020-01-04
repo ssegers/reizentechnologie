@@ -172,7 +172,7 @@ class EloquentTraveller implements TravellerRepository
     /**
      * check if loggedin user is organiser for the given trip
      * @author Stefan Segers
-     * @param intger $iTripid the trip_id
+     * @param integer $iTripid the trip_id
      * @return boolean $isOrganizer 
      */
     public function isOrganizerForTheTrip($iTripId){
@@ -189,7 +189,7 @@ class EloquentTraveller implements TravellerRepository
         }
         return $bIsOrganizer;
     }    
-    
+   
     /*
      * Returns the traveller data based on the trip id and requested datafields. Will return a paginated list if requested
      *

@@ -6,6 +6,7 @@ use App\Repositories\Contracts\TripRepository;
 use App\Models\Traveller;
 use App\Models\Trip;
 use App\Models\Destination;
+use App\Models\Transport;
 
 /**
  * accessing trip data
@@ -75,7 +76,7 @@ class EloquentTrip implements TripRepository
 
     public function getAllActive() 
     {
-        $aTrips = Trip::IsActive()->select('trip_id','name','year')->get();
+        $aTrips = Trip::IsActive()->select('trip_id','name','year')->orderBy('trip_id')->get();
         return $aTrips;
     }
 
@@ -83,7 +84,7 @@ class EloquentTrip implements TripRepository
         $aActiveTripsByOrganiser = Traveller::where('user_id', $iUserId)->first()
                 ->trips()->where('is_active',true)->wherePivot('is_organizer', true)
                 ->select('trips.trip_id','trips.name','trips.year')
-                ->get();
+                ->orderBy('trips.trip_id')->get();
         return $aActiveTripsByOrganiser;
     }
     
@@ -106,7 +107,7 @@ class EloquentTrip implements TripRepository
     }
     
     /**
-     * get organizers per trip
+     * get organizers for the given trip
      * 
      * @autor Stefan Segers
      * @param integer $iTripId 
@@ -124,6 +125,39 @@ class EloquentTrip implements TripRepository
                 ->all();
             });
         return $aSubsetOfOrganizers;
+    }
+    /**
+     * get all possible drivers for the given trip
+     * @author Stefan Segers
+     * @param integer $iTripid the trip_id
+     * @return collection possibleDrivers 
+     */
+    
+    public function getPossibleDriversForTheTrip($tripId){
+        
+        $driversForTrip = Trip::where('trip_id', $tripId)->first()
+                ->travellers()->wherePivot('is_guide', true)
+                ->select('travellers.traveller_id','travellers.first_name','travellers.last_name')
+                ->get()->toArray();
+        //set key to traveller_id
+        foreach ($driversForTrip as $index => $driverForTrip){
+            $driversForTrip[$driverForTrip["traveller_id"]] = $driverForTrip;
+            unset($driversForTrip[$index]);
+        }
+        $driversForTrip = collect($driversForTrip);
+        
+        $driversInUse = Transport::where('trip_id', $tripId)->get()->toArray();
+        //set key to driver_id (=traveller_id)
+        foreach ($driversInUse as $index => $driverInUse){
+            $driversInUse[$driverInUse["driver_id"]] = $driverInUse;
+            unset($driversInUse[$index]);
+        }
+        $driversInUse = collect($driversInUse);
+        
+        //div on keys
+        $possibleDrivers = $driversForTrip->diffKeys($driversInUse);
+
+        return $possibleDrivers;
     }
     
     /**

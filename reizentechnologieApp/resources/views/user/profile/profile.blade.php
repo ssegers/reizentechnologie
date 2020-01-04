@@ -164,7 +164,7 @@
                         @endif
 
                         @if(!$bIsOrganizer)
-                            <a class="btn btn-primary" href="/user/profile/edit">Aanpassen</a>
+                            <a class="btn btn-primary" href="/traveller/profile/edit">Aanpassen</a>
                         @endif
                     </div>
                 </div>

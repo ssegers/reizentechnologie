@@ -100,6 +100,13 @@ Route::middleware(['auth','checkloggedin'])->group(function () {
             Route::post('/leaveRoom/{roomId}/{travellerId?}', 'Traveller\Rooms@leaveRoom')->name("leaveRoomTraveller");
         
         });
+        //User transportation
+        Route::prefix('transport')->group(function(){
+            Route::get('/overview', 'Traveller\Transport@overview')->name("transportOverviewTraveller");
+            Route::post('/selectTransport/{transportId}', 'Traveller\Transport@selectVan')->name("selectVan");
+            Route::post('/leaveTransport/{transportId}/{travellerId?}', 'Traveller\Transport@leaveVan')->name("leaveVan");
+        
+        });
     });
     Route::get('/logout','Auth\AuthController@logout')->name("logout");
 });
@@ -130,21 +137,26 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::get('compose','Organiser\SendMail@getEmailForm')->name('composeemail');
         Route::post('send','Organiser\SendMail@sendInformationMail')->name('sendemail');
     });
-        //hotels
+    //hotels
     Route::prefix('accomodations')->group(function() {
         Route::get('/overview/{trip?}', 'Organiser\Accomodation@overview')->name("accomodationOverview");
         Route::post('/createAccomodation', 'Organiser\Accomodation@createAccomodation')->name("createAccomodation");
         Route::post('/updateAccomodation', 'Organiser\Accomodation@updateAccomodation')->name("updateAccomodation");
         Route::post('/deleteAccomodation/{tripId}', 'Organiser\Accomodation@deleteAccomodation')->name("deleteAccomodation");
         Route::post('/addAccomodationToTrip', 'Organiser\Accomodation@addAccomodationToTrip');
-
-        //Route::get('/listrooms/{hotel_id}/{hotel_name}', 'Organiser\Accomodation@getRoomsOrganisator');
+        //rooms
         Route::get('/listrooms/{hotelTripId}/{hotelId}', 'Organiser\Rooms@overview')->name("roomsOverview");
-
         Route::post('/addRooms', 'Organiser\Rooms@addRooms')->name("addRooms");
         Route::post('/deleteRoom/{roomId}', 'Organiser\Rooms@deleteRoom')->name("deleteRoom");
         Route::post('/selectRoom/{roomId}', 'Organiser\Rooms@selectRoom')->name("selectRoom");
         Route::post('/leaveRoom/{roomId}/{travellerId?}', 'Organiser\Rooms@leaveRoom')->name("leaveRoom");
+    });
+    //transport
+    Route::prefix('transport')->group(function() {
+        Route::get('/overview/{trip?}', 'Organiser\Transport@overview')->name("transportOverview");
+        Route::post('/deleteVan/{transportId}', 'Organiser\Transport@deleteVan')->name("deleteVan");
+        Route::post('/createVan', 'Organiser\Transport@createVan')->name("createVan");
+        Route::get('drivers/get/{tripId}','DataController@getPossibleDriversByTrip');
     });
     
 });

@@ -107,9 +107,12 @@ class Rooms extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
-     */
+     */    
     function leaveRoom($roomId,$travellerId = null){
-        $oUser = Auth::user();
+        if ($travellerId == null){
+            $oUser = Auth::user();
+            $travellerId=$oUser->traveller->traveller_id;
+        }
         $travellerId=$oUser->traveller->traveller_id;
         $this->rooms->deleteTravellerFromRoom($roomId,$travellerId);
         return redirect()->back()->with('successmessage', 'U kunt nu een andere kamer kiezen');

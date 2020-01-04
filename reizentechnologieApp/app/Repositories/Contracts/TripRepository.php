@@ -78,6 +78,13 @@ interface TripRepository {
      */      
     public function getOrganizersByTrip($iTripId);
     
+    /**
+     * get all possible drivers for the given trip
+     * @author Stefan Segers
+     * @param integer $iTripid the trip_id
+     * @return collection possibleDrivers 
+     */
+    public function getPossibleDriversForTheTrip($tripId);
     
     public function setTravellerAsTripOrganizer($iTripId,$iTravellerId);
     

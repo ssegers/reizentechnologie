@@ -34,7 +34,7 @@
                 <h1>Accomodaties {{ $currentTrip->name }} {{ $currentTrip->year }}</h1>
             </div>
         </div>
-        <div class="d-flex flex-row flex-nowrap py-3" style="height: calc(100vh - 400px);">    
+        <div class="d-flex flex-row flex-nowrap py-3" style="height: calc(100vh - 200px);">    
             <div class="table-responsive">
                 <table class="table table-striped table-hover" width="100%">
                     <thead

@@ -144,5 +144,10 @@ class DataController extends Controller
         $this->travellers->addPayment($aPaymentData);
 
     }
+    
+    public function getPossibleDriversByTrip($tripId){
+        $possibleDrivers = $this->trips->getPossibleDriversForTheTrip($tripId);
+        return response()->json(['possibleDrivers' => $possibleDrivers]);
+    }
 
 }

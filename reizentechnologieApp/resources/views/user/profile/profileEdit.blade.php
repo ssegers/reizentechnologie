@@ -16,7 +16,7 @@
     @endif
     <div class="container">
         @if($sEditor == 'user')
-            {{ Form::open(array('url' => "/user/profile/update", 'method' => 'post', 'name' => 'userProfile')) }}
+            {{ Form::open(array('url' => "/traveller/profile/update", 'method' => 'post', 'name' => 'userProfile')) }}
         @else
             {{ Form::open(array('url' => "/organiser/updatepartisipant/".$aUserData["trip_id"]."/".$aUserData["username"], 'method' => 'post', 'name' => 'userProfile')) }}
         @endif
@@ -193,7 +193,7 @@
             <div class="row">
                 <div class="col">
                     @if($sEditor == 'user')
-                        <a class="btn btn-danger" href="/user/profile">Annuleren</a>
+                        <a class="btn btn-danger" href="/traveller/profile">Annuleren</a>
                     @else
                         <a class="btn btn-danger" href="/organiser/showpartisipant/{{$aUserData["trip_id"]}}/{{$aUserData["username"]}}">Annuleren</a>
                     @endif
